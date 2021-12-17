@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
 
 
+
 def login_view(request):
     form = LoginForm(request.POST or None)
 
@@ -22,7 +23,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                return redirect("/VTrust")
             else:
                 msg = 'Invalid credentials'
         else:
