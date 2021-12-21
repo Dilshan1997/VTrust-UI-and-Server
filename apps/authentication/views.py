@@ -7,7 +7,10 @@ Copyright (c) 2019 - present AppSeed.us
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
-
+from web3 import Web3
+import time
+import sys
+from .auth_contract import *
 
 
 def login_view(request):
@@ -20,7 +23,8 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            user = authenticate(username=username, password=password)
+            print(password)
+            user = execTxn("loginUser",username, password,"null","null")
             if user is not None:
                 login(request, user)
                 return redirect("/VTrust")
@@ -41,8 +45,9 @@ def register_user(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get("username")
+            email=form.cleaned_data.get("email")
             raw_password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=raw_password)
+            user = execTxn("registerUser",username, email,raw_password,"null")
 
             msg = 'User created - please <a href="/login">login</a>.'
             success = True
@@ -55,3 +60,9 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+
+
+
+
+
+

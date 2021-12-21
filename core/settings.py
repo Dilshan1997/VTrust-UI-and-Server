@@ -6,6 +6,9 @@ Copyright (c) 2019 - present AppSeed.us
 import os
 from decouple import config
 from unipath import Path
+import sys
+sys.path.append('../')
+from connection import connection
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).parent
@@ -120,6 +123,8 @@ STATICFILES_DIRS = (
     os.path.join(CORE_DIR, 'apps/static'),
 )
 
+#############################################################
+#############################################################
 
-#############################################################
-#############################################################
+#Web3 connection creation
+print(connection.con)
