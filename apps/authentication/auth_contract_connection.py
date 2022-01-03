@@ -1,5 +1,19 @@
-contract_address='0x968CEca962045D2f50BFAa40c741A761Ed021b42'
+contract_address='0xdE4bF2d6Ac58aA815adD2320c85a4223a421b179'
 abi="""[
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "get_address",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
 	{
 		"constant": false,
 		"inputs": [

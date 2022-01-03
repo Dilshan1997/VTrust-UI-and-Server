@@ -1,7 +1,17 @@
 from web3 import Web3
+from web3.auto import w3
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-con=Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
-wallet_address='0x902b3443aD7DBb594534b10cf09307374c17a3Bd'
-wallet_private_key ='cfb5072e29419ddd87e23292008e4e86d20576b5a874279787f27123758de07d'
+connected = w3.isConnected()
+print(connected)
 
+node_provider=os.environ['NODE_PROVIDER_LOCAL']
+print(node_provider)
+con=Web3(Web3.HTTPProvider(node_provider))
+
+
+wallet_address='0xA6acec1607fF4046252d158ca00000009737BFEC'
+wallet_private_key ='56f239e8a9ca4ac985cf7f96f3f1d1658af2ab35e2a1e0804c9ecdc6b44d50c8'
 
