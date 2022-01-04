@@ -12,6 +12,6 @@ print(node_provider)
 con=Web3(Web3.HTTPProvider(node_provider))
 
 
-wallet_address='0xA6acec1607fF4046252d158ca00000009737BFEC'
-wallet_private_key ='56f239e8a9ca4ac985cf7f96f3f1d1658af2ab35e2a1e0804c9ecdc6b44d50c8'
+wallet_address='0x72c29fcbfF1153A4E05d45E724b4B1Be2DED302e'
+wallet_private_key ='f8577c2c2d2988be516e67964ab92610a77a7b4e050c1318f78a491dc092d522'
 

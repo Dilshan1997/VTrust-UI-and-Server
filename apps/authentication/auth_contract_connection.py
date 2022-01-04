@@ -1,4 +1,5 @@
-contract_address='0xdE4bF2d6Ac58aA815adD2320c85a4223a421b179'
+contract_address='0x8Cd58958fF412d9bA314aA3065357787095F4Ed4'
+
 abi="""[
 	{
 		"constant": true,
@@ -203,10 +204,21 @@ abi="""[
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_password",
+				"type": "string"
+			}
+		],
+		"name": "LogInUser",
+		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -233,23 +245,6 @@ abi="""[
 			}
 		],
 		"name": "RegNewUser",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "_password",
-				"type": "string"
-			}
-		],
-		"name": "LogInUser",
 		"type": "event"
 	}
 ]
