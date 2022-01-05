@@ -14,12 +14,13 @@ auth_contract = connection.con.eth.contract(address = contract_address, abi = ab
 print(connection.con.eth.accounts[0])
 # print(connection.con.eth.accounts[0])
 def execTxn(txName,*args,**kwargs):
-    # print(*args )
+    print(args)
     return_value=None
     nonce =connection.con.eth.getTransactionCount(connection.wallet_address)
     print(nonce)
     buildData = {
-        'from':connection.con.eth.accounts[1],
+        # 'from':args[0],
+        # 'to':connection.wallet_address,
         'chainId': 4,
         'gas': 400000,
         'gasPrice': connection.con.toWei('40', 'gwei'),

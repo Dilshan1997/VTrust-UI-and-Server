@@ -25,10 +25,11 @@ def login_view(request):
     
     if request.method == "POST":
         if form.is_valid():
+            address=form.cleaned_data.get("address")
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
            
-            user_blockchian = execTxn("loginUser",username, password)
+            user_blockchian = execTxn("loginUser",address,username, password)
             # status=execTxn("checkIsUserLogged",connection.wallet_address)
             # print(status)
             login_status=execTxn("checkIsUserLogged",connection.wallet_address)
@@ -60,10 +61,11 @@ def register_user(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             
+            address=form.cleaned_data.get("address")
             username = form.cleaned_data.get("username")
             email=form.cleaned_data.get("email")
             raw_password = form.cleaned_data.get("password1")
-            blockchain_user_store = execTxn("registerUser",username, email,raw_password)
+            blockchain_user_store = execTxn("registerUser",address,username, email,raw_password)
           
             if blockchain_user_store==True:
                 form.save()

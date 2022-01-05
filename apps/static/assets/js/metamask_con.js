@@ -6,15 +6,16 @@ else{
     console.log('You should install metamask!');
 
 }
-// const ethereumButton = document.querySelector('.enableEthereumButton');
-// const showAccount = document.querySelector('.showAccount');
+const ethereumButton = document.querySelector('.enableEthereumButton');
+const showAccount = document.querySelector('.showAccount');
 
-// ethereumButton.addEventListener('click', () => {
-//   getAccount();
-// });
+ethereumButton.addEventListener('click', () => {
+  console.log('account')
+  getAccount();
+});
 
-// async function getAccount() {
-//   const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-//   const account = accounts[0];
-//   showAccount.innerHTML = account;
-// }
+async function getAccount() {
+  const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+  const account = accounts[0];
+  showAccount.innerHTML = account;
+}

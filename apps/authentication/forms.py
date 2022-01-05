@@ -23,6 +23,13 @@ class LoginForm(forms.Form):
                 "class": "form-control"
             }
         ))
+    address = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Wallet Address",
+                "class": "form-control"
+            }
+        ))
 
 
 class SignUpForm(UserCreationForm):
@@ -54,6 +61,15 @@ class SignUpForm(UserCreationForm):
                 "class": "form-control"
             }
         ))
+    
+    address = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Wallet Address",
+                "class": "form-control showAccount",
+            }
+        )
+        )
 
     class Meta:
         model = User
