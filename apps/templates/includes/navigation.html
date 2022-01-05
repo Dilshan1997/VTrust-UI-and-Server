@@ -2,16 +2,24 @@
     <header class="header-global">
         <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg  headroom bg-dark text-white">
             <div class="container position-relative">
-                <a class="navbar-brand me-lg-5" href="./index.html">
+                <a class="navbar-brand me-lg-5" href="{%url 'landing_page' %}">
                     <img class="navbar-brand-dark" src="/static/assets/img/brand/light.svg" alt="Logo light">
                     <img class="navbar-brand-light" src="/static/assets/img/brand/dark.svg" alt="Logo dark">
+                    
+                    
+                </a>
+                <a class=" navbar-brand-light" href="{%url 'landing_page' %}">
+                <div class=" d-lg-inline">
+                    <h2>VTrust</h2>
+                </div>
                 </a>
                 <div class="navbar-collapse collapse me-auto" id="navbar_global">
                     <div class="navbar-collapse-header">
                         <div class="row">
                             <div class="col-6 collapse-brand">
-                                <a href="./index.html">
+                                <a href="{%url 'landing_page' %}">
                                     <img src="/static/assets/img/brand/dark.svg" alt="Themesberg logo">
+                                   
                                 </a>
                             </div>
                             <div class="col-6 collapse-close">
@@ -19,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                    <!-- <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" id="frontPagesDropdown" aria-expanded="false" data-bs-toggle="dropdown">
                                 Pages
@@ -111,7 +119,7 @@
                                 Support
                                 <span class="fas fa-angle-down nav-link-arrow ms-1"></span>
                             </a>
-                            <!-- <div class="dropdown-menu dropdown-menu-lg" aria-labelledby="supportDropdown">
+                            <div class="dropdown-menu dropdown-menu-lg" aria-labelledby="supportDropdown">
                                 <div class="col-auto px-0">
                                     <div class="list-group list-group-flush">
                                         <a href="https://appseed.us/" target="_blank" 
@@ -124,16 +132,21 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
                 <div class="d-flex align-items-center">
+                    {% if login_val%}
+                    <a href="{% url 'logout' %}"
+                    class="btn btn-outline-gray-100 d-none d-lg-inline me-md-3"><span class="fas fa-sign-out-alt me-2"></span> Log Out</a>
+                    
+                    {%else%}
                     <a href="{% url 'login' %}"
-                       class="btn btn-outline-gray-100 d-none d-lg-inline me-md-3"><span class="fas fa-sign-out-alt me-2"></span> Log In</a>
+                       class="btn btn-outline-gray-100 d-none d-lg-inline me-md-3"><span class="fas fa-sign-in-alt me-2"></span> Log In</a>
                        <a href="{% url 'register' %}"
-                       class="btn btn-outline-gray-100 d-none d-lg-inline me-md-3"><span class="fas fa-sign-out-alt me-2"></span> Register</a>
-                  
+                       class="btn btn-outline-gray-100 d-none d-lg-inline me-md-3"><span class=" fas fa-registered me-2"></span> Register</a>
+                  {%endif%}
                     <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>

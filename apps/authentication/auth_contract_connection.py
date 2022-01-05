@@ -1,5 +1,20 @@
-contract_address='0x968CEca962045D2f50BFAa40c741A761Ed021b42'
+contract_address='0x8Cd58958fF412d9bA314aA3065357787095F4Ed4'
+
 abi="""[
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "get_address",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
 	{
 		"constant": false,
 		"inputs": [
@@ -189,10 +204,21 @@ abi="""[
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_password",
+				"type": "string"
+			}
+		],
+		"name": "LogInUser",
+		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -219,23 +245,6 @@ abi="""[
 			}
 		],
 		"name": "RegNewUser",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "_password",
-				"type": "string"
-			}
-		],
-		"name": "LogInUser",
 		"type": "event"
 	}
 ]

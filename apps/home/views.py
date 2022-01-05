@@ -15,7 +15,7 @@ def index_view(request):
 
 @login_required(login_url="login/")
 def index(request):
-    context = {'segment': 'index'}
+    context = {'segment': 'index','login_val':True}
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
