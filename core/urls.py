@@ -10,5 +10,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),          # Django admin route
     
     path("VTrust/", include("apps.authentication.urls")), # Auth routes - login / register
-    path("VTrust/", include("apps.home.urls"))             # UI Kits Html files
+    path("VTrust/", include("apps.home.urls")),             # UI Kits Html files
+    path("VTrust/",include("apps.Ballots.urls")) #Ballot urls
 ]
