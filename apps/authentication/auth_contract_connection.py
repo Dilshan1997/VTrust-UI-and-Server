@@ -1,8 +1,8 @@
-contract_address='0x8Cd58958fF412d9bA314aA3065357787095F4Ed4'
+contract_address='0xC531B6057B42619C9d3c3f292768aB84Db91f505'
 
 abi="""[
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [],
 		"name": "get_address",
 		"outputs": [
@@ -12,12 +12,16 @@ abi="""[
 			}
 		],
 		"payable": false,
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"constant": false,
 		"inputs": [
+			{
+				"name": "_addr",
+				"type": "address"
+			},
 			{
 				"name": "_name",
 				"type": "string"
@@ -49,6 +53,10 @@ abi="""[
 			},
 			{
 				"name": "email",
+				"type": "string"
+			},
+			{
+				"name": "name",
 				"type": "string"
 			}
 		],
@@ -130,33 +138,6 @@ abi="""[
 	},
 	{
 		"constant": false,
-		"inputs": [
-			{
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"name": "_email",
-				"type": "string"
-			},
-			{
-				"name": "_password",
-				"type": "string"
-			}
-		],
-		"name": "registerUser",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
 		"inputs": [],
 		"name": "logoutUser",
 		"outputs": [],
@@ -204,21 +185,41 @@ abi="""[
 		"type": "function"
 	},
 	{
-		"anonymous": false,
+		"constant": false,
 		"inputs": [
 			{
-				"indexed": false,
+				"name": "_addr",
+				"type": "address"
+			},
+			{
 				"name": "_name",
 				"type": "string"
 			},
 			{
-				"indexed": false,
+				"name": "_email",
+				"type": "string"
+			},
+			{
 				"name": "_password",
 				"type": "string"
 			}
 		],
-		"name": "LogInUser",
-		"type": "event"
+		"name": "registerUser",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	},
 	{
 		"anonymous": false,
@@ -245,6 +246,23 @@ abi="""[
 			}
 		],
 		"name": "RegNewUser",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_password",
+				"type": "string"
+			}
+		],
+		"name": "LogInUser",
 		"type": "event"
 	}
 ]

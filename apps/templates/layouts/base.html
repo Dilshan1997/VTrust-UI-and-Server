@@ -62,6 +62,10 @@
 <!-- Pixel CSS -->
 <link type="text/css" href="/static/assets/css/pixel.css" rel="stylesheet">
 
+<!--side bar css-->
+<link rel="stylesheet" href="/static/assets/css/side_bar.css">
+
+
 <!-- Specific Page JS goes HERE  -->    
 {% block stylesheets %}{% endblock stylesheets %}
 
@@ -70,7 +74,9 @@
 
     {% include 'includes/navigation.html' %}
 
+
     {% block content %}{% endblock content %}
+
 
     {% include 'includes/scripts.html' %}
 

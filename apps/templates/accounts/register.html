@@ -33,7 +33,17 @@
                             <form method="post" action="" action="#">
 
                                 {% csrf_token %}
+                                <div class="form-group mb-4">
+                                    <label for="email">Wallet Address</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1" ><span class="fas fa-user"></span></span>
+                                        {{ form.address }}          
+                                        <button  name="metamask" class="btn btn-primary enableEthereumButton">metamask</button>
+                               
 
+                                    </div>  
+                                    <span class="text-error">{{ form.address.errors }}</span>
+                                </div>
                                 <div class="form-group mb-4">
                                     <label for="email">Username</label>
                                     <div class="input-group">
@@ -84,10 +94,10 @@
                                 <div class="d-grid">
                                     <button type="submit" name="register" class="btn btn-primary ">Sign UP</button>
                                 </div>
-                                <!-- <div class="d-grid">
-                                    <button  name="metamask" class="btn btn-primary enableEthereumButton">metamask</button>
-                                </div>
-                                <h5>Account: <span class="showAccount"></span></h5> -->
+                        
+                                   
+                    
+                                
 
                             </form>
                             
