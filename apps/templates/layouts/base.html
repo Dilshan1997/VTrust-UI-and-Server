@@ -72,12 +72,14 @@
 </head>
 <body>
 
-    {% include 'includes/navigation.html' %}
-
-
+   
+<div class="wrapper">
+    {%include 'includes/sidebar.html'%}
+    <div id="container">
+        {% include 'includes/navigation_main.html' %}
     {% block content %}{% endblock content %}
-
-
+</div>
+</div>
     {% include 'includes/scripts.html' %}
 
     <!-- Specific Page JS goes HERE  -->
