@@ -3,7 +3,10 @@
 {% block title %} Ballot create {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<!-- <link rel="stylesheet" href="/static/assets/css/mdb.css"> -->
+<link rel="stylesheet" href="/static/assets/css/stage_nav.css">
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -12,8 +15,32 @@
         {% include 'includes/preloader.html' %}
 
    
-        
+        <div class="container d-flex justify-content-center align-items-center">
+
+  
+      
+    
+<div class=" mt-7 container">
+  <div class="steps-form">
+        <div class="steps-row setup-panel">
+          <div class="steps-step">
+            <a href="#step-9" type="button" class="btn btn-indigo btn-circle">1</a>
+            <p>Basic Details</p>
+          </div>
+          <div class="steps-step">
+            <a href="#step-10" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+            <p>Proposal Details</p>
+          </div>
+          <div class="steps-step">
+            <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+            <p>Submit</p>
+          </div>
+        </div>
+      </div>
+  
+    
         <div class="section section-md pb-0">
+     
             <div class="container">
                 <!-- Title -->
                 <div class="row">
@@ -24,16 +51,24 @@
                 <!-- End of Title -->
             </div>
         </div>
-
-        <!-- Section -->
+        <!-- First Step -->
+        <div class="row setup-content" id="step-9">
+          <div class="col-md-12">
+                   <!-- Section -->
         <div class="section section-md pt-4">
             <div class="container">
-                <div class="row mb-4 mb-lg-5">
-                    <div class="col-lg-4 col-sm-6">
+              
+                    
                         <!-- Form -->
-                        <div class="mb-4">
+                        <form method="POST" action="" class="mt-4">
+                            {% csrf_token %} 
+                            <div class="row mb-4 mb-lg-5">
+                            <div class="col-lg-4 col-sm-6">
+                        <div class="mb-3">
                             <label for="exampleInputEmail6">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail6">
+                         
+                            {{ form.email }}
+                  
                             <small id="emailHelp" class="form-text text-gray">We'll never share your email with anyone
                                 else.</small>
                         </div>
@@ -42,60 +77,51 @@
                     <div class="col-lg-4 col-sm-6">
                         <!-- Form -->
                         <div class="mb-3">
-                            <label for="disabledTextInput">Ballot Name</label>
-                            <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input"
-                                >
+                            <label for="TextInput">Ballot Name</label>
+                            {{form.ballot_name}}
+                           
                         </div>
                    
                         <!-- End of Form -->
                         <!-- Form -->
-                        <div class="mb-3">
-                            <label class="my-1 me-2" for="inlineFormCustomSelectPref">Ballot type</label>
-                            <select class="form-select" id="inlineFormCustomSelectPref" aria-label="Default select example">
-                                <option selected></option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
+             
                     </div>
                         <!-- End of Form -->
                         <!-- Form -->
                         <div class="col-lg-4 col-sm-6">
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1">Details</label>
-                            <textarea class="form-control" placeholder="Enter your message..." id="exampleFormControlTextarea1"
-                                rows="4"></textarea>
+                          {{form.ballot_details}}
                         </div>
                         </div>
                         <!-- End of Form -->
-                   
-                    
+                        <div class="row mb-4 mb-lg-5">
+                            <div class="col-lg-4 col-sm-6">
+                        <div class="mb-1">
+                            <label class="my-1 me-2" for="inlineFormCustomSelectPref">Ballot type</label>
+                            {{form.ballot_type}}
+                        </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="mb-3">
+                                    <label class="my-1 me-2" for="inlineFormCustomSelectPref">Proposal Numbers</label>
+                      {{form.proposal_count}}
+                                </div>
+                                    </div>
+                        </div>
                         
                 <div class="row mb-5 mb-lg-5">
-                  
-                    <legend class="h4">public or private</legend>
-                    <div class="col-lg-3 col-sm-6 mt-4 mt-md-0">
-                        <!-- Radio -->
-                    
-                            
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                                    value="option1" checked>
-                                <label class="form-check-label" for="exampleRadios1">
-                                    Public
-                                </label>
-                            </div>
+                
+                    <legend class="h5">public or private</legend>
+                    <fieldset>
+                        <legend>{{ from.publish_method.label }}</legend>
+                        {% for radio in form.publish_method %}
+                        <div class="myradio">
+                        {{ radio }}
                         </div>
-                        <div class="col-lg-3 col-sm-6 mt-4 mt-md-0">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                                    value="option2">
-                                <label class="form-check-label" for="exampleRadios2">
-                                    Private
-                                </label>
-                            </div>
-                </div>
+                        {% endfor %}
+                   
+                    </fieldset>
                 </div>
                             <!-- End of Radio -->
                         
@@ -112,8 +138,7 @@
                                     <div class="input-group input-group-border">
                                         <span class="input-group-text" id="basic-addonDate2"><span
                                                 class="fas far fa-calendar-alt"></span></span>
-                                        <input class="form-control" data-datepicker="" id="exampleInputDate2"
-                                            placeholder="Start date" type="text">
+                                   {{form.start_date}}
                                     </div>
                                 </div>
                             </div>
@@ -123,17 +148,75 @@
                                     <div class="input-group input-group-border">
                                         <span class="input-group-text" id="basic-addonDate3"><span
                                                 class="fas far fa-calendar-alt"></span></span>
-                                        <input class="form-control" data-datepicker="" id="exampleInputDate3"
-                                            placeholder="End date" type="text">
+                                       {{form.end_date}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- End of Form -->
+                    </form>
+
+                    <div class="col mt-5">
+                        <div class=" fas far fa-arrow-right" ></div>
+                        <button value="Next" class="btn btn-indigo btn-rounded nextBtn float-right nextbtn btn btn-black ">NEXT</button>
+                    </div>
                     </div>
                 </div>
+
+            
+            
             </div>
         </div>
+        </div>
+        
+          </div>
+   
+        </div>
+  
+        <!-- Second Step -->
+        <div class="row setup-content" id="step-10">
+            <div class="col-md-12">
+                <!-- Section -->
+     <div class="section section-md pt-4">
+         <div class="container">
+             <div class="row mb-4 mb-lg-5">
+                 <div class="col-lg-4 col-sm-6">
+                     <!-- Form -->
+                     <div class="mb-4">
+                         <label for="exampleInputEmail6">Email address</label>
+                         <input type="email" class="form-control" id="exampleInputEmail6">
+                         <small id="emailHelp" class="form-text text-gray">We'll never share your email with anyone
+                             else.</small>
+                     </div>
+                 </div>
+             </div>
+    
+                 <div class="col">
+            <button class="btn btn-indigo btn-rounded prevBtn float-left" type="button">Previous</button>
+            <button class="btn btn-indigo btn-rounded nextBtn float-right" type="button">Next</button>
+        </div>
+          </div>
+        </div>
+    </div>
+</div>
+  
+        <!-- Third Step -->
+        <div class="row setup-content" id="step-11">
+          <div class="col-md-12">
+            <h3 class="font-weight-bold pl-0 my-4"><strong>Step 3</strong></h3>
+            <button class="btn btn-indigo btn-rounded prevBtn float-left" type="button">Previous</button>
+            <button class="btn btn-default btn-rounded float-right" type="submit">Submit</button>
+          </div>
+        </div>
+  
+ 
+  
+    </div>
+  </div>
+  <!-- Ste-->
+        
+
+ 
         <!-- End of Section -->
 
     </main>
@@ -141,4 +224,6 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+
+{% endblock javascripts %}
