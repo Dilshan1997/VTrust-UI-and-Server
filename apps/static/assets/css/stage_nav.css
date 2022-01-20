@@ -1,4 +1,4 @@
-.btn {
+/* .btn {
     margin: .375rem;
     color: inherit;
     text-transform: uppercase;
@@ -73,7 +73,7 @@
 .btn[class*="btn-outline-"].btn-sm {
     padding-top: .38rem;
     padding-bottom: .38rem
-}
+} */
 .btn-default {
     color: #fff;
     background-color: #2bbbad !important

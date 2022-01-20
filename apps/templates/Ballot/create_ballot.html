@@ -51,6 +51,9 @@
                 <!-- End of Title -->
             </div>
         </div>
+        <!-- Form -->
+        <form method="POST" action="" class="mt-4" name="ballot_form" id="ballot_form">
+            {% csrf_token %} 
         <!-- First Step -->
         <div class="row setup-content" id="step-9">
           <div class="col-md-12">
@@ -59,9 +62,7 @@
             <div class="container">
               
                     
-                        <!-- Form -->
-                        <form method="POST" action="" class="mt-4">
-                            {% csrf_token %} 
+                        
                             <div class="row mb-4 mb-lg-5">
                             <div class="col-lg-4 col-sm-6">
                         <div class="mb-3">
@@ -96,15 +97,15 @@
                         </div>
                         <!-- End of Form -->
                         <div class="row mb-4 mb-lg-5">
-                            <div class="col-lg-4 col-sm-6">
+                            <!-- <div class="col-lg-4 col-sm-6">
                         <div class="mb-1">
                             <label class="my-1 me-2" for="inlineFormCustomSelectPref">Ballot type</label>
                             {{form.ballot_type}}
                         </div>
-                            </div>
+                            </div> -->
                             <div class="col-lg-4 col-sm-6">
                                 <div class="mb-3">
-                                    <label class="my-1 me-2" for="inlineFormCustomSelectPref">Proposal Numbers</label>
+                                    <label class="my-1 me-2" for="inlineFormCustomSelectPref">Number of Proposals</label>
                       {{form.proposal_count}}
                                 </div>
                                     </div>
@@ -115,7 +116,7 @@
                     <legend class="h5">public or private</legend>
                     <fieldset>
                         <legend>{{ from.publish_method.label }}</legend>
-                        {% for radio in form.publish_method %}
+                        {% for radio in form.published_method %}
                         <div class="myradio">
                         {{ radio }}
                         </div>
@@ -139,7 +140,10 @@
                                         <span class="input-group-text" id="basic-addonDate2"><span
                                                 class="fas far fa-calendar-alt"></span></span>
                                    {{form.start_date}}
+                                   
+                                   
                                     </div>
+                                    
                                 </div>
                             </div>
                             <div class="col">
@@ -149,16 +153,18 @@
                                         <span class="input-group-text" id="basic-addonDate3"><span
                                                 class="fas far fa-calendar-alt"></span></span>
                                        {{form.end_date}}
+                                       
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- End of Form -->
-                    </form>
+                  
 
                     <div class="col mt-5">
                         <div class=" fas far fa-arrow-right" ></div>
-                        <button value="Next" class="btn btn-indigo btn-rounded nextBtn float-right nextbtn btn btn-black ">NEXT</button>
+                        <button type="button" value="Next" id="fn_btn"  class="btn btn-indigo btn-rounded nextBtn float-right ">NEXT</button>
                     </div>
                     </div>
                 </div>
@@ -178,28 +184,36 @@
             <div class="col-md-12">
                 <!-- Section -->
      <div class="section section-md pt-4">
-         <div class="container">
+         <div class="container" id="cont">
              <div class="row mb-4 mb-lg-5">
                  <div class="col-lg-4 col-sm-6">
+                     
                      <!-- Form -->
                      <div class="mb-4">
-                         <label for="exampleInputEmail6">Email address</label>
-                         <input type="email" class="form-control" id="exampleInputEmail6">
-                         <small id="emailHelp" class="form-text text-gray">We'll never share your email with anyone
-                             else.</small>
+                         <label for="exampleInputEmail6">Proposal Name</label>
+               
                      </div>
+                    </div>
+                     <div class="col-lg-4 col-sm-6">
+                        <!-- Form -->
+                        <div class="mb-4">
+                            <label for="exampleInputEmail6">Proposal Details</label>
+                           
+                       
+                        </div>
                  </div>
-             </div>
-    
-                 <div class="col">
-            <button class="btn btn-indigo btn-rounded prevBtn float-left" type="button">Previous</button>
-            <button class="btn btn-indigo btn-rounded nextBtn float-right" type="button">Next</button>
+            
+            </div>
+      
+     
         </div>
-          </div>
+        <div class="col">
+            <button class="btn btn-indigo btn-rounded prevBtn float-left" type="button">Previous</button>
+            <button class="btn btn-indigo btn-rounded nextBtn float-right" id="sn_btn" type="button">Next</button>
         </div>
     </div>
 </div>
-  
+</div>
         <!-- Third Step -->
         <div class="row setup-content" id="step-11">
           <div class="col-md-12">
@@ -208,10 +222,10 @@
             <button class="btn btn-default btn-rounded float-right" type="submit">Submit</button>
           </div>
         </div>
-  
- 
-  
-    </div>
+   
+
+
+    </form>
   </div>
   <!-- Ste-->
         
@@ -225,5 +239,6 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-
+<script src="/static/assets/js/progress_stage.js"></script>
+<script src="/static/assets/js/create_ballot.js"></script>
 {% endblock javascripts %}
