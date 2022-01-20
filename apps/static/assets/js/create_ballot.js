@@ -37,13 +37,33 @@ $("#sn_btn").on('click',()=>{
     console.log(x)
     for(var i=1;i<=x;i++){
         var proposal_data={}
+        if ($('#prop_name_'+i).val()=="" || $('#prop_details_'+i).val()==!""){
+            proposals_obj["error"]="Plz fill the all fields"
+        }
+        else{
+        delete proposals_obj["error"]
         proposal_data['prop_name']=($('#prop_name_'+i).val())
         proposal_data['prop_details']=($('#prop_details_'+i).val())
         // proposals_obj['prop'+i]=($('#prop_name_'+i).val());
         // proposal_details['prop'+i]['prop_details']=($('#prop_details_'+i).val());
+        
     proposals_obj["prop"+i]=proposal_data;
-    
+    console.log(typeof(proposals_obj))
+        }
     }
-console.log(proposals_obj)
+console.log(JSON.stringify(proposals_obj))
+
+$.ajax({
+    
+    type: 'POST',
+    url: "create/proposal_data",
+    data: {"prop_data":JSON.stringify(proposals_obj)},
+    success: function (response) {
+ 
+    },
+    error: function (response) {
+        console.log(response)
+    }
+})
 
 })

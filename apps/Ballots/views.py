@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .forms import BallotDetails
 from django.http import JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -39,6 +41,13 @@ def getProposalCount(request):
             return JsonResponse({"valid":True,"state":200})
          
 print(prop_count)
+
+@csrf_exempt
+def getProposalData(request):
+    if request.is_ajax and request.method == "POST":
+            prop_data = json.loads(request.POST.get("prop_data", None))
+            print(prop_data)
+            return JsonResponse({"valid":True,"state":200})
     
 
 
