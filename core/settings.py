@@ -33,8 +33,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.home',  # Enable the inner home (home)
-    
-    
 ]
 
 MIDDLEWARE = [
@@ -127,6 +125,5 @@ STATICFILES_DIRS = (
 
 #############################################################
 #############################################################
-
 #Web3 connection creation
 print(connection.con)

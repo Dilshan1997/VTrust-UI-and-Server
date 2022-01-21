@@ -52,7 +52,7 @@
             </div>
         </div>
         <!-- Form -->
-        <form method="POST" action="" class="mt-4" name="ballot_form" id="ballot_form">
+        <form method="POST" action="{%url 'create_ballot'%}" class="mt-4" name="ballot_form" id="ballot_form">
             {% csrf_token %} 
         <!-- First Step -->
         <div class="row setup-content" id="step-9">
@@ -69,6 +69,7 @@
                             <label for="exampleInputEmail6">Email address</label>
                          
                             {{ form.email }}
+                            <span class="text-error">{{ form.email.errors }}</span>
                   
                             <small id="emailHelp" class="form-text text-gray">We'll never share your email with anyone
                                 else.</small>
@@ -80,7 +81,7 @@
                         <div class="mb-3">
                             <label for="TextInput">Ballot Name</label>
                             {{form.ballot_name}}
-                           
+                            <span class="text-error">{{ form.ballot_name.errors }}</span>
                         </div>
                    
                         <!-- End of Form -->
@@ -93,6 +94,7 @@
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1">Details</label>
                           {{form.ballot_details}}
+                          <span class="text-error">{{ form.ballot_details.errors }}</span>
                         </div>
                         </div>
                         <!-- End of Form -->
@@ -107,6 +109,7 @@
                                 <div class="mb-3">
                                     <label class="my-1 me-2" for="inlineFormCustomSelectPref">Number of Proposals</label>
                       {{form.proposal_count}}
+                      <span class="text-error">{{ form.proposal_count.errors }}</span>
                                 </div>
                                     </div>
                         </div>
@@ -123,6 +126,7 @@
                         {% endfor %}
                    
                     </fieldset>
+                    <span class="text-error">{{ form.publish_method.errors }}</span>
                 </div>
                             <!-- End of Radio -->
                         
@@ -141,7 +145,7 @@
                                                 class="fas far fa-calendar-alt"></span></span>
                                    {{form.start_date}}
                                    
-                                   
+                                   <span class="text-error">{{ form.start_date.errors }}</span>
                                     </div>
                                     
                                 </div>
@@ -153,6 +157,7 @@
                                         <span class="input-group-text" id="basic-addonDate3"><span
                                                 class="fas far fa-calendar-alt"></span></span>
                                        {{form.end_date}}
+                                       <span class="text-error">{{ form.end_date.errors }}</span>
                                        
                                        
                                     </div>
