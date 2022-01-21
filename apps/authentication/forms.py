@@ -26,8 +26,8 @@ class LoginForm(forms.Form):
     address = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Wallet Address",
-                "class": "form-control"
+                "placeholder": "Wallet Address ",
+                "class": "form-control showAccount"
             }
         ))
 

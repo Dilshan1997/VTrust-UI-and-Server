@@ -1,8 +1,8 @@
-contract_address='0xC531B6057B42619C9d3c3f292768aB84Db91f505'
+contract_address='0x64680A8628289e18a02A944DC5c6F868E6FAdbb1'
 
 abi="""[
 	{
-		"constant": false,
+		"constant": true,
 		"inputs": [],
 		"name": "get_address",
 		"outputs": [
@@ -12,7 +12,7 @@ abi="""[
 			}
 		],
 		"payable": false,
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -53,10 +53,6 @@ abi="""[
 			},
 			{
 				"name": "email",
-				"type": "string"
-			},
-			{
-				"name": "name",
 				"type": "string"
 			}
 		],
@@ -216,10 +212,21 @@ abi="""[
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_password",
+				"type": "string"
+			}
+		],
+		"name": "LogInUser",
+		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -246,23 +253,6 @@ abi="""[
 			}
 		],
 		"name": "RegNewUser",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "_password",
-				"type": "string"
-			}
-		],
-		"name": "LogInUser",
 		"type": "event"
 	}
 ]

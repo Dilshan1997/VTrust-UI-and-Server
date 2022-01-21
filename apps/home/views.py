@@ -10,6 +10,7 @@ from django.template import loader
 from django.urls import reverse
 from django.shortcuts import render, redirect
 
+
 def index_view(request):
     return render(request,'home/landingpage.html')
 
