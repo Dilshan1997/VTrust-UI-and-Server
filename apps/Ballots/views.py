@@ -1,11 +1,16 @@
+from os import system
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from .forms import BallotDetails
 from django.http import JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
+from .ballot_contract_controller import *
+import sys
+from connection import connection
+from apps.authentication import auth_contract
 
-
+print(auth_contract.auth_contract.functions.getUserData().call())
 @login_required(login_url="login/")
 def indexBallot(request):
     ballot_details = BallotDetails     
@@ -17,10 +22,9 @@ def indexBallot(request):
 @login_required(login_url="login/")
 def createBallot(request):
     ballot_details = BallotDetails(request.POST or None)
-    # print("fdf",ballot_details)
     login_val=False
     msg = None
-   
+    
     if request.method == "POST":
         if ballot_details.is_valid():
             print("Valid")
