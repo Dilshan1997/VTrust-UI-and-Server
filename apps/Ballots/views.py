@@ -9,24 +9,42 @@ from .ballot_contract_controller import *
 import sys
 from connection import connection
 from apps.authentication import auth_contract
+import time
 
-print(auth_contract.auth_contract.functions.getUserData().call())
+
 @login_required(login_url="login/")
 def indexBallot(request):
     ballot_details = BallotDetails     
     print(ballot_details)
     return render(request,"Ballot/create_ballot.html",{'form':ballot_details,'login_val':True})
 
+prop_data=None
 
-
+@csrf_exempt
+def getProposalData(request):
+    global prop_data
+    if request.is_ajax and request.method == "POST":
+        prop_data = json.loads(request.POST.get("prop_data", None))
+        # print(prop_data)
+        return JsonResponse({"valid":True,"state":200})
+        
 @login_required(login_url="login/")
 def createBallot(request):
+    global prop_data
     ballot_details = BallotDetails(request.POST or None)
     login_val=False
     msg = None
+    # print(request.POST)
     
+    print(prop_data)
+    auth_data=auth_contract.auth_contract.functions.getUserData().call()
+    print(auth_data)
+    owner_name=auth_data[3]
+    owner_address=auth_data[2]
     if request.method == "POST":
+
         if ballot_details.is_valid():
+            
             print("Valid")
             email=ballot_details.cleaned_data.get("email")
             ballot_name=ballot_details.cleaned_data.get("ballot_name")
@@ -35,10 +53,25 @@ def createBallot(request):
             published_method=ballot_details.cleaned_data.get("published_method")
             start_date=ballot_details.cleaned_data.get("start_date")
             end_date=ballot_details.cleaned_data.get("end_date")
+            
+            p='%Y-%m-%d'
+            print(start_date,end_date)
+            now=time.time()
+            print(int(now))
+            start_date_epoch = int(time.mktime(time.strptime(str(start_date),p)))
+            end_date_epoch=int(time.mktime(time.strptime(str(end_date),p)))
+            print(start_date_epoch,end_date_epoch)
             ballot_data={"email":email,"b_name":ballot_name,"b_des":ballot_description,"prop_count":proposal_count,"pub_method":published_method,"start_date":start_date,"end_date":end_date}
-            print(ballot_data)
-     
-            return render(request,"home/index.html",{'data':ballot_data,'login_val':True})
+            # print(ballot_data)
+            print(published_method)
+            r_value=execTxn("createBallot",email,ballot_name,ballot_description,owner_name,owner_address,start_date_epoch,end_date_epoch,published_method)
+            
+            time.sleep(5)
+            for i in range(len(prop_data.keys())):
+                execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])
+                time.sleep(5)
+            if r_value==True:
+                return render(request,"home/index.html",{'data':ballot_data,'login_val':True})
             
             
         else:
@@ -54,9 +87,3 @@ def getProposalCount(request):
             print(prop_count)
             return JsonResponse({"valid":True,"state":200})
          
-@csrf_exempt
-def getProposalData(request):
-    if request.is_ajax and request.method == "POST":
-            prop_data = json.loads(request.POST.get("prop_data", None))
-            print(prop_data)
-            return JsonResponse({"valid":True,"state":200})

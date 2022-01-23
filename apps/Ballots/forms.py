@@ -75,7 +75,6 @@ class BallotDetails(forms.Form):
             attrs={
                 'class':'form-control',
           
-
             }
         )
     )
