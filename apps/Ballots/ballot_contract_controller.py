@@ -4,8 +4,6 @@ import sys
 from .ballot_contract_connection import contract_address,abi
 sys.path.append('../')
 from connection import connection
-
-
 ballot_contract = connection.con.eth.contract(address = contract_address, abi = abi)
 
 def execTxn(txName,*args,**kwargs):
@@ -23,8 +21,6 @@ def execTxn(txName,*args,**kwargs):
         'nonce': nonce,
     }
     
-    
-
     try:
         if (txName == 'createBallot'):
             buildData['gas']=1000000
@@ -39,14 +35,12 @@ def execTxn(txName,*args,**kwargs):
             print(txn_dict)
             # address=ballot_contract.functions.get_address().buildTransaction(buildData)
             # address=ballot_contract.functions.get_address().call()
-            # print("address:",address)
-            
-            
+            # print("address:",address) 
+              
         if (txName == 'voting'):
             txn_dict = ballot_contract.functions.voting(*args).buildTransaction(buildData)
             return_value=ballot_contract.functions.voting(*args).call()
-            
-            
+              
         if (txName == 'getBallotId'):
             return_value = ballot_contract.functions.getBallotId().call()
             
@@ -71,6 +65,6 @@ def execTxn(txName,*args,**kwargs):
     if return_value!=None:
         return return_value
 
-print(ballot_contract.functions.getBallotDetatils(1).call())
-print(ballot_contract.functions.getProposaldetails('1-0').call())
-print(ballot_contract.functions.getBallotId().call())
+# print(ballot_contract.functions.getBallotDetatils(1).call())
+# print(ballot_contract.functions.getProposaldetails('1-0').call())
+# print(ballot_contract.functions.getBallotId().call())
