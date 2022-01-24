@@ -44,7 +44,6 @@ def createBallot(request):
     if request.method == "POST":
 
         if ballot_details.is_valid():
-            
             print("Valid")
             email=ballot_details.cleaned_data.get("email")
             ballot_name=ballot_details.cleaned_data.get("ballot_name")
@@ -53,7 +52,7 @@ def createBallot(request):
             published_method=ballot_details.cleaned_data.get("published_method")
             start_date=ballot_details.cleaned_data.get("start_date")
             end_date=ballot_details.cleaned_data.get("end_date")
-            
+            print(published_method)
             p='%Y-%m-%d'
             print(start_date,end_date)
             now=time.time()
@@ -63,15 +62,23 @@ def createBallot(request):
             print(start_date_epoch,end_date_epoch)
             ballot_data={"email":email,"b_name":ballot_name,"b_des":ballot_description,"prop_count":proposal_count,"pub_method":published_method,"start_date":start_date,"end_date":end_date}
             # print(ballot_data)
-            print(published_method)
-            r_value=execTxn("createBallot",email,ballot_name,ballot_description,owner_name,owner_address,start_date_epoch,end_date_epoch,published_method)
+            method=""
+            if published_method=='1':
+                method="public"
+            else:
+                method="private"
+            print(method)
+            if now<=start_date_epoch and now<=end_date_epoch and start_date_epoch<end_date_epoch:
+                msg="Successfully Created Ballot"
+                r_value=execTxn("createBallot",email,ballot_name,ballot_description,owner_name,owner_address,start_date_epoch,end_date_epoch,method)
             
-            time.sleep(5)
-            for i in range(len(prop_data.keys())):
-                execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])
-                time.sleep(5)
-            if r_value==True:
-                return render(request,"home/index.html",{'data':ballot_data,'login_val':True})
+                for i in range(len(prop_data.keys())):
+                    execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])
+                
+                if r_value:
+                    return render(request,"home/index.html",{'msg':msg,'data':ballot_data,'login_val':True})
+            else:
+                return redirect('index_ballot')
             
             
         else:

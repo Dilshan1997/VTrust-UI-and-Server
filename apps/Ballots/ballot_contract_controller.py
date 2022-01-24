@@ -27,6 +27,7 @@ def execTxn(txName,*args,**kwargs):
 
     try:
         if (txName == 'createBallot'):
+            buildData['gas']=1000000
             txn_dict = ballot_contract.functions.createBallot(*args).buildTransaction(buildData)
             return_value=ballot_contract.functions.createBallot(*args).call()
             print(txn_dict)
@@ -71,3 +72,5 @@ def execTxn(txName,*args,**kwargs):
         return return_value
 
 print(ballot_contract.functions.getBallotDetatils(1).call())
+print(ballot_contract.functions.getProposaldetails('1-0').call())
+print(ballot_contract.functions.getBallotId().call())
