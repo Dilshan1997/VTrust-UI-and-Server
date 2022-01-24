@@ -76,6 +76,7 @@ def createBallot(request):
                     execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])
                 
                 if r_value:
+                    
                     return render(request,"home/index.html",{'msg':msg,'data':ballot_data,'login_val':True})
             else:
                 return redirect('index_ballot')
