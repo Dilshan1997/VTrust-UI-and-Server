@@ -1,0 +1,33 @@
+<div class="row justify-content-center mb-7 mt-6">
+    
+    <div class="col-6 col-md-6 col-lg-4 mb-5 mb-lg-0 ">
+        <div class="card shadow text-center">
+            <!-- Header -->
+            <div class="card-header bg-white p-3">
+                <h3 class="text-primary mb-4">{{value.13}}  Days Left</h3>
+                <span class="d-block">
+                    <span class="display-2 text-dark fw-bold">
+                        {{ value.2}}
+                    </span>
+                    <span class="d-block text-gray font-small">Ballot</span>
+                </span>
+            </div>
+            <!-- End Header -->
+            <!-- Content -->
+            <div class="card-body">
+                <ul class="list-unstyled mb-4">
+                    <li class="list-item pb-3"><strong>Create By:</strong> {{ value.4}}</li>
+                    <li class="list-item pb-3"><strong>Start Date:{{ value.11}}</strong> </li>
+                    <li class="list-item pb-3"><strong>End Date:{{ value.12}}</strong> </li>
+                    <li class="list-item pb-3"><strong>Proposals_count:</strong> {{value.9}}</li>
+                  
+                </ul>
+                <div class="d-grid"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1">vote now</a></div>
+            </div>
+            <!-- End Content -->
+        </div>
+    </div>
+    <div class="col-4 col-md-3 col-lg-2 mb-2 mb-lg-0">
+        Analysis part
+    </div>
+</div>

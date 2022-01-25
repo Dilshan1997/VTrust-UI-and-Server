@@ -77,7 +77,7 @@ def createBallot(request):
                 
                 if r_value:
                     
-                    return render(request,"home/index.html",{'msg':msg,'data':ballot_data,'login_val':True})
+                    return redirect('home')
             else:
                 return redirect('index_ballot')
             
@@ -95,3 +95,9 @@ def getProposalCount(request):
             print(prop_count)
             return JsonResponse({"valid":True,"state":200})
          
+
+def gotoBallotView(request, b_id):
+    print(f"bid {b_id}")
+    ballot_d=list(execTxn("getBallotDetails",int(b_id)))
+    print(ballot_d)
+    return render(request,"Ballot/ballot_details.html",{'data':ballot_d,'login_val':True})

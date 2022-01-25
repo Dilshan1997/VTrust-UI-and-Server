@@ -23,13 +23,14 @@ def execTxn(txName,*args,**kwargs):
     
     try:
         if (txName == 'createBallot'):
-            buildData['gas']=1000000
+            buildData['gas']=10000000
             txn_dict = ballot_contract.functions.createBallot(*args).buildTransaction(buildData)
             return_value=ballot_contract.functions.createBallot(*args).call()
             print(txn_dict)
     
         
         if (txName == 'createProposal'):
+            buildData['gas']=10000000
             txn_dict = ballot_contract.functions.createProposal(*args).buildTransaction(buildData)
             # return_value=ballot_contract.functions.createProposal(*args).call()
             print(txn_dict)
