@@ -1,4 +1,4 @@
-contract_address='0x64680A8628289e18a02A944DC5c6F868E6FAdbb1'
+contract_address='0x593c22E4Ef295cBB1997Ebb7339cbB430D1B2FAD'
 
 abi="""[
 	{
@@ -53,6 +53,14 @@ abi="""[
 			},
 			{
 				"name": "email",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
 				"type": "string"
 			}
 		],
