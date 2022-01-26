@@ -27,10 +27,11 @@ def getProposalData(request):
         prop_data = json.loads(request.POST.get("prop_data", None))
         # print(prop_data)
         return JsonResponse({"valid":True,"state":200})
-        
+
 @login_required(login_url="login/")
 def createBallot(request):
     global prop_data
+    print(prop_data)
     ballot_details = BallotDetails(request.POST or None)
     login_val=False
     msg = None
@@ -71,12 +72,11 @@ def createBallot(request):
             if now<=start_date_epoch and now<=end_date_epoch and start_date_epoch<end_date_epoch:
                 msg="Successfully Created Ballot"
                 r_value=execTxn("createBallot",email,ballot_name,ballot_description,owner_name,owner_address,start_date_epoch,end_date_epoch,method)
-            
                 for i in range(len(prop_data.keys())):
                     execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])
                 
                 if r_value:
-                    
+                    msg="Plz check your dates"
                     return redirect('home')
             else:
                 return redirect('index_ballot')
@@ -98,6 +98,19 @@ def getProposalCount(request):
 
 def gotoBallotView(request, b_id):
     print(f"bid {b_id}")
+    proposals_d=list()
     ballot_d=list(execTxn("getBallotDetails",int(b_id)))
+    n=ballot_d[9]
+    for i in range(n):
+        proposal_details=execTxn("getProposalDetails",f'{b_id}-{i}')
+        proposals_d.append(proposal_details)
     print(ballot_d)
-    return render(request,"Ballot/ballot_details.html",{'data':ballot_d,'login_val':True})
+    print(proposals_d)
+    return render(request,"Ballot/ballot_details.html",{'data':ballot_d,'p_data':proposals_d,'login_val':True})
+
+def voting(request,b_id,p_id,address):
+    print(b_id,p_id,address)
+    msg=''
+    vote=execTxn('voting',int(b_id),p_id,address)
+    print(vote)
+    

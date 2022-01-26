@@ -45,13 +45,8 @@ def index(request):
             inside_data.append(y)
         proposal_data[i]=inside_data
         
-    print(today)
-    print(start_date.year)
-    
-    print(date_difference)
-    print(ballot_data)
-    # print(proposal_data)
-    # print(dates)
+ 
+
     context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'login_val':True}
 
     html_template = loader.get_template('home/index.html')

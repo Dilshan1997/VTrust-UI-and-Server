@@ -23,14 +23,14 @@ def execTxn(txName,*args,**kwargs):
     
     try:
         if (txName == 'createBallot'):
-            buildData['gas']=10000000
+            buildData['gas']=800000
             txn_dict = ballot_contract.functions.createBallot(*args).buildTransaction(buildData)
             return_value=ballot_contract.functions.createBallot(*args).call()
             print(txn_dict)
     
         
         if (txName == 'createProposal'):
-            buildData['gas']=10000000
+            # buildData['gas']=100000000
             txn_dict = ballot_contract.functions.createProposal(*args).buildTransaction(buildData)
             # return_value=ballot_contract.functions.createProposal(*args).call()
             print(txn_dict)
@@ -41,15 +41,16 @@ def execTxn(txName,*args,**kwargs):
         if (txName == 'voting'):
             txn_dict = ballot_contract.functions.voting(*args).buildTransaction(buildData)
             return_value=ballot_contract.functions.voting(*args).call()
+            print(txn_dict)
               
         if (txName == 'getBallotId'):
             return_value = ballot_contract.functions.getBallotId().call()
             
         if(txName=='getBallotDetails'):
-            return_value = ballot_contract.functions.getBallotDetatils(*args).call()
+            return_value = ballot_contract.functions.getBallotDetails(*args).call()
         
         if(txName=='getProposalDetails'):
-            return_value = ballot_contract.functions.getProposaldetails(*args).call()
+            return_value = ballot_contract.functions.getProposalDetails(*args).call()
             
         if(txName=='getProposalResult'):
             return_value = ballot_contract.functions.getProposalResult(*args).call()   
