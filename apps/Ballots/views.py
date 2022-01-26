@@ -85,7 +85,6 @@ def createBallot(request):
         else:
             print("not valid")
 
-
 prop_count=0
 def getProposalCount(request):
     global prop_count
@@ -95,7 +94,7 @@ def getProposalCount(request):
             print(prop_count)
             return JsonResponse({"valid":True,"state":200})
          
-
+@login_required(login_url="login/")
 def gotoBallotView(request, b_id):
     print(f"bid {b_id}")
     proposals_d=list()
@@ -104,13 +103,17 @@ def gotoBallotView(request, b_id):
     for i in range(n):
         proposal_details=execTxn("getProposalDetails",f'{b_id}-{i}')
         proposals_d.append(proposal_details)
+    addr=auth_contract.auth_contract.functions.getUserData().call()[2]
+    print("address",addr)
     print(ballot_d)
-    print(proposals_d)
-    return render(request,"Ballot/ballot_details.html",{'data':ballot_d,'p_data':proposals_d,'login_val':True})
+    
+    return render(request,"Ballot/ballot_details.html",{'data':ballot_d,'p_data':proposals_d,'address':addr,'login_val':True})
 
+@login_required(login_url="login/")
 def voting(request,b_id,p_id,address):
     print(b_id,p_id,address)
     msg=''
     vote=execTxn('voting',int(b_id),p_id,address)
     print(vote)
+    return redirect('home')
     
