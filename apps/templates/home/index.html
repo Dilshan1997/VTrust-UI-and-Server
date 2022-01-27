@@ -10,7 +10,7 @@
         {% include 'includes/preloader.html' %}
 
         <div class="section section-sm pb-0 mb-n4">
-            <div class="container">
+            <div class="container-fluid">
                 {% for value in ballot_data.values %}
                 {% include 'includes/public_ballot_view.html' %}
                 {% endfor %}
@@ -160,6 +160,7 @@
     {% include 'includes/scripts.html' %}
     {% block javascripts %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    {%endblock%}
+    <script src="/static/assets/js/pie_chart.js"></script>
+    {%endblock javascripts%}
 </body>
 </html>

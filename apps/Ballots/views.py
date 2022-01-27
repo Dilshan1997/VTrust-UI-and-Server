@@ -104,8 +104,8 @@ def gotoBallotView(request, b_id):
         proposal_details=execTxn("getProposalDetails",f'{b_id}-{i}')
         proposals_d.append(proposal_details)
     addr=auth_contract.auth_contract.functions.getUserData().call()[2]
-    print("address",addr)
-    print(ballot_d)
+    # print("address",addr)
+    # print(ballot_d)
     
     return render(request,"Ballot/ballot_details.html",{'data':ballot_d,'p_data':proposals_d,'address':addr,'login_val':True})
 

@@ -1,3 +1,4 @@
+
 from web3 import Web3
 import time
 import sys
@@ -23,7 +24,7 @@ def execTxn(txName,*args,**kwargs):
     
     try:
         if (txName == 'createBallot'):
-            buildData['gas']=800000
+            buildData['gas']=6721974
             txn_dict = ballot_contract.functions.createBallot(*args).buildTransaction(buildData)
             return_value=ballot_contract.functions.createBallot(*args).call()
             print(txn_dict)
@@ -42,7 +43,8 @@ def execTxn(txName,*args,**kwargs):
             txn_dict = ballot_contract.functions.voting(*args).buildTransaction(buildData)
             return_value=ballot_contract.functions.voting(*args).call()
             print(txn_dict)
-              
+            print(return_value)
+            print("print*****************",connection.con.eth.get_block("latest"))
         if (txName == 'getBallotId'):
             return_value = ballot_contract.functions.getBallotId().call()
             
