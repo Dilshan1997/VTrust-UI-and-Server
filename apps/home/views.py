@@ -40,7 +40,7 @@ def index(request):
         
         
         # dates[i]=[str(start_date.strftime('%Y-%m-%d')),str(end_date.strftime('%Y-%m-%d')),date_difference]
-        
+        ballot_count=ballot_contract_controller.execTxn("getBallotId")
         
         # date_difference=(end_date-today)
         for j in range(x[9]):
@@ -52,7 +52,7 @@ def index(request):
         data = []
 
 
-    context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'login_val':True}
+    context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_count,'login_val':True}
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
@@ -92,9 +92,9 @@ def proposalChart(request,b_id):
     labels = []
     data = []
     urls=[]
-    ballot_count=ballot_contract_controller.execTxn("getBallotId")
-    for i in range(ballot_count):
-        urls.append(f"home/proposal-chart/{i}")
+    # ballot_count=ballot_contract_controller.execTxn("getBallotId")
+    # for i in range(ballot_count):
+    #     urls.append(f"home/proposal-chart/{i}")
         
     
     x=list(ballot_contract_controller.execTxn("getBallotDetails",int(b_id)))
@@ -106,5 +106,4 @@ def proposalChart(request,b_id):
     return JsonResponse(data={
         'labels': labels,
         'data': data,
-        'urls':urls
     })

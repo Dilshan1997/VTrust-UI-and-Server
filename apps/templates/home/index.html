@@ -10,6 +10,7 @@
         {% include 'includes/preloader.html' %}
 
         <div class="section section-sm pb-0 mb-n4">
+            <div id="ballot_count" class=" visually-hidden">{{n}}</div>
             <div class="container-fluid">
                 {% for value in ballot_data.values %}
                 {% include 'includes/public_ballot_view.html' %}
