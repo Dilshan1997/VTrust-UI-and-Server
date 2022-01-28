@@ -15,6 +15,7 @@ from apps.Ballots import ballot_contract_controller
 import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+import time
 
 def index_view(request):
     return render(request,'home/landingpage.html')
@@ -23,21 +24,39 @@ def index_view(request):
 def index(request):
     ballot_data=dict()
     proposal_data=dict()
+    expired=True
     # dates=dict()
     n=ballot_contract_controller.execTxn("getBallotId")
     print(n)
+    today=datetime.datetime.now().strftime('%Y-%m-%d')
+    print(today)
+    td=int(int(time.time()))
+    print(td)
+    
+   
     for i in range(n):
         inside_data=list()
         x=list(ballot_contract_controller.execTxn("getBallotDetails",i))
-        today=datetime.datetime.now()
         start_date=datetime.datetime.fromtimestamp(x[6])
         end_date=datetime.datetime.fromtimestamp(x[7])
-        date_difference=(datetime.date(end_date.year,end_date.month,end_date.day)-datetime.date(today.year,today.month,today.day)).days
+        date_difference=(datetime.date(end_date.year,end_date.month,end_date.day)-datetime.date(start_date.year,start_date.month,start_date.day)).days
         x.append(str(start_date.strftime('%Y-%m-%d')))
         x.append(str(end_date.strftime('%Y-%m-%d')))
-        x.append(date_difference)
-        ballot_data[i]=x
+        if( td>=x[6]  and  x[7]>=td ):
+            x.append(f'{date_difference} Days Left')
+            x.append(False)
+        elif(td<x[6]):
+            x.append("Not Yet Published")
+            x.append(True)
+            
+            
+        else:
+            x.append("Voting time is over")
+            x.append(True)
+            
         
+        ballot_data[i]=x
+        # print(ballot_data)
         
         # dates[i]=[str(start_date.strftime('%Y-%m-%d')),str(end_date.strftime('%Y-%m-%d')),date_difference]
         ballot_count=ballot_contract_controller.execTxn("getBallotId")

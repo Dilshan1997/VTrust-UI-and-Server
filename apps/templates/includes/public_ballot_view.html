@@ -4,7 +4,7 @@
         <div class="card shadow text-center" style="width: 30rem;">
             <!-- Header -->
             <div class="card-header bg-white ">
-                <h3 class="text-primary mb-4">{{value.13}}  Days Left</h3>
+                <h3 class="text-primary mb-4">{{value.13}}</h3>
                 <span class="d-block">
                     <span class="display-2 text-dark fw-bold">
                         {{ value.2}}
@@ -22,7 +22,11 @@
                     <li class="list-item pb-3"><strong>Proposals_count:</strong> {{value.9}}</li>
                   
                 </ul>
-                <div class="d-grid"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1">vote now</a></div>
+                {%if value.14%}
+                <div class="d-grid"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1 disabled">vote now</a></div>
+                {%else%}
+                <div class="d-grid"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1 ">vote now</a></div>
+                {%endif%}
             </div>
             <!-- End Content -->
         </div>
