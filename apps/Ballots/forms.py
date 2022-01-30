@@ -78,25 +78,14 @@ class BallotDetails(forms.Form):
             }
         )
     )
-    # for _ in range(prop_count):
-    #     prop_name=forms.CharField(
-    #         widget=forms.TextInput(
-    #                     attrs={
-    #                 'class':'form-control'
-    #             }
-            
-
-    #         )
-    #     )
-        
-    #     prop_details=forms.CharField(
-    #         widget=forms.TextInput(
-    #                     attrs={
-    #                 'class':'form-control'
-    #             }
-            
-    #         )
-    #     )
-
-    
+   
+    CHOICES = [('1', 'I agree'), ('2', 'Send the all the updates via email')]
+    agrements= forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple(
+        #     attrs={
+        # "class":"form-check-input"
+        #        }
+     ),
+    choices=CHOICES
+        )
     

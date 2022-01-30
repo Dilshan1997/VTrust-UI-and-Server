@@ -1,6 +1,75 @@
-contract_address='0x5ae536dDd2795E7EFaa6C29dad98292110Db5989'
+contract_address='0x97159D8B33FB2E3c8274d71f85aFeD64dEb1a303'
 
 abi="""[
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "ballots_arr",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "ballot_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "owner_email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "ballot_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "ballot_description",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "ballot_owner_name",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "ballot_owner_address",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "open_date",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "closing_date",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "ballot_type",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "proposals_count",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "full_vote_count",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
 	{
 		"inputs": [
 			{
@@ -82,98 +151,6 @@ abi="""[
 			}
 		],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "b_id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "p_id",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			}
-		],
-		"name": "voting",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "ballots_arr",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "ballot_id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "owner_email",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "ballot_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "ballot_description",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "ballot_owner_name",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "ballot_owner_address",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "open_date",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "closing_date",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "ballot_type",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "proposals_count",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "full_vote_count",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -357,6 +334,29 @@ abi="""[
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "b_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "p_id",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_addr",
+				"type": "address"
+			}
+		],
+		"name": "voting",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

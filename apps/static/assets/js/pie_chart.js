@@ -14,12 +14,14 @@ $(function () {
         var ctx = proposalChart[0].getContext("2d");
 
         new Chart(ctx, {
-          type: 'bar',
+          type: 'horizontalBar', //'doughnut'
           data: {
             labels: data.labels,
             datasets: [{
               label: 'Proposals',
-              backgroundColor: '#A5FFF9 ',
+              backgroundColor:  ['rgba(56, 1, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(153, 102, 255, 0.2)'],
               data: data.data
             }]          
           },
@@ -28,10 +30,22 @@ $(function () {
             legend: {
               position: 'top',
             },
+            scales: {
+              xAxes: [{
+      
+                ticks: {
+                  min: 0
+                }
+              }],
+              yAxes: [{
+        
+              }],
+            },
             title: {
               display: true,
               text: 'Proposal Analysis Chart'
-            }
+            },
+     
           }
         });
 

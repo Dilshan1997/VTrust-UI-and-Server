@@ -22,18 +22,16 @@ def index_view(request):
 
 @login_required(login_url="login/")
 def index(request):
+    ballot_count=0
     ballot_data=dict()
     proposal_data=dict()
     expired=True
     # dates=dict()
     n=ballot_contract_controller.execTxn("getBallotId")
-    print(n)
     today=datetime.datetime.now().strftime('%Y-%m-%d')
     print(today)
     td=int(int(time.time()))
-    print(td)
-    
-   
+    print(td,)
     for i in range(n):
         inside_data=list()
         x=list(ballot_contract_controller.execTxn("getBallotDetails",i))
@@ -70,7 +68,7 @@ def index(request):
         labels = []
         data = []
 
-
+        print(ballot_data)
     context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_count,'login_val':True}
 
     html_template = loader.get_template('home/index.html')
@@ -126,3 +124,6 @@ def proposalChart(request,b_id):
         'labels': labels,
         'data': data,
     })
+    
+def dashboard(request):
+    return render(request,'Dashboard/main.html',{'login_val':True})
