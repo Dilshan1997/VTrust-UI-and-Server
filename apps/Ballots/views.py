@@ -120,3 +120,4 @@ def voting(request,b_id,p_id,address):
     print(vote)
     return redirect('home')
     
+    

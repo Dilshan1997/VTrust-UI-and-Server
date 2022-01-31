@@ -1,5 +1,5 @@
-<nav id="sidebar">
-        <div class="sidebar-header">
+<nav id="sidebar" >
+        <div class="sidebar-header position-fixed " >
             <h3>
             <a class="navbar-brand me-lg-5" href="{%url 'landing_page' %}">
            
@@ -10,7 +10,7 @@
         </h3>
             <strong>VT</strong>
         </div>
-        <ul class="list-unstyled components">
+        <ul class="list-unstyled components position-fixed mt-6">
             <!-- <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fas fa-home"></i>
@@ -56,7 +56,7 @@
                 </a>
             </li>
             <li>
-                <a href="{%url 'dashboard-view'%}">
+                <a href="dashboard/{{addr}}">
                     <i class="fas fa-question"></i>
                     Dashboard
                 </a>
