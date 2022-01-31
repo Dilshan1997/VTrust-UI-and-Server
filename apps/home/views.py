@@ -12,6 +12,7 @@ from django.template import loader
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from apps.Ballots import ballot_contract_controller
+from apps.authentication import auth_contract
 import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -29,6 +30,8 @@ def index(request):
     # dates=dict()
     n=ballot_contract_controller.execTxn("getBallotId")
     today=datetime.datetime.now().strftime('%Y-%m-%d')
+    user_address=auth_contract.auth_contract.functions.getUserData().call()[2]
+    print(user_address)
     print(today)
     td=int(int(time.time()))
     print(td,)
@@ -69,7 +72,7 @@ def index(request):
         data = []
 
         print(ballot_data)
-    context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_count,'login_val':True}
+    context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_count,'addr':user_address,'login_val':True}
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
@@ -125,5 +128,6 @@ def proposalChart(request,b_id):
         'data': data,
     })
     
-def dashboard(request):
+def dashboard(request,addr):
+    print(addr)
     return render(request,'Dashboard/main.html',{'login_val':True})
