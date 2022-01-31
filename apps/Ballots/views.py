@@ -35,6 +35,7 @@ def createBallot(request):
     ballot_details = BallotDetails(request.POST or None)
     login_val=False
     msg = None
+    r_value=False
     # print(request.POST)
     
     print(prop_data)
@@ -45,7 +46,9 @@ def createBallot(request):
     if request.method == "POST":
 
         if ballot_details.is_valid():
+            
             print("Valid")
+            print(ballot_details.cleaned_data.get('agrements'))
             email=ballot_details.cleaned_data.get("email")
             ballot_name=ballot_details.cleaned_data.get("ballot_name")
             ballot_description=ballot_details.cleaned_data.get("ballot_details")
@@ -66,22 +69,21 @@ def createBallot(request):
             method=""
             if published_method=='1':
                 method="public"
+                if now<=start_date_epoch and now<=end_date_epoch and start_date_epoch<end_date_epoch:
+                    msg="Successfully Created Ballot"
+                    r_value=execTxn("createBallot",email,ballot_name,ballot_description,owner_name,owner_address,start_date_epoch,end_date_epoch,method)
+                    for i in range(len(prop_data.keys())):
+                        execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])
+                    return redirect('home')
+                if r_value==False:
+                    msg="Plz check your data"
+                    return redirect('index_ballot')
+                
             else:
                 method="private"
-            print(method)
-            if now<=start_date_epoch and now<=end_date_epoch and start_date_epoch<end_date_epoch:
-                msg="Successfully Created Ballot"
-                r_value=execTxn("createBallot",email,ballot_name,ballot_description,owner_name,owner_address,start_date_epoch,end_date_epoch,method)
-                for i in range(len(prop_data.keys())):
-                    execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])
-                
-                if r_value:
-                    msg="Plz check your dates"
-                    return redirect('home')
-            else:
-                return redirect('index_ballot')
-            
-            
+                print(method)
+                print("private ballot not yet develop")
+
         else:
             print("not valid")
 
@@ -91,12 +93,12 @@ def getProposalCount(request):
     # request should be ajax and method should be GET.
     if request.is_ajax and request.method == "GET":
             prop_count = request.GET.get("prop_count", None)
-            print(prop_count)
+            # print(prop_count)
             return JsonResponse({"valid":True,"state":200})
          
 @login_required(login_url="login/")
 def gotoBallotView(request, b_id):
-    print(f"bid {b_id}")
+    # print(f"bid {b_id}")
     proposals_d=list()
     ballot_d=list(execTxn("getBallotDetails",int(b_id)))
     n=ballot_d[9]
@@ -106,12 +108,13 @@ def gotoBallotView(request, b_id):
     addr=auth_contract.auth_contract.functions.getUserData().call()[2]
     # print("address",addr)
     # print(ballot_d)
+    # print(proposals_d)
     
     return render(request,"Ballot/ballot_details.html",{'data':ballot_d,'p_data':proposals_d,'address':addr,'login_val':True})
 
 @login_required(login_url="login/")
 def voting(request,b_id,p_id,address):
-    print(b_id,p_id,address)
+    # print("ffffffff",b_id,p_id,address)
     msg=''
     vote=execTxn('voting',int(b_id),p_id,address)
     print(vote)

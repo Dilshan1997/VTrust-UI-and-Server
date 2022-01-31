@@ -6,7 +6,8 @@ urlpatterns = [
     # The home page
     path('home', views.index, name='home'),
     path('',views.index_view,name="landing_page"),
-    path('home/proposal-chart/<b_id>', views.proposalChart, name='proposal-chart')
+    path('home/proposal-chart/<b_id>', views.proposalChart, name='proposal-chart'),
+    path('dashboard',views.dashboard,name='dashboard-view')
     # Matches any html file
     # re_path(r'^.*\.*', views.pages, name='pages'),
     

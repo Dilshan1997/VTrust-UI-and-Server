@@ -15,32 +15,49 @@ from apps.Ballots import ballot_contract_controller
 import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+import time
 
 def index_view(request):
     return render(request,'home/landingpage.html')
 
 @login_required(login_url="login/")
 def index(request):
+    ballot_count=0
     ballot_data=dict()
     proposal_data=dict()
+    expired=True
     # dates=dict()
     n=ballot_contract_controller.execTxn("getBallotId")
-    print(n)
+    today=datetime.datetime.now().strftime('%Y-%m-%d')
+    print(today)
+    td=int(int(time.time()))
+    print(td,)
     for i in range(n):
         inside_data=list()
         x=list(ballot_contract_controller.execTxn("getBallotDetails",i))
-        today=datetime.datetime.now()
         start_date=datetime.datetime.fromtimestamp(x[6])
         end_date=datetime.datetime.fromtimestamp(x[7])
-        date_difference=(datetime.date(end_date.year,end_date.month,end_date.day)-datetime.date(today.year,today.month,today.day)).days
+        date_difference=(datetime.date(end_date.year,end_date.month,end_date.day)-datetime.date(start_date.year,start_date.month,start_date.day)).days
         x.append(str(start_date.strftime('%Y-%m-%d')))
         x.append(str(end_date.strftime('%Y-%m-%d')))
-        x.append(date_difference)
-        ballot_data[i]=x
+        if( td>=x[6]  and  x[7]>=td ):
+            x.append(f'{date_difference} Days Left')
+            x.append(False)
+        elif(td<x[6]):
+            x.append("Not Yet Published")
+            x.append(True)
+            
+            
+        else:
+            x.append("Voting time is over")
+            x.append(True)
+            
         
+        ballot_data[i]=x
+        # print(ballot_data)
         
         # dates[i]=[str(start_date.strftime('%Y-%m-%d')),str(end_date.strftime('%Y-%m-%d')),date_difference]
-        
+        ballot_count=ballot_contract_controller.execTxn("getBallotId")
         
         # date_difference=(end_date-today)
         for j in range(x[9]):
@@ -51,8 +68,8 @@ def index(request):
         labels = []
         data = []
 
-
-    context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'login_val':True}
+        print(ballot_data)
+    context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_count,'login_val':True}
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
@@ -92,9 +109,9 @@ def proposalChart(request,b_id):
     labels = []
     data = []
     urls=[]
-    ballot_count=ballot_contract_controller.execTxn("getBallotId")
-    for i in range(ballot_count):
-        urls.append(f"home/proposal-chart/{i}")
+    # ballot_count=ballot_contract_controller.execTxn("getBallotId")
+    # for i in range(ballot_count):
+    #     urls.append(f"home/proposal-chart/{i}")
         
     
     x=list(ballot_contract_controller.execTxn("getBallotDetails",int(b_id)))
@@ -106,5 +123,7 @@ def proposalChart(request,b_id):
     return JsonResponse(data={
         'labels': labels,
         'data': data,
-        'urls':urls
     })
+    
+def dashboard(request):
+    return render(request,'Dashboard/main.html',{'login_val':True})
