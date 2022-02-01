@@ -128,6 +128,3 @@ def proposalChart(request,b_id):
         'data': data,
     })
     
-def dashboard(request,addr):
-    print(addr)
-    return render(request,'Dashboard/main.html',{'login_val':True})
