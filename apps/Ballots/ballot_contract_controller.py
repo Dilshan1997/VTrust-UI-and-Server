@@ -58,7 +58,10 @@ def execTxn(txName,*args,**kwargs):
             return_value = ballot_contract.functions.getProposalResult(*args).call()   
             
         if(txName=='winningProposal'):
-            return_value = ballot_contract.functions.winningProposal(*args).call()             
+            return_value = ballot_contract.functions.winningProposal(*args).call()  
+        if(txName=='dashboardData'):
+            return_value = ballot_contract.functions.getDashboardData(*args).call()      
+              
         
         signed_txn = connection.con.eth.account.signTransaction(txn_dict, private_key=connection.wallet_private_key)
         transcation_hash = connection.con.eth.sendRawTransaction(signed_txn.rawTransaction)

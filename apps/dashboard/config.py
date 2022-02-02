@@ -5,7 +5,6 @@ Copyright (c) 2019 - present AppSeed.us
 
 from django.apps import AppConfig
 
-
-class AuthenticationConfig(AppConfig):
-    name = 'apps.authentication'
-    label = 'apps_authentication'
+class DashboardConfig(AppConfig):
+    name = 'apps.dashboard'
+    label = 'apps_dashboard'
