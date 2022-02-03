@@ -13,11 +13,9 @@ from django.http import JsonResponse
 import time
 import json
 
-
 def dashboard_index(request,addr):
     owner_belongs_ballot_ids=ballot_contract_controller.execTxn("dashboardData",addr)
     ballot_count=len(owner_belongs_ballot_ids)
-
     ballot_data=dict()
     proposal_data=dict()
     expired=True
@@ -26,8 +24,6 @@ def dashboard_index(request,addr):
     full_vote_count=0
     if len(owner_belongs_ballot_ids)!=0:
         most_famous_ballot_id=owner_belongs_ballot_ids[0]
-        
-
     td=int(int(time.time()))
     for i in owner_belongs_ballot_ids:
         inside_data=list()
@@ -44,30 +40,23 @@ def dashboard_index(request,addr):
         elif(td<x[6]):
             x.append("Not Yet Published")
             x.append(True)
-            
-            
         else:
             x.append("Voting time is over")
             x.append(True)
-            
         full_vote_count=full_vote_count+x[10]
         ballot_data[i]=x
         # print(ballot_data)
         if x[10]>ballot_data[most_famous_ballot_id][10]:
             most_famous_ballot_id=x[0]
         # dates[i]=[str(start_date.strftime('%Y-%m-%d')),str(end_date.strftime('%Y-%m-%d')),date_difference]
-    
-        
         # date_difference=(end_date-today)
         for j in range(x[9]):
             y=ballot_contract_controller.execTxn("getProposalDetails",f'{i}-{j}')
             print(y)
             inside_data.append(y)
         proposal_data[i]=inside_data
-        
         labels = []
         data = []
-
         print(ballot_data)
     print(proposal_data)
     if len(owner_belongs_ballot_ids)!=0:
