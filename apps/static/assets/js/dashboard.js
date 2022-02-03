@@ -30,11 +30,11 @@ $( document ).ready(()=>{
           backgroundColor: "#fff",
           data: ballot_chart_data,
           maxBarThickness: 6
-        }, ],
+        }]
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         plugins: {
           legend: {
             display: false,

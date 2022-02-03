@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.home', 
     'apps.authentication',
+    'apps.Ballots',
    
     # Enable the inner home (home),
 

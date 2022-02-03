@@ -26,7 +26,7 @@ def dashboard_index(request,addr):
     full_vote_count=0
     if len(owner_belongs_ballot_ids)!=0:
         most_famous_ballot_id=owner_belongs_ballot_ids[0]
-        ("############",most_famous_ballot_id)
+        
 
     td=int(int(time.time()))
     for i in owner_belongs_ballot_ids:
