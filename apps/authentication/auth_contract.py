@@ -55,7 +55,7 @@ def execTxn(txName,*args,**kwargs):
             print(txn_dict)
             
         if(txName=='getUserData'):
-            txn_dict = auth_contract.functions.getUserData().buildTransaction(buildData)
+            return_value=auth_contract.functions.getUserData().call()
         
         if(txName=='changeUserData'):
             txn_dict = auth_contract.functions.changeUserData(*args).buildTransaction(buildData)

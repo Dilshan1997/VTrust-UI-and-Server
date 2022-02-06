@@ -10,7 +10,7 @@ import sys
 from connection import connection
 from apps.authentication import auth_contract
 import time
-
+import datetime
 
 @login_required(login_url="login/")
 def indexBallot(request):
@@ -66,6 +66,7 @@ def createBallot(request):
             print(start_date_epoch,end_date_epoch)
             ballot_data={"email":email,"b_name":ballot_name,"b_des":ballot_description,"prop_count":proposal_count,"pub_method":published_method,"start_date":start_date,"end_date":end_date}
             # print(ballot_data)
+            ballot_id=execTxn("getBallotId")
             method=""
             if published_method=='1':
                 method="public"
@@ -84,8 +85,12 @@ def createBallot(request):
                 if now<=start_date_epoch and now<=end_date_epoch and start_date_epoch<end_date_epoch:
                     msg="Successfully Created Ballot"
                     r_value=execTxn("createBallot",email,ballot_name,ballot_description,owner_name,owner_address,start_date_epoch,end_date_epoch,method)
+                    print("####",ballot_id,owner_address)
+                    private_ballot=execTxn("savePrivateBallotIds",owner_address,ballot_id)
+                    print('###############',private_ballot)
                     for i in range(len(prop_data.keys())):
-                        execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])
+                        execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])     
+                    return redirect('private_ballot')
                
 
         else:
@@ -124,4 +129,79 @@ def voting(request,b_id,p_id,address):
     print(vote)
     return redirect('home')
     
+############PRIVATE BALLOT###############
+
+@login_required(login_url="login/")
+def privateBallot(request):
+    ballot_count=0
+    ballot_data=dict()
+    proposal_data=dict()
+    expired=True 
+    today=datetime.datetime.now().strftime('%Y-%m-%d')   
+    admin_address=auth_contract.execTxn("getUserData")[2]
+    print(type(admin_address))
+    td=int(int(time.time()))
+    ballot_ids=execTxn("getPrivateBallotIds",admin_address)
+    for i in ballot_ids:
+        inside_data=list()
+        x=list(execTxn("getBallotDetails",i))
+        start_date=datetime.datetime.fromtimestamp(x[6])
+        end_date=datetime.datetime.fromtimestamp(x[7])
+        date_difference=(datetime.date(end_date.year,end_date.month,end_date.day)-datetime.date(start_date.year,start_date.month,start_date.day)).days
+        x.append(str(start_date.strftime('%Y-%m-%d')))
+        x.append(str(end_date.strftime('%Y-%m-%d')))
+        if( td>=x[6]  and  x[7]>=td ):
+            x.append(f'{date_difference} Days Left')
+            x.append(False)
+        elif(td<x[6]):
+            x.append("Not Yet Published")
+            x.append(True)
+            
+            
+        else:
+            x.append("Voting time is over")
+            x.append(True)
+            
+        
+        ballot_data[i]=x
+        # print(ballot_data)
+        
+        # dates[i]=[str(start_date.strftime('%Y-%m-%d')),str(end_date.strftime('%Y-%m-%d')),date_difference]
+        ballot_count=len(ballot_ids)
+        
+        # date_difference=(end_date-today)
+        for j in range(x[9]):
+            y=execTxn("getProposalDetails",f'{i}-{j}')
+            inside_data.append(y)
+        proposal_data[i]=inside_data
+        
+        labels = []
+        data = []
+
+        print(ballot_data)
+    context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_count,'addr':admin_address,'login_val':True}
+    return render(request,"Ballot/private_ballot_page.html",context)
+
+@login_required(login_url="login/")
+def gotoPrivateBallotView(request,b_id):
+    proposals_d=list()
+    ballot_d=list(execTxn("getBallotDetails",int(b_id)))
+    n=ballot_d[9]
+    for i in range(n):
+        proposal_details=execTxn("getProposalDetails",f'{b_id}-{i}')
+        proposals_d.append(proposal_details)
+    addr=auth_contract.auth_contract.functions.getUserData().call()[2]
+    # print("address",addr)
+    # print(ballot_d)
+    # print(proposals_d)
     
+    return render(request,"Ballot/ballot_details.html",{'data':ballot_d,'p_data':proposals_d,'address':addr,'login_val':True})
+
+
+@login_required(login_url="login/")
+def privateBalloVoting(request,b_id,p_id,address):
+    # print("ffffffff",b_id,p_id,address)
+    msg=''
+    vote=execTxn('privateBallotVoting',int(b_id),p_id,address)
+    print(vote)
+    return redirect('home')

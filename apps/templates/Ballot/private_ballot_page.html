@@ -1,0 +1,25 @@
+{%extends 'layouts/base.html'%}
+{% block title %} Home {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <main>
+
+        {% include 'includes/preloader.html' %}
+        <div class=" container-fluid">
+            {% for value in ballot_data.values %}
+            {% include 'includes/public_ballot_view.html' %}
+            {% endfor %}
+        </div>
+        {% include 'includes/footer.html' %}
+    </main>
+    
+
+
+{%endblock content%}
+    {% include 'includes/scripts.html' %}
+
+</body>
+</html>

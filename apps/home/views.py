@@ -38,6 +38,8 @@ def index(request):
     for i in range(n):
         inside_data=list()
         x=list(ballot_contract_controller.execTxn("getBallotDetails",i))
+        if(x[8]=="private"):
+            continue
         start_date=datetime.datetime.fromtimestamp(x[6])
         end_date=datetime.datetime.fromtimestamp(x[7])
         date_difference=(datetime.date(end_date.year,end_date.month,end_date.day)-datetime.date(start_date.year,start_date.month,start_date.day)).days
@@ -49,9 +51,8 @@ def index(request):
         elif(td<x[6]):
             x.append("Not Yet Published")
             x.append(True)
-            
-            
         else:
+            
             x.append("Voting time is over")
             x.append(True)
             
