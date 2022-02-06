@@ -11,5 +11,6 @@ urlpatterns = [
     
     path("VTrust/", include("apps.authentication.urls")), # Auth routes - login / register
     path("VTrust/", include("apps.home.urls")),             # UI Kits Html files
-    path("VTrust/",include("apps.Ballots.urls")) #Ballot urls
+    path("VTrust/",include("apps.Ballots.urls")), #Ballot urls
+    path("VTrust/",include("apps.dashboard.urls")), #dashboard urls
 ]

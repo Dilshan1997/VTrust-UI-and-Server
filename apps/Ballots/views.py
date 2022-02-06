@@ -81,8 +81,12 @@ def createBallot(request):
                 
             else:
                 method="private"
-                print(method)
-                print("private ballot not yet develop")
+                if now<=start_date_epoch and now<=end_date_epoch and start_date_epoch<end_date_epoch:
+                    msg="Successfully Created Ballot"
+                    r_value=execTxn("createBallot",email,ballot_name,ballot_description,owner_name,owner_address,start_date_epoch,end_date_epoch,method)
+                    for i in range(len(prop_data.keys())):
+                        execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])
+               
 
         else:
             print("not valid")
