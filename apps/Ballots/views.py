@@ -195,7 +195,7 @@ def gotoPrivateBallotView(request,b_id):
     # print(ballot_d)
     # print(proposals_d)
     
-    return render(request,"Ballot/ballot_details.html",{'data':ballot_d,'p_data':proposals_d,'address':addr,'login_val':True})
+    return render(request,"Ballot/private_ballot_details.html",{'data':ballot_d,'p_data':proposals_d,'address':addr,'login_val':True})
 
 
 @login_required(login_url="login/")
@@ -205,3 +205,12 @@ def privateBalloVoting(request,b_id,p_id,address):
     vote=execTxn('privateBallotVoting',int(b_id),p_id,address)
     print(vote)
     return redirect('home')
+
+def winningProposal(request,b_id):
+    winner=execTxn("winningProposal",int(b_id))
+    print(winner)
+    proposal_data=execTxn("getProposalDetails",winner)
+    print(proposal_data)
+    if request.is_ajax and request.method == "GET":
+        # print(prop_count)
+        return JsonResponse({"valid":True,"state":200,"proposal_data":proposal_data})

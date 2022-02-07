@@ -10,7 +10,7 @@
         {% include 'includes/preloader.html' %}
         <div class=" container-fluid">
             {% for value in ballot_data.values %}
-            {% include 'includes/public_ballot_view.html' %}
+            {% include 'includes/private_ballot_card.html' %}
             {% endfor %}
         </div>
         {% include 'includes/footer.html' %}
@@ -20,6 +20,5 @@
 
 {%endblock content%}
     {% include 'includes/scripts.html' %}
-
-</body>
+    
 </html>
