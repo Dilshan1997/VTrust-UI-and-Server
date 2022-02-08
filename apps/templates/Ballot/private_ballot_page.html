@@ -2,8 +2,9 @@
 {% block title %} Home {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
-
+{% block stylesheets %}
+{% endblock stylesheets %}
+<script src="/static/assets/css/invitation_ui.css"></script>
 {% block content %}
     <main>
 
@@ -21,4 +22,7 @@
 {%endblock content%}
     {% include 'includes/scripts.html' %}
     
+ {% block javascripts %}
+<script src="/static/assets/js/private_ballot.js"></script>
+{% endblock javascripts %}
 </html>

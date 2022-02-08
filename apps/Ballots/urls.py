@@ -14,7 +14,10 @@ urlpatterns = [
     path('ballot/private/',views.privateBallot,name="private_ballot"),
     path('ballot/private/<b_id>',views.gotoPrivateBallotView,name="PrivateBallotView"),
     path('ballot/private/<b_id>/<p_id>/<address>/vote',views.privateBalloVoting,name="PrivateVoting"),
-    path('ballot/winner/<b_id>',views.winningProposal,name="BallotView")
+    path('ballot/winner/<b_id>',views.winningProposal),
+    path('ballot/follower/<b_id>/<addr>',views.followers),
+    path('ballot/private/proposal-chart/<b_id>', views.privateBallotDetailsAnalysisChart, name='Private-proposal-chart'),
+    path('ballot/private/invite/<b_id>/<wallet_address>',views.privateBallotInvitationSend)
 
     # Matches any html file
     # re_path(r'^.*\.*', views.pages, name='pages'),

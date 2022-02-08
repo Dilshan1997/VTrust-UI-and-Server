@@ -19,6 +19,7 @@ def indexBallot(request):
     return render(request,"Ballot/create_ballot.html",{'form':ballot_details,'login_val':True})
 
 prop_data=None
+method=None
 
 @csrf_exempt
 def getProposalData(request):
@@ -36,6 +37,7 @@ def createBallot(request):
     login_val=False
     msg = None
     r_value=False
+ 
     # print(request.POST)
     
     print(prop_data)
@@ -206,11 +208,48 @@ def privateBalloVoting(request,b_id,p_id,address):
     print(vote)
     return redirect('home')
 
+@login_required(login_url="login/")
 def winningProposal(request,b_id):
     winner=execTxn("winningProposal",int(b_id))
     print(winner)
     proposal_data=execTxn("getProposalDetails",winner)
     print(proposal_data)
     if request.is_ajax and request.method == "GET":
-        # print(prop_count)
         return JsonResponse({"valid":True,"state":200,"proposal_data":proposal_data})
+    
+@login_required(login_url="login/")
+def followers(request,b_id,addr):
+    print(b_id)
+    follower=execTxn("setFollowers",int(b_id),addr)
+    if request.is_ajax and request.method == "GET":
+        return JsonResponse({"valid":True,"state":200})
+    
+        
+def privateBallotDetailsAnalysisChart(b_id):
+    labels = []
+    data = []
+    urls=[]
+    # ballot_count=ballot_contract_controller.execTxn("getBallotId")
+    # for i in range(ballot_count):
+    #     urls.append(f"home/proposal-chart/{i}")
+        
+    
+    x=list(execTxn("getBallotDetails",int(b_id)))
+    for j in range(x[9]):
+            y=execTxn("getProposalDetails",f'{b_id}-{str(j)}')
+            print(y)
+            labels.append(y[1])
+            data.append(y[3])
+    return JsonResponse(data={
+        'labels': labels,
+        'data': data,
+    })
+    
+def privateBallotInvitationSend(request,b_id,wallet_address):
+    save_voter=execTxn("savePrivateVotersData",int(b_id),wallet_address)
+    status="success"
+    get_voters_data=execTxn("getPrivateVotersData",int(b_id))
+    print(get_voters_data)
+    print(b_id,wallet_address)
+    if request.is_ajax and request.method == "GET":
+            return JsonResponse({"valid":True,"state":200,"method":method,'status':status})

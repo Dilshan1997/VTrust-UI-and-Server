@@ -5,14 +5,55 @@
         <div class="card shadow text-center" style="width: 30rem;">
             <!-- Header -->
             <div class="card-header bg-white ">
+                <div class=" align-content-end float-end">
+                    <a href='#' class="btn btn-primary animate-up-1 fas fa-user-plus" data-bs-toggle="modal" id="{{value.0}}"
+                    data-bs-target="#modal_{{value.0}}" ></a>
+                </div>
+                          <!-- Modal Content -->
+                          <div class="modal fade" id="modal_{{value.0}}" tabindex="-1" role="dialog "
+                          aria-labelledby="modal_{{value.0}}" aria-hidden="true" id="winningProposalJsonData" data-json="{{ data }}">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content bg-primary text-white">
+                                  <div class="modal-header border-0">
+                                      <button type="button" class="btn-close bg-gray-500" data-bs-dismiss="modal"
+                                          aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <div class="py-3 text-center">
+                                          <span class="modal-icon display-1-lg"><span
+                                                  class="fas fa-user-friends"></span></span>
+                                          <h2 class="h5 modal-title ">Invite</h2>
+                                              <div id="inviter_{{value.0}}">
+                                                <div class="container mt-5 mb-5 d-flex justify-content-center">
+                                                    <!-- <div class="card text-center">
+                                                            <h5>Invite</h5> <span class="earn-text"></span>
+                                                        </div> -->
+                                                        <div class=" mt-2 gap-2"> <input class="form-control" placeholder="Enter wallet address" id="inviter_wallet_address"> 
+                                                            <button class="btn btn-danger mt-2" onclick="privateInvitation('{{ value.0 }}')">Invite</button> </div>
+                                                    </div>
+                                                </div>
+                                                <div id="send_or_not">
+
+                                                </div>
+                                              </div>
+                                      </div>
+                                  </div>
+                                  <!-- <div class="modal-footer border-secondary">
+                                      <button type="button" class="btn btn-sm btn-white">Ok</button>
+                                  </div> -->
+                              </div>
+                          </div>
+                     
+                      <!-- End of Modal Content -->
                 <h3 class="text-primary mb-4">{{value.15}}</h3>
+
                 <span class="d-block">
                     <span class="display-2 text-dark fw-bold">
                         {{ value.2}}
                     </span>
                     <span class="d-block text-gray font-small">Ballot</span>
                 </span>
-            </div>
+            
             <!-- End Header -->
             <!-- Content -->
             <div class="card-body">
@@ -23,18 +64,15 @@
                     <li class="list-item pb-3"><strong>Proposals_count:</strong> {{value.9}}</li>
                   
                 </ul>
-                {%if value.16%}
-                <div class="d-grid"><a href='{{value.0}}' class="btn btn-primary animate-up-1 disabled">vote now</a></div>
-                {%else%}
-                <div class="d-grid"><a href='{{value.0}}' class="btn btn-primary animate-up-1 ">vote now</a></div>
-                {%endif%}
+                <div class="d-grid"><a href='{{value.0}}' class="btn btn-primary animate-up-1 ">Details</a></div>
             </div>
             <!-- End Content -->
         </div>
     </div>
+    </div>
     <div class="col-6 mb-2 mx-6">
         <div >
-            <canvas id="proposal-analysis-chart{{value.0}}" data-url="home/proposal-chart/{{value.0}}"></canvas>
+            <canvas id="proposal-analysis-chart{{value.0}}" data-url="ballot/private/proposal-chart/{{value.0}}"></canvas>
           </div>
     </div>
 </div>

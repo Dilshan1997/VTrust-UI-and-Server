@@ -77,10 +77,11 @@ def execTxn(txName,*args,**kwargs):
            return_value = ballot_contract.functions.getPrivateVotersData(*args).call()
         
         if(txName=='privateBallotVoting'):
+            buildData['gas']=6721974
             txn_dict=ballot_contract.functions.privateBallotVoting(*args).buildTransaction(buildData)
         
         if(txName=='setFollowers'): 
-            txn_dict=ballot_contract.functions.setFollowers(*args).buildTransaction(buildData)
+            txn_dict=ballot_contract.functions.setFollwers(*args).buildTransaction(buildData)
         
         signed_txn = connection.con.eth.account.signTransaction(txn_dict, private_key=connection.wallet_private_key)
         transcation_hash = connection.con.eth.sendRawTransaction(signed_txn.rawTransaction)

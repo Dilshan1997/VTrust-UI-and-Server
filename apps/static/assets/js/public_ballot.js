@@ -16,6 +16,24 @@ function showPopUp(id){
 
 }
 
+function followers(b_id,address){
+    console.log(b_id,address)
+    $.ajax({
+        type: 'GET',
+        url: "ballot/follower/"+b_id+"/"+address,
+        
+        success: function (response) {
+            console.log(response)
+            $("#follower_btn").prop('disabled', true)
+        },
+        error: function (response) {
+            console.log(response)
+        }
+    })
+}
+
+
+
 
 
 
