@@ -1,0 +1,28 @@
+{%extends 'layouts/base.html'%}
+{% block title %} Home {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+{% endblock stylesheets %}
+<script src="/static/assets/css/invitation_ui.css"></script>
+{% block content %}
+    <main>
+
+        {% include 'includes/preloader.html' %}
+        <div class=" container-fluid">
+            {% for value in ballot_data.values %}
+            {% include 'includes/private_ballot_card.html' %}
+            {% endfor %}
+        </div>
+        {% include 'includes/footer.html' %}
+    </main>
+    
+
+
+{%endblock content%}
+    {% include 'includes/scripts.html' %}
+    
+ {% block javascripts %}
+<script src="/static/assets/js/private_ballot.js"></script>
+{% endblock javascripts %}
+</html>

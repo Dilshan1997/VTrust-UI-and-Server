@@ -49,10 +49,10 @@ $("#sn_btn").on('click', () => {
             // proposal_details['prop'+i]['prop_details']=($('#prop_details_'+i).val());
 
             proposals_obj["prop" + i] = proposal_data;
-            console.log(typeof (proposals_obj))
+
         }
     }
-    console.log(JSON.stringify(proposals_obj))
+
 
     $.ajax({
 

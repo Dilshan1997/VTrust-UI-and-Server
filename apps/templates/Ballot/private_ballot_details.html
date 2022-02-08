@@ -10,36 +10,43 @@
         {% include 'includes/preloader.html' %}
 
         <div class="section section-sm pb-0 mb-n4">
-            <div id="ballot_count" class=" visually-hidden">{{n}}</div>
-            <div class="container-fluid">
-                {% for value in ballot_data.values %}
-                {% include 'includes/public_ballot_view.html' %}
-                {% endfor %}
-                    <div class="row justify-content-center">
+            <div class="container">
+                
+                <div class="row justify-content-center">
                     <div class="col-12 mt-5">
                         <div class="card shadow mb-6">
                             <div class="card-body px-5 py-5 text-center text-md-left">
                                 <div class="row align-items-center">
                                     <div class="col-md-6">
-                                        <h2 class="mb-3">Get in touch</h2>
+                                        <h2 class="mb-3">{{data.2}}</h2>
                                         <p class="mb-0">
-                                            If you need any help with our products or services, choose one of the following ways
-                                            to contact us.
+                                            {{data.3}}
                                         </p>
+                                        <p class="mb-0">
+                                            Type:{{data.8}}
+                                        </p>
+                                        <p class="mb-0">
+                                            Creator:{{data.4}}
+                                        </p>
+                                        <p class="mb-0">
+                                            Proposals:{{data.9}}
+                                        </p>
+                                        <p class="mb-0">
+                                            Full vote count:{{data.10}}
+                                        </p>
+                                      
                                     </div>
-                                    <div class="col-12 col-md-6 mt-4 mt-md-0 text-md-right">
-                                        <a href="#" class="btn btn-primary">
-                                            <span class="me-1">
-                                                <span class="fas fa-headphones"></span>
-                                            </span>
-                                            Contact Us
-                                        </a>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="row justify-content-left">
+              {% for p_data in p_data%}
+                    {% include 'includes/proposal.html'%}
+              {%endfor%}
+          
                
             </div>
         </div>
@@ -159,10 +166,6 @@
 
 {%endblock content%}
     {% include 'includes/scripts.html' %}
-    {% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script src="/static/assets/js/pie_chart.js"></script>
-    <script src="/static/assets/js/public_ballot.js"></script>
-    {%endblock javascripts%}
+
 </body>
 </html>

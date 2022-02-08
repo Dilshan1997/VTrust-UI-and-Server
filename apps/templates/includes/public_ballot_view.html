@@ -1,10 +1,12 @@
+
 <div class="row justify-content-left mb-7 mt-6">
     
     <div class="col-6 col-md-6 col-lg-4 mb-5 mb-lg-0 ">
         <div class="card shadow text-center" style="width: 30rem;">
             <!-- Header -->
             <div class="card-header bg-white ">
-                <h3 class="text-primary mb-4">{{value.13}}</h3>
+                <div class=" align-content-end float-end"><a href='#' class=" fas fa-share-alt"></a></div>
+                <h3 class="text-primary mb-4">{{value.15}}</h3>
                 <span class="d-block">
                     <span class="display-2 text-dark fw-bold">
                         {{ value.2}}
@@ -17,16 +19,64 @@
             <div class="card-body">
                 <ul class="list-unstyled mb-4">
                     <li class="list-item pb-3"><strong>Create By:</strong> {{ value.4}}</li>
-                    <li class="list-item pb-3"><strong>Start Date:{{ value.11}}</strong> </li>
-                    <li class="list-item pb-3"><strong>End Date:{{ value.12}}</strong> </li>
+                    <li class="list-item pb-3"><strong>Start Date:{{ value.13}}</strong> </li>
+                    <li class="list-item pb-3"><strong>End Date:{{ value.14}}</strong> </li>
                     <li class="list-item pb-3"><strong>Proposals_count:</strong> {{value.9}}</li>
                   
                 </ul>
-                {%if value.14%}
-                <div class="d-grid"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1 disabled">vote now</a></div>
+                <div class="row">
+                {% if value.18 %}
+                <div class="col-4">
+                    <a id="follower_btn" class="btn btn-primary animate-up-1" onclick="followers('{{ value.0 }}','{{addr}}')"><i class=" fa fa-rss"></i> </a>
+                </div>
                 {%else%}
-                <div class="d-grid"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1 ">vote now</a></div>
+                <div class="col-4">
+                    <a id="follower_btn" class="btn btn-primary animate-up-1 disabled" onclick="followers('{{ value.0 }}','{{addr}}')"><i class=" fa fa-rss"></i> </a>
+                </div>                
+                {% endif%}
+                {%if value.16%}
+                <div class="col-4"><a href='ballot/{{value.0}}' class="btn btn-primary disabled ">vote now</a></div>
+                {%else%}
+                <div class="col-4"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1 ">vote now</a></div>
                 {%endif%}
+                <div class="col-4">
+                           <!-- Button Modal -->
+                           {%if value.17 %}
+                            <a  class="btn btn-primary animate-up-1 fas fa-trophy" data-bs-toggle="modal" id="{{value.0}}"
+                                data-bs-target="#modal_{{value.0}}" onclick="showPopUp('{{ value.0 }}')"></a>
+                            {% else %}
+                            <a  class="btn btn-primary animate-up-1 fas fa-trophy disabled" data-bs-toggle="modal" id="{{value.0}}"
+                                data-bs-target="#modal_{{value.0}}" onclick="showPopUp('{{ value.0 }}')"></a>
+                            {% endif%}
+                        <!-- Modal Content -->
+                        <div class="modal fade" id="modal_{{value.0}}" tabindex="-1" role="dialog "
+                            aria-labelledby="modal_{{value.0}}" aria-hidden="true" id="winningProposalJsonData" data-json="{{ data }}">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content bg-primary text-white">
+                                    <div class="modal-header border-0">
+                                        <button type="button" class="btn-close bg-gray-500" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="py-3 text-center">
+                                            <span class="modal-icon display-1-lg"><span
+                                                    class="far fa-envelope-open"></span></span>
+                                            <h2 class="h4 modal-title my-3">Winning Proposal</h2>
+                                                <div id="winner_details_{{value.0}}">
+
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="modal-footer border-secondary">
+                                        <button type="button" class="btn btn-sm btn-white">Ok</button>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Modal Content -->
+                   
+                </div>
+                </div>
             </div>
             <!-- End Content -->
         </div>
@@ -37,3 +87,4 @@
           </div>
     </div>
 </div>
+

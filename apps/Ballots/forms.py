@@ -55,7 +55,9 @@ class BallotDetails(forms.Form):
     published_method= forms.ChoiceField(
         widget=forms.RadioSelect(
         attrs={
-            "class":"form-check-input"
+            "class":"form-check-input",
+            "id":"method",
+            "name":"publish method"
                }
      ),
         choices=CHOICES

@@ -59,12 +59,29 @@ def execTxn(txName,*args,**kwargs):
             
         if(txName=='winningProposal'):
             return_value = ballot_contract.functions.winningProposal(*args).call()  
+            
         if(txName=='dashboardData'):
             return_value = ballot_contract.functions.getDashboardData(*args).call()      
 
-        if(txName=='savePrivateBallotData'):
-            ballot_contract.functions.getDashboardData(*args).buildTransaction(buildData)  
-            return_value = ballot_contract.functions.getDashboardData(*args).call()     
+        if(txName=='savePrivateBallotIds'):
+            txn_dict=ballot_contract.functions.savePrivateBallotIds(*args).buildTransaction(buildData)  
+            return_value = ballot_contract.functions.savePrivateBallotIds(*args).call() 
+        
+        if(txName=='getPrivateBallotIds'): 
+            return_value = ballot_contract.functions.getPrivateIds(*args).call()    
+            
+        if(txName=='savePrivateVotersData'):
+            txn_dict=ballot_contract.functions.savePrivateVotersData(*args).buildTransaction(buildData)
+        
+        if(txName=='getPrivateVotersData'): 
+           return_value = ballot_contract.functions.getPrivateVotersData(*args).call()
+        
+        if(txName=='privateBallotVoting'):
+            buildData['gas']=6721974
+            txn_dict=ballot_contract.functions.privateBallotVoting(*args).buildTransaction(buildData)
+        
+        if(txName=='setFollowers'): 
+            txn_dict=ballot_contract.functions.setFollwers(*args).buildTransaction(buildData)
         
         signed_txn = connection.con.eth.account.signTransaction(txn_dict, private_key=connection.wallet_private_key)
         transcation_hash = connection.con.eth.sendRawTransaction(signed_txn.rawTransaction)

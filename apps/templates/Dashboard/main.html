@@ -3,7 +3,9 @@
 {% block title %} Dashboard {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/dashboard.css">
+{% endblock stylesheets %}
 
 {% block content %}
 {% include 'includes/preloader.html' %}
@@ -204,14 +206,14 @@
                   <div class="section section-md">
                     <div class="container">
                         <div class="row justify-content-center">
-                          <table class="table align-items-center mb-0">
+                          <!-- <table class="table align-items-center mb-0">
                             <thead>
                               <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Proposal Name</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vote count</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Winning proposal</th>
                               </tr>
-                            </thead>
+                            </thead> -->
                             <div class="col-12 col-md-10 col-lg-8">
                               <!-- Tab Nav -->
                               <div class="nav-wrapper position-relative mb-2">
@@ -227,38 +229,24 @@
                               <!-- End of Tab Nav -->
                               <!-- Tab Content -->
                               {% for key,value in proposal_data.items %}
-                             
+
                               <div class="card border-0">
                                   <div class="card-body p-0">
-                            
                                       <div class="tab-content" id="tabcontent{{key}}">
                                           <div class="tab-pane fade show " id="tabs-text-{{key}}" role="tabpane{{key}}"
                                               aria-labelledby="tabs-text-{{key}}-tab">
+                                              <div class="d-flex justify-content-around flex-wrap me-auto">
+                                                <div class="p-2 font-medium fw-bold">proposal name</div>
+                                                <div class="p-2 font-medium fw-bold">Votes</div>
+                                                <div class="p-2 font-medium fw-bold">Percentage</div>
+                                                <div class="p-2 font-medium fw-bold">Winning Proposal</div>
+                                              </div>
                                               {% for p_value in value %}
-                                             
-                                                <div class=" d-inline-block d-inline-flex">
-                                                  <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                      <!-- <img src="/static/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd"> -->
-                                                    </div>
-                                                    <div class="d-flex flex-column justify-content-center mx-6">
-                                                      <h6 class="mb-0 text-sm text-center">
-                                                        <h5>Proposal name</h5>
-                                                        {{p_value.1}}
-                                                      </h6>
-                                                    </div>
-                                                  </div>
-                                                  <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                      <!-- <img src="/static/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd"> -->
-                                                    </div>
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                      <h6 class="mb-0 text-sm text-center">
-                                                        <h5>Vote count</h5>
-                                                        {{p_value.3}}
-                                                      </h6>
-                                                    </div>
-                                                  </div>
+                                                <div class="d-flex justify-content-around me-auto">
+                                                  <div class="p-2">{{p_value.1}}</div>
+                                                  <div class="p-2">{{p_value.3}}</div>
+                                                  <div class="p-2">{{p_value.4}}%</div>
+                                                  <div class="p-2"></div>   
                                                 </div>
                                          <br>
                                               <!-- <h5> {{p_value.0}}</h5> -->
@@ -273,7 +261,7 @@
                               {% endfor %}
                               <!-- End of Tab Content -->
                           </div>       
-                </table>
+                <!-- </table> -->
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from cProfile import label
+from operator import le
 from tracemalloc import start
 from django import template
 from django.contrib.auth.decorators import login_required
@@ -26,7 +27,7 @@ def index(request):
     ballot_count=0
     ballot_data=dict()
     proposal_data=dict()
-    expired=True
+    follower_btn=True
     # dates=dict()
     n=ballot_contract_controller.execTxn("getBallotId")
     today=datetime.datetime.now().strftime('%Y-%m-%d')
@@ -38,23 +39,35 @@ def index(request):
     for i in range(n):
         inside_data=list()
         x=list(ballot_contract_controller.execTxn("getBallotDetails",i))
+        if(x[8]=="private"):
+            continue
         start_date=datetime.datetime.fromtimestamp(x[6])
         end_date=datetime.datetime.fromtimestamp(x[7])
         date_difference=(datetime.date(end_date.year,end_date.month,end_date.day)-datetime.date(start_date.year,start_date.month,start_date.day)).days
         x.append(str(start_date.strftime('%Y-%m-%d')))
         x.append(str(end_date.strftime('%Y-%m-%d')))
+        
         if( td>=x[6]  and  x[7]>=td ):
             x.append(f'{date_difference} Days Left')
-            x.append(False)
+            x.append(False) #voting disabled or not
+            x.append(False) #winner btn disabled or not
         elif(td<x[6]):
             x.append("Not Yet Published")
             x.append(True)
-            
-            
+            x.append(False)
+           
         else:
             x.append("Voting time is over")
             x.append(True)
+            x.append(True)
             
+        if len(x[12])==0:
+            follower_btn=True
+        elif str(user_address) in x[12]:
+            follower_btn=False
+        
+        print("#####",follower_btn)
+        x.append(follower_btn)
         
         ballot_data[i]=x
         # print(ballot_data)

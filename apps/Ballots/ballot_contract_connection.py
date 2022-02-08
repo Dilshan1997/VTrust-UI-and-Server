@@ -1,4 +1,4 @@
-contract_address='0x815bE53C24c701A29CEF0bC6Ddcb4801A3659A4B'
+contract_address='0x9A93E86dd6bF27E47f85c709A53E263B08691bD0'
 
 abi="""[
 	{
@@ -87,6 +87,29 @@ abi="""[
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "b_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "p_id",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "voting_addr",
+				"type": "address"
+			}
+		],
+		"name": "privateBallotVoting",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "admin_address",
 				"type": "address"
@@ -95,14 +118,9 @@ abi="""[
 				"internalType": "uint256",
 				"name": "ballot_id",
 				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "voter_addr",
-				"type": "address"
 			}
 		],
-		"name": "savePrivateBallotData",
+		"name": "savePrivateBallotIds",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -110,6 +128,48 @@ abi="""[
 				"type": "bool"
 			}
 		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ballot_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "voter_address",
+				"type": "address"
+			}
+		],
+		"name": "savePrivateVotersData",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "bid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_addr",
+				"type": "address"
+			}
+		],
+		"name": "setFollwers",
+		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -271,6 +331,16 @@ abi="""[
 						"internalType": "uint256",
 						"name": "full_vote_count",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "private_ballot_ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "followers",
+						"type": "address[]"
 					}
 				],
 				"internalType": "struct Ballot.BallotDetails",
@@ -316,34 +386,36 @@ abi="""[
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "admin_address",
+				"type": "address"
+			}
+		],
+		"name": "getPrivateIds",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "ballot_id",
 				"type": "uint256"
 			}
 		],
-		"name": "getPrivateBallotData",
+		"name": "getPrivateVotersData",
 		"outputs": [
 			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "owner_address",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "ballot_id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address[]",
-						"name": "voters",
-						"type": "address[]"
-					}
-				],
-				"internalType": "struct Ballot.privateballots",
+				"internalType": "address[]",
 				"name": "",
-				"type": "tuple"
+				"type": "address[]"
 			}
 		],
 		"stateMutability": "view",

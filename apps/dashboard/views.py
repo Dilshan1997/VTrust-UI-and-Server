@@ -22,13 +22,14 @@ def dashboard_index(request,addr):
     today=datetime.datetime.now().strftime('%Y-%m-%d')
     most_voting_count_from="Not Any Data"
     full_vote_count=0
+    ballot_vote_count=0
     if len(owner_belongs_ballot_ids)!=0:
         most_famous_ballot_id=owner_belongs_ballot_ids[0]
     td=int(int(time.time()))
     for i in owner_belongs_ballot_ids:
         inside_data=list()
         x=list(ballot_contract_controller.execTxn("getBallotDetails",i))
-        print(x)
+        ballot_vote_count=x[10]
         start_date=datetime.datetime.fromtimestamp(x[6])
         end_date=datetime.datetime.fromtimestamp(x[7])
         date_difference=(datetime.date(end_date.year,end_date.month,end_date.day)-datetime.date(start_date.year,start_date.month,start_date.day)).days
@@ -51,8 +52,11 @@ def dashboard_index(request,addr):
         # dates[i]=[str(start_date.strftime('%Y-%m-%d')),str(end_date.strftime('%Y-%m-%d')),date_difference]
         # date_difference=(end_date-today)
         for j in range(x[9]):
-            y=ballot_contract_controller.execTxn("getProposalDetails",f'{i}-{j}')
+            y=list(ballot_contract_controller.execTxn("getProposalDetails",f'{i}-{j}'))
             print(y)
+            if y[3]!=0:
+                percentage=int(y[3]/ballot_vote_count*100)
+                y.append(percentage)
             inside_data.append(y)
         proposal_data[i]=inside_data
         labels = []
