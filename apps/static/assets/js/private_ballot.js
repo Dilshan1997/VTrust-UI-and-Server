@@ -1,6 +1,8 @@
 $( document ).ready(()=>{
-    n=$('#ballot_count').text()
-    for(let i=0;i<n;i++){
+    n=$('#private_ballot_count').text()
+    console.log(n)
+    for(i in n){
+      console.log(i)
   $(function () {
       var proposalChart = $("#proposal-analysis-chart"+i);
       $.ajax({

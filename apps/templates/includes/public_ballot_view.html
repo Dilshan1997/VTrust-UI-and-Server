@@ -5,8 +5,28 @@
         <div class="card shadow text-center" style="width: 30rem;">
             <!-- Header -->
             <div class="card-header bg-white ">
-                <div class=" align-content-end float-end"><a href='#' class=" fas fa-share-alt"></a></div>
-                <h3 class="text-primary mb-4">{{value.15}}</h3>
+                <div class=" align-content-end float-end">
+                    <a href='#' class=" fas fa-share-alt" class="btn btn-primary text-uppercase" data-bs-toggle="modal" data-bs-target="#myModel" id="shareBtn" data-bs-placement="top"> 
+
+                    </a>
+                    <div class="modal fade" id="myModel" tabindex="-1" aria-labelledby="myModelLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="myModelLabel">Share Link</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Share this link via</p>
+                                    <div class="d-flex align-items-center icons"> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-facebook-f"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-twitter"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-instagram"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-whatsapp"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-telegram-plane"></span> </a> </div>
+                                    <p>Or copy link</p>
+                                    <div class="field d-flex align-items-center justify-content-between"> <span class="fas fa-link text-center"></span> <input type="text" value="some.com/share"> <button>Copy</button> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+                <h3 class="text-primary mb-4">{{value.14}}</h3>
                 <span class="d-block">
                     <span class="display-2 text-dark fw-bold">
                         {{ value.2}}
@@ -19,8 +39,8 @@
             <div class="card-body">
                 <ul class="list-unstyled mb-4">
                     <li class="list-item pb-3"><strong>Create By:</strong> {{ value.4}}</li>
-                    <li class="list-item pb-3"><strong>Start Date:{{ value.13}}</strong> </li>
-                    <li class="list-item pb-3"><strong>End Date:{{ value.14}}</strong> </li>
+                    <li class="list-item pb-3"><strong>Start Date:{{ value.12}}</strong> </li>
+                    <li class="list-item pb-3"><strong>End Date:{{ value.13}}</strong> </li>
                     <li class="list-item pb-3"><strong>Proposals_count:</strong> {{value.9}}</li>
                   
                 </ul>
@@ -34,14 +54,14 @@
                     <a id="follower_btn" class="btn btn-primary animate-up-1 disabled" onclick="followers('{{ value.0 }}','{{addr}}')"><i class=" fa fa-rss"></i> </a>
                 </div>                
                 {% endif%}
-                {%if value.16%}
+                {%if value.15%}
                 <div class="col-4"><a href='ballot/{{value.0}}' class="btn btn-primary disabled ">vote now</a></div>
                 {%else%}
                 <div class="col-4"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1 ">vote now</a></div>
                 {%endif%}
                 <div class="col-4">
                            <!-- Button Modal -->
-                           {%if value.17 %}
+                           {%if value.16 %}
                             <a  class="btn btn-primary animate-up-1 fas fa-trophy" data-bs-toggle="modal" id="{{value.0}}"
                                 data-bs-target="#modal_{{value.0}}" onclick="showPopUp('{{ value.0 }}')"></a>
                             {% else %}
