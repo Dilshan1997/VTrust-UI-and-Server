@@ -64,6 +64,7 @@ $( document ).ready(()=>{
         
         success: function (response) {
             console.log(response)
+            $("#send_or_not").addClass( "fa-solid fa-envelope fa-bounce" );
         },
         error: function (response) {
             console.log(response)
