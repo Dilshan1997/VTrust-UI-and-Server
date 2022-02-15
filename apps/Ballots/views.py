@@ -11,6 +11,7 @@ from connection import connection
 from apps.authentication import auth_contract
 import time
 import datetime
+from django.core.mail import send_mail
 
 @login_required(login_url="login/")
 def indexBallot(request):
@@ -181,7 +182,7 @@ def privateBallot(request):
         data = []
 
         print(ballot_data)
-    context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_count,'addr':admin_address,'login_val':True}
+    context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_ids,'addr':admin_address,'login_val':True}
     return render(request,"Ballot/private_ballot_page.html",context)
 
 @login_required(login_url="login/")
@@ -228,12 +229,7 @@ def followers(request,b_id,addr):
 def privateBallotDetailsAnalysisChart(b_id):
     labels = []
     data = []
-    urls=[]
-    # ballot_count=ballot_contract_controller.execTxn("getBallotId")
-    # for i in range(ballot_count):
-    #     urls.append(f"home/proposal-chart/{i}")
-        
-    
+    print("####",b_id)
     x=list(execTxn("getBallotDetails",int(b_id)))
     for j in range(x[9]):
             y=execTxn("getProposalDetails",f'{b_id}-{str(j)}')
@@ -247,9 +243,19 @@ def privateBallotDetailsAnalysisChart(b_id):
     
 def privateBallotInvitationSend(request,b_id,wallet_address):
     save_voter=execTxn("savePrivateVotersData",int(b_id),wallet_address)
-    status="success"
+    if save_voter:
+        status="success"
+    else:
+        status="Fail"
     get_voters_data=execTxn("getPrivateVotersData",int(b_id))
     print(get_voters_data)
     print(b_id,wallet_address)
+    send_mail(
+    'Subject here',
+    'Here is the message.',
+    'from@example.com',
+    ['to@example.com'],
+    fail_silently=False,
+)
     if request.is_ajax and request.method == "GET":
             return JsonResponse({"valid":True,"state":200,"method":method,'status':status})

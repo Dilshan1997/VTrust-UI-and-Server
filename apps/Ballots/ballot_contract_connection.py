@@ -1,4 +1,4 @@
-contract_address='0x9A93E86dd6bF27E47f85c709A53E263B08691bD0'
+contract_address='0x9Bf184Ac0E80555159b9357B6e48FA3Ec4BC0a82'
 
 abi="""[
 	{
@@ -331,11 +331,6 @@ abi="""[
 						"internalType": "uint256",
 						"name": "full_vote_count",
 						"type": "uint256"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "private_ballot_ids",
-						"type": "uint256[]"
 					},
 					{
 						"internalType": "address[]",

@@ -7,7 +7,7 @@
 <script src="/static/assets/css/invitation_ui.css"></script>
 {% block content %}
     <main>
-
+        <div id="private_ballot_count" class=" visually-hidden">{{n}}</div>
         {% include 'includes/preloader.html' %}
         <div class=" container-fluid">
             {% for value in ballot_data.values %}
