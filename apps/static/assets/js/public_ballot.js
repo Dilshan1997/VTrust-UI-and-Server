@@ -24,12 +24,18 @@ function followers(b_id,address){
         
         success: function (response) {
             console.log(response)
-            $("#follower_btn").prop('disabled', true)
+            $("#follower_btn").delay(1000).fadeOut(800);
+            $("#follower_btn").attr("class", "disabled");
         },
         error: function (response) {
             console.log(response)
         }
     })
+}
+
+function shareLink(b_id){
+    console.log(b_id)
+$("#share_link").val('http://127.0.0.1:8000/VTrust/ballot/'+b_id)
 }
 
 

@@ -1,4 +1,4 @@
-contract_address='0x9Bf184Ac0E80555159b9357B6e48FA3Ec4BC0a82'
+contract_address='0x863d287F982f6EF216442FB84FB4D76F8f585F66'
 
 abi="""[
 	{
@@ -368,6 +368,25 @@ abi="""[
 			}
 		],
 		"name": "getDashboardData",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_addr",
+				"type": "address"
+			}
+		],
+		"name": "getFollowingBallots",
 		"outputs": [
 			{
 				"internalType": "uint256[]",

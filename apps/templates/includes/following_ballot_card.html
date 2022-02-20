@@ -45,21 +45,12 @@
                   
                 </ul>
                 <div class="row">
-                {% if value.17 %}
-                <div class="col-4">
-                    <a id="follower_btn" class="btn btn-primary animate-up-1" onclick="followers('{{ value.0 }}','{{addr}}')"><i class=" fa fa-rss"></i> </a>
-                </div>
-                {%else%}
-                <div class="col-4">
-                    <a id="follower_btn" class="btn btn-primary animate-up-1 disabled" onclick="followers('{{ value.0 }}','{{addr}}')"><i class=" fa fa-rss"></i> </a>
-                </div>                
-                {% endif%}
                 {%if value.15%}
-                <div class="col-4"><a href='ballot/{{value.0}}' class="btn btn-primary disabled ">vote now</a></div>
+                <div class="col-6"><a href='ballot/{{value.0}}' class="btn btn-primary disabled ">vote now</a></div>
                 {%else%}
-                <div class="col-4"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1 ">vote now</a></div>
+                <div class="col-6"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1 ">vote now</a></div>
                 {%endif%}
-                <div class="col-4">
+                <div class="col-6">
                            <!-- Button Modal -->
                            {%if value.16 %}
                             <a  class="btn btn-primary animate-up-1 fas fa-trophy" data-bs-toggle="modal" id="{{value.0}}"

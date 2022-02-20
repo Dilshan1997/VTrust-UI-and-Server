@@ -64,10 +64,11 @@ $( document ).ready(()=>{
         
         success: function (response) {
             console.log(response)
-            $("#send_or_not").addClass( "fa-solid fa-envelope fa-bounce" );
+            $("#send_or_not").attribute( "class","fa-solid fa-envelope fa-bounce" );
         },
         error: function (response) {
             console.log(response)
+            $("#send_or_not").attribute( "class","fa-solid fa-envelope fa-bounce" );
         }
     })
   }

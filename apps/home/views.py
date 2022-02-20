@@ -39,6 +39,7 @@ def index(request):
     for i in range(n):
         inside_data=list()
         x=list(ballot_contract_controller.execTxn("getBallotDetails",i))
+        print("$$$$$",x)
         if(x[8]=="private"):
             continue
         start_date=datetime.datetime.fromtimestamp(x[6])
@@ -61,13 +62,12 @@ def index(request):
             x.append(True)
             x.append(True)
             
-        if len(x[12])==0:
-            follower_btn=True
-        elif str(user_address) in x[12]:
-            follower_btn=False
+        if len(x[11])==0:
+            x.append(True) #Not Following Yet
+        elif str(user_address) in x[11]:
+            x.append(False)
         
         print("#####",follower_btn)
-        x.append(follower_btn)
         
         ballot_data[i]=x
         # print(ballot_data)
@@ -140,4 +140,59 @@ def proposalChart(request,b_id):
         'labels': labels,
         'data': data,
     })
+    
+def following_ballot_tab(request):
+    user_address=auth_contract.execTxn("getUserData")[2]
+    following_ballots= ballot_contract_controller.execTxn("getFollowingBallots",user_address)
+    print(following_ballots)
+    ballot_data=dict()
+    proposal_data=dict()
+    today=datetime.datetime.now().strftime('%Y-%m-%d')
+    user_address=auth_contract.auth_contract.functions.getUserData().call()[2]
+    td=int(int(time.time()))
+    if len(following_ballots)!=0:
+        for i in following_ballots:
+            inside_data=list()
+            x=list(ballot_contract_controller.execTxn("getBallotDetails",i))
+            print("$$$$$",x)
+            if(x[8]=="private"):
+                continue
+            start_date=datetime.datetime.fromtimestamp(x[6])
+            end_date=datetime.datetime.fromtimestamp(x[7])
+            date_difference=(datetime.date(end_date.year,end_date.month,end_date.day)-datetime.date(start_date.year,start_date.month,start_date.day)).days
+            x.append(str(start_date.strftime('%Y-%m-%d')))
+            x.append(str(end_date.strftime('%Y-%m-%d')))
+            
+            if( td>=x[6]  and  x[7]>=td ):
+                x.append(f'{date_difference} Days Left')
+                x.append(False) #voting disabled or not
+                x.append(False) #winner btn disabled or not
+            elif(td<x[6]):
+                x.append("Not Yet Published")
+                x.append(True)
+                x.append(False)
+            
+            else:
+                x.append("Voting time is over")
+                x.append(True)
+                x.append(True)
+
+            ballot_data[i]=x
+            # print(ballot_data)
+            
+            # dates[i]=[str(start_date.strftime('%Y-%m-%d')),str(end_date.strftime('%Y-%m-%d')),date_difference]
+            ballot_count=ballot_contract_controller.execTxn("getBallotId")
+            
+            # date_difference=(end_date-today)
+            for j in range(x[9]):
+                y=ballot_contract_controller.execTxn("getProposalDetails",f'{i}-{j}')
+                inside_data.append(y)
+            proposal_data[i]=inside_data
+            
+            labels = []
+            data = []
+
+    print(ballot_data)   
+    
+    return render(request,'home/following_ballots.html',{'ballot_data': ballot_data,'proposal_data':proposal_data})
     
