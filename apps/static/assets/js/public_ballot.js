@@ -24,8 +24,8 @@ function followers(b_id,address){
         
         success: function (response) {
             console.log(response)
-            $("#follower_btn").delay(1000).fadeOut(800);
-            $("#follower_btn").attr("class", "disabled");
+            $("#follower_btn_"+b_id).delay(1000).fadeOut(800);
+            $("#follower_btn_"+b_id).attr("class", "disabled");
         },
         error: function (response) {
             console.log(response)

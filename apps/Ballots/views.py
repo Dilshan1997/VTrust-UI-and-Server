@@ -126,7 +126,7 @@ def gotoBallotView(request, b_id):
 
 @login_required(login_url="login/")
 def voting(request,b_id,p_id,address):
-    # print("ffffffff",b_id,p_id,address)
+    print("ffffffff",b_id,p_id,address)
     msg=''
     vote=execTxn('voting',int(b_id),p_id,address)
     print(vote)
@@ -225,7 +225,7 @@ def followers(request,b_id,addr):
     if request.is_ajax and request.method == "GET":
         return JsonResponse({"valid":True,"state":200})
     
-        
+@login_required(login_url="login/")
 def privateBallotDetailsAnalysisChart(b_id):
     labels = []
     data = []
@@ -240,7 +240,8 @@ def privateBallotDetailsAnalysisChart(b_id):
         'labels': labels,
         'data': data,
     })
-    
+
+@login_required(login_url="login/")    
 def privateBallotInvitationSend(request,b_id,wallet_address):
     save_voter=execTxn("savePrivateVotersData",int(b_id),wallet_address)
     if save_voter:
@@ -273,3 +274,4 @@ def privateBallotInvitationSend(request,b_id,wallet_address):
     
     if request.is_ajax and request.method == "GET":
             return JsonResponse({"valid":True,"state":200,"method":method,'status':status})
+        

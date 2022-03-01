@@ -19,6 +19,7 @@ urlpatterns = [
     path('ballot/private/proposal_chart/<b_id>', views.privateBallotDetailsAnalysisChart, name='Private-proposal-chart'),
     path('ballot/private/invite/<b_id>/<wallet_address>',views.privateBallotInvitationSend)
 
+
     # Matches any html file
     # re_path(r'^.*\.*', views.pages, name='pages'),
     

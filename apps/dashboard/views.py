@@ -6,6 +6,7 @@ from django.template import loader
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from apps.Ballots import ballot_contract_controller
+from apps.Ballots.views import followers
 from apps.authentication import auth_contract
 import datetime
 from django.views.decorators.csrf import csrf_exempt
@@ -13,8 +14,9 @@ from django.http import JsonResponse
 import time
 import json
 
-def dashboard_index(request,addr):
-    owner_belongs_ballot_ids=ballot_contract_controller.execTxn("dashboardData",addr)
+def dashboard_index(request):
+    user_address=auth_contract.execTxn("getUserData")[2]
+    owner_belongs_ballot_ids=ballot_contract_controller.execTxn("dashboardData",user_address)
     ballot_count=len(owner_belongs_ballot_ids)
     ballot_data=dict()
     proposal_data=dict()
@@ -23,6 +25,8 @@ def dashboard_index(request,addr):
     most_voting_count_from="Not Any Data"
     full_vote_count=0
     ballot_vote_count=0
+    followers_count=0
+    
     if len(owner_belongs_ballot_ids)!=0:
         most_famous_ballot_id=owner_belongs_ballot_ids[0]
     td=int(int(time.time()))
@@ -51,6 +55,7 @@ def dashboard_index(request,addr):
             most_famous_ballot_id=x[0]
         # dates[i]=[str(start_date.strftime('%Y-%m-%d')),str(end_date.strftime('%Y-%m-%d')),date_difference]
         # date_difference=(end_date-today)
+        followers_count=followers_count+len(x[11])
         for j in range(x[9]):
             y=list(ballot_contract_controller.execTxn("getProposalDetails",f'{i}-{j}'))
             print(y)
@@ -67,4 +72,4 @@ def dashboard_index(request,addr):
         most_voting_count_from=ballot_data[most_famous_ballot_id][2]
     context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'login_val':True}
     json_data=json.dumps(context)
-    return render(request,'Dashboard/main.html',{"data":json_data,'ballot_data': ballot_data,'proposal_data':proposal_data,'login_val':True,'n':ballot_count,'addr':addr,'full_vote_count':full_vote_count,'most_voting_count_from':most_voting_count_from})
+    return render(request,'Dashboard/main.html',{"data":json_data,'ballot_data': ballot_data,'proposal_data':proposal_data,'login_val':True,'n':ballot_count,'addr':user_address,'full_vote_count':full_vote_count,'most_voting_count_from':most_voting_count_from,'followers_count':followers_count})

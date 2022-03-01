@@ -5,6 +5,7 @@ Copyright (c) 2019 - present AppSeed.us
 
 from cProfile import label
 from operator import le
+from tkinter import E
 from tracemalloc import start
 from django import template
 from django.contrib.auth.decorators import login_required
@@ -27,8 +28,6 @@ def index(request):
     ballot_count=0
     ballot_data=dict()
     proposal_data=dict()
-    follower_btn=True
-    # dates=dict()
     n=ballot_contract_controller.execTxn("getBallotId")
     today=datetime.datetime.now().strftime('%Y-%m-%d')
     user_address=auth_contract.auth_contract.functions.getUserData().call()[2]
@@ -56,18 +55,17 @@ def index(request):
             x.append("Not Yet Published")
             x.append(True)
             x.append(False)
-           
+        
         else:
             x.append("Voting time is over")
             x.append(True)
             x.append(True)
             
-        if len(x[11])==0:
-            x.append(True) #Not Following Yet
-        elif str(user_address) in x[11]:
+        if str(user_address) in x[11]:
             x.append(False)
         
-        print("#####",follower_btn)
+        else:
+            x.append(True) #Not Following Yet
         
         ballot_data[i]=x
         # print(ballot_data)
@@ -140,7 +138,8 @@ def proposalChart(request,b_id):
         'labels': labels,
         'data': data,
     })
-    
+
+@login_required(login_url="login/")    
 def following_ballot_tab(request):
     user_address=auth_contract.execTxn("getUserData")[2]
     following_ballots= ballot_contract_controller.execTxn("getFollowingBallots",user_address)
@@ -194,5 +193,5 @@ def following_ballot_tab(request):
 
     print(ballot_data)   
     
-    return render(request,'home/following_ballots.html',{'ballot_data': ballot_data,'proposal_data':proposal_data})
+    return render(request,'home/following_ballots.html',{'ballot_data': ballot_data,'proposal_data':proposal_data,'login_val':True})
     

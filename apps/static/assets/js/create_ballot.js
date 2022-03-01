@@ -68,3 +68,13 @@ $("#sn_btn").on('click', () => {
     })
 
 })
+
+function creationAgreement(expression){
+    console.log(expression)
+    if(expression){
+        $('#sn_btn').removeClass('disabled');
+        $('#modal-default').modal('toggle');
+    }
+
+
+}

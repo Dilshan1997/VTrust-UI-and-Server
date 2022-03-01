@@ -10,7 +10,7 @@
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #2A354F;
+    background: #200863;
     color: #fff;
     transition: all 0.3s;
 }
@@ -62,7 +62,7 @@
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #80879e;
 }
 
 #sidebar .sidebar-header strong {
@@ -90,12 +90,19 @@
 #sidebar ul li a i {
     margin-right: 10px;
 }
-
-#sidebar ul li.active>a,
+#sidebar ul li a:active{
+    color: #1E90FF;
+    background-color: rgb(0, 0, 0);
+}
+#sidebar ul li a .active{
+    color: #1E90FF;
+    background-color: rgb(0, 0, 0);
+}
+/* #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #1E90FF;
 
-}
+} */
 
 a[data-toggle="collapse"] {
     position: relative;
