@@ -1,4 +1,4 @@
-{% load social_share %}
+
 <div class="row justify-content-left mb-7 mt-6">
     
     <div class="col-6 col-md-6 col-lg-4 mb-5 mb-lg-0 ">
@@ -17,12 +17,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <p>Share this link via</p>
-                                    <div class="d-flex align-items-center icons"> 
-                                        <div  class="fs-5 d-flex align-items-center justify-content-center"> {% post_to_facebook 'http://127.0.0.1:8000/VTrust/ballot/{{value.0}}' '<span class="fab fa-facebook"></span>' %} </div> 
-                                        <div href="#" class="fs-5 d-flex align-items-center justify-content-center"> {% post_to_twitter 'http://127.0.0.1:8000/VTrust/ballot/{{value.0}}' '<span class="fab fa-twitter"></span>' %}</div> 
-                                        <div href="#" class="fs-5 d-flex align-items-center justify-content-center"> {% post_to_whatsapp 'http://127.0.0.1:8000/VTrust/ballot/{{value.0}}' '<span class="fab fa-whatsapp"></span>' %}</div>
-                                        <div href="#" class="fs-5 d-flex align-items-center justify-content-center"> {% post_to_telegram 'http://127.0.0.1:8000/VTrust/ballot/{{value.0}}' '<span class="fab fa-telegram-plane></span>' %}</div>
-                                    </div>
+                                    <div class="d-flex align-items-center icons"> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-facebook-f"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-twitter"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-instagram"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-whatsapp"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-telegram-plane"></span> </a> </div>
                                     <p>Or copy link</p>
                                     <div class="field d-flex align-items-center justify-content-between"> <span class="fas fa-link text-center"></span> <input id="share_link" type="text"> <button>Copy</button> </div>
                                 </div>
@@ -50,21 +45,12 @@
                   
                 </ul>
                 <div class="row">
-                {% if value.17 %}
-                <div class="col-4">
-                    <a id="follower_btn_{{value.0}}" class="btn btn-primary animate-up-1" onclick="followers('{{ value.0 }}','{{addr}}')"><i class=" fa fa-rss"></i> </a>
-                </div>
-                {%else%}
-                <div class="col-4">
-                    <a id="follower_btn" class="btn btn-primary animate-up-1 disabled" onclick="followers('{{ value.0 }}','{{addr}}')"><i class=" fa fa-rss"></i> </a>
-                </div>                
-                {% endif%}
                 {%if value.15%}
-                <div class="col-4"><a href='ballot/{{value.0}}' class="btn btn-primary disabled ">vote now</a></div>
+                <div class="col-6"><a href='ballot/{{value.0}}' class="btn btn-primary disabled ">vote now</a></div>
                 {%else%}
-                <div class="col-4"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1 ">vote now</a></div>
+                <div class="col-6"><a href='ballot/{{value.0}}' class="btn btn-primary animate-up-1 ">vote now</a></div>
                 {%endif%}
-                <div class="col-4">
+                <div class="col-6">
                            <!-- Button Modal -->
                            {%if value.16 %}
                             <a  class="btn btn-primary animate-up-1 fas fa-trophy" data-bs-toggle="modal" id="{{value.0}}"

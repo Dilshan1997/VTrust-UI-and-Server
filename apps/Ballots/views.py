@@ -2,7 +2,7 @@ from os import system
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from .forms import BallotDetails
-from django.http import JsonResponse
+from django.http import BadHeaderError, JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
 from .ballot_contract_controller import *
@@ -126,7 +126,7 @@ def gotoBallotView(request, b_id):
 
 @login_required(login_url="login/")
 def voting(request,b_id,p_id,address):
-    # print("ffffffff",b_id,p_id,address)
+    print("ffffffff",b_id,p_id,address)
     msg=''
     vote=execTxn('voting',int(b_id),p_id,address)
     print(vote)
@@ -225,7 +225,7 @@ def followers(request,b_id,addr):
     if request.is_ajax and request.method == "GET":
         return JsonResponse({"valid":True,"state":200})
     
-        
+@login_required(login_url="login/")
 def privateBallotDetailsAnalysisChart(b_id):
     labels = []
     data = []
@@ -240,7 +240,8 @@ def privateBallotDetailsAnalysisChart(b_id):
         'labels': labels,
         'data': data,
     })
-    
+
+@login_required(login_url="login/")    
 def privateBallotInvitationSend(request,b_id,wallet_address):
     save_voter=execTxn("savePrivateVotersData",int(b_id),wallet_address)
     if save_voter:
@@ -250,12 +251,27 @@ def privateBallotInvitationSend(request,b_id,wallet_address):
     get_voters_data=execTxn("getPrivateVotersData",int(b_id))
     print(get_voters_data)
     print(b_id,wallet_address)
-    send_mail(
-    'Subject here',
-    'Here is the message.',
-    'from@example.com',
-    ['to@example.com'],
-    fail_silently=False,
-)
+    
+    user_data=auth_contract.execTxn("getUserData",wallet_address)
+    get_private_ballot_voters_list=execTxn("getPrivateVotersData",int(b_id))
+    print("##########",get_private_ballot_voters_list)
+    # print("######", user_email)
+    ballot_data=execTxn("getBallotDetails",int(b_id))
+    print("++++++++++++++++++++++++++",ballot_data)
+    inviting_url=f"http://127.0.0.1:8000/VTrust/ballot/private/{int(b_id)}"
+    mail_subject=f"Request to Vote My Private Ballot - {ballot_data[2]}"
+    mail_body=f"Hi, I am {user_data[2]} This is private ballot {ballot_data[3]}.It has {ballot_data[9]}  proposals and \n Plz click and vote the ballot\n+++++++ {inviting_url} +++++++"
+    try:
+        send_mail(
+        mail_subject,
+        mail_body,
+        'dmpblackedition@gmail.com',
+        [user_data[1]],
+        fail_silently=False
+            )
+    except BadHeaderError:
+        print("Error")
+    
     if request.is_ajax and request.method == "GET":
             return JsonResponse({"valid":True,"state":200,"method":method,'status':status})
+        

@@ -21,13 +21,16 @@
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Full voting count</p>
                     <h5 class="font-weight-bolder mb-0" >
                       {{full_vote_count}}
-                      <span class="text-success text-sm font-weight-bolder">+55%</span>
+                      <span class="text-success text-sm font-weight-bolder">+5%</span>
                     </h5>
                   </div>
                 </div>
                 <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                    <i class="text-lg opacity-10" aria-hidden="true"></i>
+                  <div class="icon icon-shape  shadow text-center border-radius-md">
+                    <lord-icon
+                    src="https://cdn.lordicon.com/spkantfu.json"
+                    style="width:65px;height:65px">
+                </lord-icon>
                   </div>
                 </div>
               </div>
@@ -40,16 +43,19 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-capitalize font-weight-bold">New Followers</p>
+                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Following</p>
                     <h5 class="font-weight-bolder mb-0">
-                      2,300
+                      {{followers_count}}
                       <span class="text-success text-sm font-weight-bolder">+3%</span>
                     </h5>
                   </div>
                 </div>
                 <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                  <div class="icon icon-shape shadow text-center border-radius-md">
+                    <lord-icon
+                    src="https://cdn.lordicon.com/ribwzplp.json"
+                    style="width:65px;height:65px">
+                    </lord-icon>
                   </div>
                 </div>
               </div>
@@ -70,8 +76,14 @@
                   </div>
                 </div>
                 <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                  <div class="icon icon-shape  shadow text-center border-radius-md">
+                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+            <lord-icon
+                src="https://cdn.lordicon.com/jmffufym.json"
+                trigger="loop"
+                colors="primary:#ebfad1"
+                style="width:65px;height:65px">
+            </lord-icon>
                   </div>
                 </div>
               </div>
@@ -200,6 +212,13 @@
                 </div>
               </div>
             </div>
+
+
+            
+  
+
+
+
             <div class="card-body px-0 pb-2">
               <div class="table-responsive">
          
@@ -346,4 +365,5 @@
 {% block javascripts %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script src="/static/assets/js/dashboard.js"></script>
+<script src="https://cdn.lordicon.com/lusqsztk.js"></script>
 {% endblock javascripts %}

@@ -16,6 +16,10 @@ import time
 import sys
 from .auth_contract import *
 from connection import connection
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
+from django.http import JsonResponse
 
 @unauthenticated_user
 def login_view(request):
@@ -96,7 +100,33 @@ def logout_view(request):
     
     return render(request, 'home/landingpage.html')
     
+@login_required(login_url="login/") 
+def profileView(request):
+    user_details=execTxn("getUserData")
+    
+    print(user_details)
+    return render(request,"profile/profile.html",{"user_data":user_details,"login_val":True})
     
 
+@login_required(login_url="login/") 
+def profile_edit(request):
+    user=User.objects.all()
+    print(user.count)
+    response_data = {}
 
-
+    if request.POST.get('action') == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        old_password=request.POST.get('old_password')
+        new_password=request.POST.get('new_password')
+        re_new_password=request.POST.get('re_new_password')
+        
+        response_data["name"]=name
+    user.filter()
+    # User.objects.save(
+    #         name = name,
+    #         email =email ,
+    #         )
+    return JsonResponse(response_data)    
+        
+   

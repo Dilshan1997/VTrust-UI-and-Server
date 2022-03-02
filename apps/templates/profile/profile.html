@@ -1,0 +1,121 @@
+{%extends 'layouts/base.html'%}
+{% block title %} Home {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<main>
+    <div class="row d-flex justify-content-center mt-10">
+        <div class="card border-0 ">
+            <div
+                class="card-body position-relative mt-n6 mx-2 bg-white border border-gray-300 text-center rounded">
+                <h3 class="h5 card-title text-dark">{{user_data.3}}</h3>
+                <span class="text-gray"><span class=" fas fa-wallet me-2"></span>{{user_data.2}}</span>
+                <p class="mt-3">Etherium Verified</p> 
+                <h3 class="h5 card-title text-dark">{{user_data.1}}</h3>
+                <div class="btn-group">
+                    
+                    <button type="button" class="btn btn-action" data-bs-toggle="modal"
+                            data-bs-target="#modal-edit-profile" > <span class="far fa-edit"></span></button>
+                    </button>
+                    <!-- <button class="btn btn-primary" aria-label="mesage button" title="message button">
+                        <span aria-hidden="true" class="far fa-envelope"></span>
+                    </button> -->
+             
+          
+                    <!-- Modal Content -->
+                    <div class="modal fade" id="modal-edit-profile" tabindex="-1" role="dialog"
+                        aria-labelledby="modal-edit-profile" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content bg-primary text-white">
+                                <div class="modal-header border-0">
+                                    <button type="button" class="btn-close bg-gray-500" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST" id="post-form">
+                                        {% csrf_token %}
+                                    <div class="row mb-4 mb-lg-5">
+                                        <!-- Form -->
+                                        <div class="mb-2">
+                                            <label for="exampleInputEmail6">New Name</label>
+                                            <input type="text" class="form-control" id="user_edit_name" placeholder="{{user_data.3}}">
+                                            <small id="emailHelp" class="form-text text-gray">We'll never share your email with anyone
+                                                else.</small>
+                                        </div>
+                                        <!-- End of Form -->
+                                </div>
+                                    <div class="row mb-4 mb-lg-5">
+                                            <!-- Form -->
+                                            <div class="mb-2">
+                                                <label for="exampleInputEmail6">New Email address</label>
+                                                <input type="email" class="form-control" id="user_edit_email" placeholder="{{user_data.1}}">
+                                                <small id="emailHelp" class="form-text text-gray">We'll never share your email with anyone
+                                                    else.</small>
+                                            </div>
+                                            <!-- End of Form -->
+                                    </div>
+                               
+                                    <div class="row mb-2 mb-lg-5">
+                                            <!-- Form -->
+                                            <div class="mb-3">
+                                                <label for="exampleInputIconPassword">Old Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control" id="old_password" placeholder="Old Password"
+                                                        aria-label="Password" aria-describedby="basic-addon3">
+                                                    <span class="input-group-text" id="basic-addon3"><span class="fas fa-unlock-alt"></span></span>
+                                                </div>
+                                            </div>
+
+                                            <!-- End of Form -->
+                                        </div>
+                                        <div class="row mb-2 mb-lg-5">
+                                            <!-- Form -->
+                                            <div class="mb-3">
+                                                <label for="exampleInputIconPassword">New Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control" id="new_password" placeholder="New Password"
+                                                        aria-label="Password" aria-describedby="basic-addon3">
+                                                    <span class="input-group-text" id="basic-addon3"><span class="fas fa-unlock-alt"></span></span>
+                                                </div>
+                                            </div>
+
+                                            <!-- End of Form -->
+                                        </div>
+                                        <div class="row mb-2 mb-lg-5">
+                                            <!-- Form -->
+                                            <div class="mb-3">
+                                                <label for="exampleInputIconPassword">Re Enter Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control" id="re_new_password" placeholder="Re enter new password"
+                                                        aria-label="Password" aria-describedby="basic-addon3">
+                                                    <span class="input-group-text" id="basic-addon3"><span class="fas fa-unlock-alt"></span></span>
+                                                </div>
+                                            </div>
+
+                                            <!-- End of Form -->
+                                        </div>
+                                        
+                                <div class="modal-footer border-secondary">
+                                    <button type="submit" class="btn btn-sm btn-white" id="edit_profile">Update</button>
+                                </div>
+                            </form>
+                                        </div>
+                                        
+                                    
+                     
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Modal Content -->
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%block javascripts%}
+<script src="/static/assets/js/profile.js"></script>
+{%endblock javascripts%}
+
+{%endblock content%}

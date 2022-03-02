@@ -81,13 +81,13 @@ class BallotDetails(forms.Form):
         )
     )
    
-    CHOICES = [('1', 'I agree'), ('2', 'Send the all the updates via email')]
-    agrements= forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple(
-        #     attrs={
-        # "class":"form-check-input"
-        #        }
-     ),
-    choices=CHOICES
-        )
+    # CHOICES = [('1', 'I agree'), ('2', 'Send the all the updates via email')]
+    # agrements= forms.MultipleChoiceField(
+    #     widget=forms.CheckboxSelectMultiple(
+    #     #     attrs={
+    #     # "class":"form-check-input"
+    #     #        }
+    #  ),
+    # choices=CHOICES
+    #     )
     

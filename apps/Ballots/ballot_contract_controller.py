@@ -83,6 +83,9 @@ def execTxn(txName,*args,**kwargs):
         if(txName=='setFollowers'): 
             txn_dict=ballot_contract.functions.setFollwers(*args).buildTransaction(buildData)
         
+        if(txName=='getFollowingBallots'): 
+            return_value=ballot_contract.functions.getFollowingBallots(*args).call()
+        
         signed_txn = connection.con.eth.account.signTransaction(txn_dict, private_key=connection.wallet_private_key)
         transcation_hash = connection.con.eth.sendRawTransaction(signed_txn.rawTransaction)
         print(txn_dict)

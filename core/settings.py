@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.home', 
     'apps.authentication',
+    'django_social_share',
    
     # Enable the inner home (home),
 
@@ -131,3 +132,10 @@ STATICFILES_DIRS = (
 #############################################################
 #Web3 connection creation
 print(connection.con)
+
+###########EMAIL SERVER################
+EMAIL_HOST = "127.0.0.1"
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_TLS = False

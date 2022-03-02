@@ -1,16 +1,17 @@
-<nav id="sidebar" >
-        <div class="sidebar-header" >
+<nav id="sidebar">
+        <div class="sidebar-header  position-fixed " >
             <h3>
             <a class="navbar-brand me-lg-5" href="{%url 'landing_page' %}">
            
                 <img class="navbar-brand-light" src="/static/assets/img/brand/dark.svg" alt="Logo dark">
                 
-                <span class=" font-medium">VTrust</span>
+                <span class=" display-4 mx-3 mt-1">VTrust</span>
             </a>
         </h3>
             <strong>VT</strong>
         </div>
-        <ul class="list-unstyled components mt-4">
+        <div class="mt-7 ">
+        <ul class="list-unstyled  position-fixed">
             <!-- <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fas fa-home"></i>
@@ -56,7 +57,7 @@
                 </a>
             </li>
             <li>
-                <a href="dashboard/{{addr}}">
+                <a href="{%url 'dashboard-view'%}">
                     <i class="fas fa-database"></i>
                     Dashboard
                 </a>
@@ -64,21 +65,28 @@
             <li>
                 <a href="{%url 'index_ballot'%}">
                     <i class="fas fa-vote-yea"></i>
-                    Create Ballot
+                    Create
                 </a>
             </li>
             <li>
                 <a href="{%url 'private_ballot'%}">
                     <i class="fas fa-person-booth"></i>
-                    Private Ballots
+                    Private
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{%url 'follower_tab'%}">
                     <i class="fas fa-paper-plane"></i>
-                    Contact
+                    Following
+                </a>
+            </li>
+            <li>
+                <a href="{%url 'profile'%}">
+                    <i class="fas fa-paper-plane"></i>
+                    Profile
                 </a>
             </li>
         </ul>
+        </div>
     </nav>
     
