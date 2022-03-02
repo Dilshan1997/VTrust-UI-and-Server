@@ -1,9 +1,7 @@
-$("#edit_profile").on("submit",()=>{
-
+$("#edit_profile").click(()=>{
     $.ajax({
-
-        type: 'POST',
-        url: '{% url "profile_edit" %}',
+        type:"POST",
+        url: 'edit',
         data: {
             name:$('#user_edit_name').val(),
             email:$('#user_edit_email').val(),
@@ -19,6 +17,10 @@ $("#edit_profile").on("submit",()=>{
         error: function (response) {
             console.log(response)
         }
-    })
+    }
+    )
 })
+
+ 
+
 

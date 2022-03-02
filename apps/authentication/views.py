@@ -1,10 +1,5 @@
-# -*- encoding: utf-8 -*-
-"""
-Copyright (c) 2019 - present AppSeed.us
-"""
-
-# Create your views here.
 from logging import log
+from tokenize import Name
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login,logout
 from web3.datastructures import T
@@ -104,29 +99,29 @@ def logout_view(request):
 def profileView(request):
     user_details=execTxn("getUserData")
     
-    print(user_details)
     return render(request,"profile/profile.html",{"user_data":user_details,"login_val":True})
     
 
 @login_required(login_url="login/") 
 def profile_edit(request):
+    user_details=execTxn("getUserData")
+    print(user_details)
     user=User.objects.all()
-    print(user.count)
     response_data = {}
-
+    print(request)
     if request.POST.get('action') == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
         old_password=request.POST.get('old_password')
         new_password=request.POST.get('new_password')
         re_new_password=request.POST.get('re_new_password')
+        print(name,email,old_password)
         
-        response_data["name"]=name
-    user.filter()
-    # User.objects.save(
-    #         name = name,
-    #         email =email ,
-    #         )
+    y=user.filter(username=user_details[3])
+    current_password=y.values_list()[0][1]
+    if current_password==old_password:
+        pass
+
     return JsonResponse(response_data)    
         
    
