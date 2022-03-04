@@ -1,7 +1,7 @@
 from logging import log
 from tokenize import Name
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth import authenticate, login,logout,password_validation
 from web3.datastructures import T
 from apps.authentication.decorator import unauthenticated_user
 from .forms import LoginForm, SignUpForm
@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from django.contrib.auth.hashers import make_password, check_password
 
 @unauthenticated_user
 def login_view(request):
@@ -27,6 +28,7 @@ def login_view(request):
             address=form.cleaned_data.get("address")
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
+            print(password)
            
             user_blockchian = execTxn("loginUser",address,username, password)
             # status=execTxn("checkIsUserLogged",connection.wallet_address)
@@ -107,6 +109,9 @@ def profile_edit(request):
     user_details=execTxn("getUserData")
     print(user_details)
     user=User.objects.all()
+    print(user[48: ])
+    print()
+    
     response_data = {}
     print(request)
     if request.POST.get('action') == 'POST':
@@ -116,11 +121,25 @@ def profile_edit(request):
         new_password=request.POST.get('new_password')
         re_new_password=request.POST.get('re_new_password')
         print(name,email,old_password)
-        
     y=user.filter(username=user_details[3])
-    current_password=y.values_list()[0][1]
-    if current_password==old_password:
-        pass
+    x=user.filter(username="d87")
+    print(x.values_list())
+    # print(y.values_list())
+    current_password=x.values_list()[0][1]
+    
+    salt_old_password=make_password(old_password,current_password.split("$")[2])
+    print(current_password)
+    print(salt_old_password)
+    
+    if current_password==salt_old_password:
+        if new_password==re_new_password and new_password!="":
+            # x.update(username=name,email=email,password=make_password(new_password,current_password.split("$")[2]))
+            # execTxn("changeUserData",name,email,old_password,new_password)
+            pass
+        else:
+            msg="Password not matching"
+    else:
+        msg="Old password is invalid"
 
     return JsonResponse(response_data)    
         

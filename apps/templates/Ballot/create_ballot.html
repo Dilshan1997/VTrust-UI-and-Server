@@ -13,6 +13,7 @@
         {% include 'includes/preloader.html' %}
 
     <div class="container d-flex justify-content-center align-items-center">
+        
 <div class=" mt-7 container">
   <div class="steps-form">
         <div class="steps-row setup-panel">
@@ -45,7 +46,7 @@
             </div>
         </div>
         <!-- Form -->
-        <form method="POST" action="{%url 'create_ballot'%}" class="mt-4" name="ballot_form" id="ballot_form">
+        <form method="POST" action="{%url 'create_ballot'%}" class="mt-4" name="ballot_form" id="ballot_form" data-parsley-validate="">
             {% csrf_token %} 
         <!-- First Step -->
         <div class="row setup-content" id="step-9">

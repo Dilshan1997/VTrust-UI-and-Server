@@ -8,6 +8,9 @@ class BallotDetails(forms.Form):
                  attrs={
             'placeholder':'email',
             'class':"form-control",
+            'data-parsley-trigger':"change",
+            'required':"",
+            'data-parsley-type':"email"
             
         }
         ))
@@ -16,6 +19,8 @@ class BallotDetails(forms.Form):
         widget=forms.TextInput(
               attrs={
             'class':"form-control",
+            'data-parsley-trigger':"change",
+            'required':""
             
         }
         ))
@@ -24,8 +29,9 @@ class BallotDetails(forms.Form):
         widget=forms.Textarea(
                 attrs={
             'class':"form-control",
-            'rows':4
-            
+            'rows':4,
+            'data-parsley-trigger':"change",
+            'required':""
         }
         ))
     
@@ -47,7 +53,8 @@ class BallotDetails(forms.Form):
         attrs={
             'class':"form-control",
             'min':2,
-            'id':'prop_num'
+            'id':'prop_num',
+            'data-parsley-type':"integer"
         }
         ))
     
