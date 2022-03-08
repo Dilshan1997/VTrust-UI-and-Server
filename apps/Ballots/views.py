@@ -76,6 +76,7 @@ def createBallot(request):
                 if now<=start_date_epoch and now<=end_date_epoch and start_date_epoch<end_date_epoch:
                     msg="Successfully Created Ballot"
                     r_value=execTxn("createBallot",email,ballot_name,ballot_description,owner_name,owner_address,start_date_epoch,end_date_epoch,method)
+                    print(r_value)
                     for i in range(len(prop_data.keys())):
                         execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])
                     return redirect('home')
@@ -207,7 +208,7 @@ def privateBalloVoting(request,b_id,p_id,address):
     msg=''
     vote=execTxn('privateBallotVoting',int(b_id),p_id,address)
     print(vote)
-    return redirect('home')
+    return redirect('private_ballot')
 
 @login_required(login_url="login/")
 def winningProposal(request,b_id):

@@ -28,8 +28,8 @@
                                                     <!-- <div class="card text-center">
                                                             <h5>Invite</h5> <span class="earn-text"></span>
                                                         </div> -->
-                                                        <div class=" mt-2 gap-2"> <input class="form-control" placeholder="Enter wallet address" id="inviter_wallet_address"> 
-                                                            <button class="btn btn-danger mt-2" onclick="privateInvitation('{{ value.0 }}')">Invite</button> </div>
+                                                        <div class=" mt-2 gap-2"> <input type="text" id="inviter_wallet_address_{{value.0}}" name="inviting"  class="form-control" placeholder="Enter wallet address" > 
+                                                            <button class="btn btn-danger mt-2" id="invitation_btn"  onclick="privateInvitation('{{ value.0 }}')">Invite</button> </div>
                                                     </div>
                                                 </div>
                                                 <div id="send_or_not" class="">

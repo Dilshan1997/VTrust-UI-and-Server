@@ -8,9 +8,10 @@ class BallotDetails(forms.Form):
                  attrs={
             'placeholder':'email',
             'class':"form-control",
-            'data-parsley-trigger':"change",
-            'required':"",
-            'data-parsley-type':"email"
+            'data-parsley-trigger':"focusin focusout",
+            'required':"true",
+            'data-parsley-type':"email",
+            'data-parsley-ui-enabled':'true'
             
         }
         ))
@@ -19,8 +20,9 @@ class BallotDetails(forms.Form):
         widget=forms.TextInput(
               attrs={
             'class':"form-control",
-            'data-parsley-trigger':"change",
-            'required':""
+            'data-parsley-trigger':"focusin focusout",
+            'required':"true",
+            'data-parsley-error-message':"Plz enter the Ballot name"
             
         }
         ))
@@ -30,8 +32,10 @@ class BallotDetails(forms.Form):
                 attrs={
             'class':"form-control",
             'rows':4,
-            'data-parsley-trigger':"change",
-            'required':""
+            'data-parsley-trigger':"focusin focusout",
+            'required':"true",
+            'data-parsley-length':"[10, 50]",
+            'data-parsley-length-message':"You should use 10-50 words"
         }
         ))
     
@@ -54,7 +58,9 @@ class BallotDetails(forms.Form):
             'class':"form-control",
             'min':2,
             'id':'prop_num',
-            'data-parsley-type':"integer"
+            'data-parsley-type':"integer",
+            'required':"true",
+            'data-parsley-error-message':"Plz enter the proposal count"
         }
         ))
     
@@ -64,7 +70,8 @@ class BallotDetails(forms.Form):
         attrs={
             "class":"form-check-input",
             "id":"method",
-            "name":"publish method"
+            "name":"publish method",
+            'required':"true"
                }
      ),
         choices=CHOICES
@@ -73,7 +80,10 @@ class BallotDetails(forms.Form):
     start_date=forms.DateField( 
         widget=forms.SelectDateWidget(
             attrs={
-                'class':'form-control'
+                'class':'form-control',
+                'required':"true",
+                'data-parsley-error-message':"Plz enter correct date",
+                
             }
         )
        
@@ -83,6 +93,8 @@ class BallotDetails(forms.Form):
         widget=forms.SelectDateWidget(
             attrs={
                 'class':'form-control',
+                'required':"true",
+                'data-parsley-error-message':"Plz enter correct date"
           
             }
         )

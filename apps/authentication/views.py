@@ -28,8 +28,7 @@ def login_view(request):
             address=form.cleaned_data.get("address")
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            print(password)
-           
+    
             user_blockchian = execTxn("loginUser",address,username, password)
             # status=execTxn("checkIsUserLogged",connection.wallet_address)
             # print(status)
