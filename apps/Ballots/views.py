@@ -12,6 +12,7 @@ from apps.authentication import auth_contract
 import time
 import datetime
 from django.core.mail import send_mail
+from django.contrib import messages
 
 @login_required(login_url="login/")
 def indexBallot(request):
@@ -128,9 +129,12 @@ def gotoBallotView(request, b_id):
 @login_required(login_url="login/")
 def voting(request,b_id,p_id,address):
     print("ffffffff",b_id,p_id,address)
-    msg=''
     vote=execTxn('voting',int(b_id),p_id,address)
     print(vote)
+    if vote==None:
+        msg="You can't vote twise"
+        messages.add_message(request, messages.ERROR, msg)
+    
     return redirect('home')
     
 ############PRIVATE BALLOT###############

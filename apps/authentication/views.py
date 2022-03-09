@@ -25,7 +25,7 @@ def login_view(request):
     
     if request.method == "POST":
         if form.is_valid():
-            address=form.cleaned_data.get("address")
+            address=connection.con.toChecksumAddress(form.cleaned_data.get("address"))
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
     
@@ -61,7 +61,7 @@ def register_user(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             
-            address=form.cleaned_data.get("address")
+            address=connection.con.toChecksumAddress(form.cleaned_data.get("address"))
             username = form.cleaned_data.get("username")
             email=form.cleaned_data.get("email")
             raw_password = form.cleaned_data.get("password1")

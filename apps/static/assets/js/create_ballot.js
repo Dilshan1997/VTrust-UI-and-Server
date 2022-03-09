@@ -20,7 +20,7 @@ f_next_button.click(() => {
 
     var container = $('<div />');
     for (var i = 1; i <= x; i++) {
-        container.append('<h3 class="h3">Proposal' + i + '</h3><div class="col-lg-4 col-sm-6"><div class="mb-4"><label>Proposal Name</label><input type="text" class="form-control" "data-parsley-trigger"="focusin focusout" "required"="true"  id=\"prop_name_' + i + '\" name=\"prop_name_' + i + '\"/></div></div></div> <div class="col-lg-4 col-sm-6"><div class="mb-4"><label >Proposal Details</label><textarea  class="form-control" "data-parsley-trigger"="focusin focusout" name=\"prop_details_' + i + '\" id=\"prop_details_' + i + '\"" /></textarea></div></div></div>');
+        container.append('<h3 class="h3">Proposal' + i + '</h3><div class="col-lg-4 col-sm-6"><div class="mb-4"><label>Proposal Name</label><input type="text" class="form-control" data-parsley-trigger="focusin focusout" required="true"  id=\"prop_name_' + i + '\" name=\"prop_name_' + i + '\"/></div></div></div> <div class="col-lg-4 col-sm-6"><div class="mb-4"><label >Proposal Details</label><textarea  class="form-control" data-parsley-trigger="focusin focusout" name=\"prop_details_' + i + '\" id=\"prop_details_' + i + '\"" /></textarea></div></div></div>');
     }
     $('#cont').html(container);
     //  console.log($('#propname_1'))
