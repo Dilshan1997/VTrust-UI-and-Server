@@ -87,12 +87,11 @@ def register_user(request):
 
 def logout_view(request):
     logout_blockchain=execTxn("logoutUser")
-    # print(logout_blockchain)
     logout_status=execTxn("checkIsUserLogged",connection.wallet_address) #logout_status 
     if logout_status==False:
             logout(request)
 
-    print(logout_status)
+
     
     return render(request, 'home/landingpage.html')
     
@@ -121,10 +120,10 @@ def profile_edit(request):
         re_new_password=request.POST.get('re_new_password')
         print(name,email,old_password)
     y=user.filter(username=user_details[3])
-    x=user.filter(username="d87")
-    print(x.values_list())
+    
+    print(y.values_list())
     # print(y.values_list())
-    current_password=x.values_list()[0][1]
+    current_password=y.values_list()[0][1]
     
     salt_old_password=make_password(old_password,current_password.split("$")[2])
     print(current_password)
@@ -132,8 +131,8 @@ def profile_edit(request):
     
     if current_password==salt_old_password:
         if new_password==re_new_password and new_password!="":
-            # x.update(username=name,email=email,password=make_password(new_password,current_password.split("$")[2]))
-            # execTxn("changeUserData",name,email,old_password,new_password)
+            y.update(username=name,email=email,password=make_password(new_password,current_password.split("$")[2]))
+            execTxn("changeUserData",name,email,old_password,new_password)
             pass
         else:
             msg="Password not matching"

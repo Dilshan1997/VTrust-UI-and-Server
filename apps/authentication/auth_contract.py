@@ -46,7 +46,6 @@ def execTxn(txName,*args,**kwargs):
             
             
         if (txName == 'checkIsUserLogged'):
-            txn_dict = auth_contract.functions.checkIsUserLogged(*args).buildTransaction(buildData)
             return_value=auth_contract.functions.checkIsUserLogged(*args).call()
             
             
@@ -59,6 +58,7 @@ def execTxn(txName,*args,**kwargs):
         
         if(txName=='changeUserData'):
             txn_dict = auth_contract.functions.changeUserData(*args).buildTransaction(buildData)
+            return_value=auth_contract.functions.changeUserData(*args).call()
         signed_txn = connection.con.eth.account.signTransaction(txn_dict, private_key=connection.wallet_private_key)
         transcation_hash = connection.con.eth.sendRawTransaction(signed_txn.rawTransaction)
         print(txn_dict)
