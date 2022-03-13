@@ -132,7 +132,7 @@ def voting(request,b_id,p_id,address):
     vote=execTxn('voting',int(b_id),p_id,address)
     print(vote)
     if vote==None:
-        msg="You can't vote twise"
+        msg="You can't vote twice"
         messages.add_message(request, messages.ERROR, msg)
     
     return redirect('home')
