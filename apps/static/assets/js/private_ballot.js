@@ -1,5 +1,5 @@
-$( document ).ready(()=>{
-    n=$('#private_ballot_count').text()
+
+n=$('#private_ballot_count').text()
     console.log(n)
     for(i in n){
       console.log(i)
@@ -53,11 +53,11 @@ $( document ).ready(()=>{
   
     });
   }
-  })
 
   function privateInvitation(b_id){
     console.log(b_id)
-    var wallet_address=$("#inviter_wallet_address").val()
+    var wallet_address=$('#inviter_wallet_address_'+b_id).val();
+    console.log(wallet_address)
     $.ajax({
         type: 'GET',
         url: "invite/"+b_id+"/"+wallet_address,
@@ -73,3 +73,6 @@ $( document ).ready(()=>{
         }
     })
   }
+  // $("#invitation_btn").click(()=>{
+  //   var wallet_address=$('#inviter_wallet_address').val()
+  // })

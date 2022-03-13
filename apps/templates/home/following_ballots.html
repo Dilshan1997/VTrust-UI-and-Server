@@ -1,5 +1,5 @@
 {%extends 'layouts/base.html'%}
-{% block title %} Home {% endblock %} 
+{% block title %} Following {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
@@ -13,9 +13,11 @@
 
         <div class="section section-sm pb-0 mb-n4">
             <div id="ballot_count" class=" visually-hidden">{{n}}</div>
-            <div class="container-fluid">
+            <div class="container-fluid row">
                 {% for value in ballot_data.values %}
+                <div class=" col-md-6">
                 {% include 'includes/following_ballot_card.html' %}
+            </div>
                 {% endfor %}
                     <div class="row justify-content-center">
                     <div class="col-12 mt-5">

@@ -1,12 +1,7 @@
-# -*- encoding: utf-8 -*-
-"""
-Copyright (c) 2019 - present AppSeed.us
-"""
-
-# Create your views here.
 from logging import log
+from tokenize import Name
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth import authenticate, login,logout,password_validation
 from web3.datastructures import T
 from apps.authentication.decorator import unauthenticated_user
 from .forms import LoginForm, SignUpForm
@@ -20,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from django.contrib.auth.hashers import make_password, check_password
 
 @unauthenticated_user
 def login_view(request):
@@ -29,10 +25,10 @@ def login_view(request):
     
     if request.method == "POST":
         if form.is_valid():
-            address=form.cleaned_data.get("address")
+            address=connection.con.toChecksumAddress(form.cleaned_data.get("address"))
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-           
+    
             user_blockchian = execTxn("loginUser",address,username, password)
             # status=execTxn("checkIsUserLogged",connection.wallet_address)
             # print(status)
@@ -65,7 +61,7 @@ def register_user(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             
-            address=form.cleaned_data.get("address")
+            address=connection.con.toChecksumAddress(form.cleaned_data.get("address"))
             username = form.cleaned_data.get("username")
             email=form.cleaned_data.get("email")
             raw_password = form.cleaned_data.get("password1")
@@ -91,12 +87,11 @@ def register_user(request):
 
 def logout_view(request):
     logout_blockchain=execTxn("logoutUser")
-    # print(logout_blockchain)
     logout_status=execTxn("checkIsUserLogged",connection.wallet_address) #logout_status 
     if logout_status==False:
             logout(request)
 
-    print(logout_status)
+
     
     return render(request, 'home/landingpage.html')
     
@@ -104,29 +99,46 @@ def logout_view(request):
 def profileView(request):
     user_details=execTxn("getUserData")
     
-    print(user_details)
     return render(request,"profile/profile.html",{"user_data":user_details,"login_val":True})
     
 
 @login_required(login_url="login/") 
 def profile_edit(request):
+    user_details=execTxn("getUserData")
+    print(user_details)
     user=User.objects.all()
-    print(user.count)
+    print(user[48: ])
+    print()
+    
     response_data = {}
-
+    print(request)
     if request.POST.get('action') == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
         old_password=request.POST.get('old_password')
         new_password=request.POST.get('new_password')
         re_new_password=request.POST.get('re_new_password')
-        
-        response_data["name"]=name
-    user.filter()
-    # User.objects.save(
-    #         name = name,
-    #         email =email ,
-    #         )
+        print(name,email,old_password)
+    y=user.filter(username=user_details[3])
+    
+    print(y.values_list())
+    # print(y.values_list())
+    current_password=y.values_list()[0][1]
+    
+    salt_old_password=make_password(old_password,current_password.split("$")[2])
+    print(current_password)
+    print(salt_old_password)
+    
+    if current_password==salt_old_password:
+        if new_password==re_new_password and new_password!="":
+            y.update(username=name,email=email,password=make_password(new_password,current_password.split("$")[2]))
+            execTxn("changeUserData",name,email,old_password,new_password)
+            pass
+        else:
+            msg="Password not matching"
+    else:
+        msg="Old password is invalid"
+
     return JsonResponse(response_data)    
         
    

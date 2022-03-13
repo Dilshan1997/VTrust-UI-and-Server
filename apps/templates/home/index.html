@@ -10,8 +10,17 @@
     <main>
 
         {% include 'includes/preloader.html' %}
-
+  
         <div class="section section-sm pb-0 mb-n4">
+            {% if messages %}
+            <ul class="messages list-style-none text-center">
+            {% for message in messages %}
+            <li {% if message.tags %} class=" alert-{{message.tags }} msg fade show " role="alert"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+            {% else %}
+            <div class=" alert-{{message.tags }} msg fade show " role="alert">{{ message }}</div>
+            {% endif %}
             <div id="ballot_count" class=" visually-hidden">{{n}}</div>
             <div class="container-fluid">
                 {% for value in ballot_data.values %}

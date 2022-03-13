@@ -12,6 +12,7 @@ from apps.authentication import auth_contract
 import time
 import datetime
 from django.core.mail import send_mail
+from django.contrib import messages
 
 @login_required(login_url="login/")
 def indexBallot(request):
@@ -76,6 +77,7 @@ def createBallot(request):
                 if now<=start_date_epoch and now<=end_date_epoch and start_date_epoch<end_date_epoch:
                     msg="Successfully Created Ballot"
                     r_value=execTxn("createBallot",email,ballot_name,ballot_description,owner_name,owner_address,start_date_epoch,end_date_epoch,method)
+                    print(r_value)
                     for i in range(len(prop_data.keys())):
                         execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])
                     return redirect('home')
@@ -127,9 +129,12 @@ def gotoBallotView(request, b_id):
 @login_required(login_url="login/")
 def voting(request,b_id,p_id,address):
     print("ffffffff",b_id,p_id,address)
-    msg=''
     vote=execTxn('voting',int(b_id),p_id,address)
     print(vote)
+    if vote==None:
+        msg="You can't vote twice"
+        messages.add_message(request, messages.ERROR, msg)
+    
     return redirect('home')
     
 ############PRIVATE BALLOT###############
@@ -207,7 +212,7 @@ def privateBalloVoting(request,b_id,p_id,address):
     msg=''
     vote=execTxn('privateBallotVoting',int(b_id),p_id,address)
     print(vote)
-    return redirect('home')
+    return redirect('private_ballot')
 
 @login_required(login_url="login/")
 def winningProposal(request,b_id):
