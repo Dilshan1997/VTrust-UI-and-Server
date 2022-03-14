@@ -23,9 +23,6 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
       run: |
-        apt-get install python3-venv
-        python3 -m venv vtrut_env
-        source vtrust/bin/activate
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run Tests
