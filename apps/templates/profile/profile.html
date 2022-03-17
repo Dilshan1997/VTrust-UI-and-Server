@@ -34,10 +34,12 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
+                                    <div id="custom-message"></div>
                                     <form method="POST" id="post-form">
                                         {% csrf_token %}
                                     <div class="row mb-4 mb-lg-5">
                                         <!-- Form -->
+                                        
                                         <div class="mb-2">
                                             <label for="exampleInputEmail6">New Name</label>
                                             <input type="text" class="form-control" id="user_edit_name" placeholder="{{user_data.3}}">

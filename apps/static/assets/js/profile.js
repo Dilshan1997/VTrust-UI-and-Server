@@ -16,6 +16,9 @@ $("#edit_profile").click(()=>{
         },
         error: function (response) {
             console.log(response)
+            $("#custom-message").html(response)
+            $("#custom-message").addClass("alert-error alert-dismissible msg fade show ")
+            
         }
     }
     )

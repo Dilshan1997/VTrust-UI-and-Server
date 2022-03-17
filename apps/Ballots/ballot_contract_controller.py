@@ -1,4 +1,5 @@
 
+from traceback import print_tb
 from web3 import Web3
 import time
 import sys
@@ -11,6 +12,7 @@ def execTxn(txName,*args,**kwargs):
     print(args)
     
     return_value=None
+    error_message=None
     nonce =connection.con.eth.getTransactionCount(connection.wallet_address)
     print(nonce)
     buildData = {
@@ -41,10 +43,9 @@ def execTxn(txName,*args,**kwargs):
               
         if (txName == 'voting'):
             txn_dict = ballot_contract.functions.voting(*args).buildTransaction(buildData)
-            return_value=ballot_contract.functions.voting(*args).call()
-            print(txn_dict)
-            print(return_value)
-            print("print*****************",connection.con.eth.get_block("latest"))
+            return_value=(ballot_contract.functions.voting(*args).call())
+            print("return value",return_value)
+            # print("print*****************",connection.con.eth.get_block("latest"))
         if (txName == 'getBallotId'):
             return_value = ballot_contract.functions.getBallotId().call()
             
@@ -79,6 +80,7 @@ def execTxn(txName,*args,**kwargs):
         if(txName=='privateBallotVoting'):
             buildData['gas']=6721974
             txn_dict=ballot_contract.functions.privateBallotVoting(*args).buildTransaction(buildData)
+            return_value=ballot_contract.functions.privateBallotVoting(*args).call()
         
         if(txName=='setFollowers'): 
             txn_dict=ballot_contract.functions.setFollwers(*args).buildTransaction(buildData)
@@ -88,12 +90,15 @@ def execTxn(txName,*args,**kwargs):
         
         signed_txn = connection.con.eth.account.signTransaction(txn_dict, private_key=connection.wallet_private_key)
         transcation_hash = connection.con.eth.sendRawTransaction(signed_txn.rawTransaction)
-        print(txn_dict)
-        print(transcation_hash)
+        # print(txn_dict)
+        # print(transcation_hash)
     except Exception as e:
-        print(e)
+        error_message=e
+        
     if return_value!=None:
         return return_value
+    else:
+        return error_message
 
 # print(ballot_contract.functions.getBallotDetatils(1).call())
 # print(ballot_contract.functions.getProposaldetails('1-0').call())
