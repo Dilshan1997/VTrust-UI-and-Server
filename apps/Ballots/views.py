@@ -137,6 +137,7 @@ def gotoBallotView(request, b_id):
 def voting(request,b_id,p_id,address):
     print("ffffffff",b_id,p_id,address)
     vote=execTxn('voting',int(b_id),p_id,address)
+
     print("*********",type(vote))
     
     if vote==[]:
@@ -144,6 +145,11 @@ def voting(request,b_id,p_id,address):
         messages.add_message(request, messages.SUCCESS, msg)
     else:
         msg=vote
+
+    print(vote)
+    if vote==None:
+        msg="You can't vote twice"
+
         messages.add_message(request, messages.ERROR, msg)
     
     return redirect('home')
