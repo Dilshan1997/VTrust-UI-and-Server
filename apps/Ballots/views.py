@@ -100,8 +100,6 @@ def createBallot(request):
                         execTxn('createProposal',prop_data[f"prop{i+1}"]["pid"],prop_data[f"prop{i+1}"]["prop_name"],prop_data[f"prop{i+1}"]["prop_details"])  
                     messages.add_message(request, messages.SUCCESS, msg)   
                     return redirect('private_ballot')
-               
-
         else:
             msg="ERROR"
             messages.add_message(request, messages.ERROR, msg)
@@ -181,13 +179,9 @@ def privateBallot(request):
         elif(td<x[6]):
             x.append("Not Yet Published")
             x.append(True)
-            
-            
         else:
             x.append("Voting time is over")
             x.append(True)
-            
-        
         ballot_data[i]=x
         # print(ballot_data)
         
@@ -229,11 +223,11 @@ def privateBalloVoting(request,b_id,p_id,address):
     msg=''
     vote=execTxn('privateBallotVoting',int(b_id),p_id,address)
     print(vote)
-    error=re.findall(r"'reason':(.*)\},|$",str(vote)) 
-    print(error)
+    # error=re.findall(r"'reason':(.*)\},|$" ,str(vote)) 
+    # print(error)
     
-    if error!="":
-        msg=error[0]
+    if vote!="":
+        msg=vote
         messages.add_message(request, messages.ERROR, msg)
     else:
         msg="Successfully Voted"

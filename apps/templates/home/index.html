@@ -16,11 +16,11 @@
             {% if messages %}
             <ul class="messages list-style-none text-center">
             {% for message in messages %}
-            <li {% if message.tags %} class=" alert-{{message.tags }} alert-dismissible msg fade show " role="alert"{% endif %}>{{ message }}</li>
+            <li {% if message.tags %} class=" alert-{{message.tags }} alert-dismissible msg fade show  alert_msg_js" role="alert"{% endif %}>{{ message }}</li>
             {% endfor %}
             </ul>
             {% else %}
-            <div class=" alert-{{message.tags }} msg fade show " role="alert">{{ message }}</div>
+            <div class=" alert-{{message.tags }} msg fade show alert_msg_js" role="alert">{{ message }}</div>
             {% endif %}
         </div>
             <div id="ballot_count" class=" visually-hidden">{{n}}</div>
