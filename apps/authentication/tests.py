@@ -1,8 +1,8 @@
-# -*- encoding: utf-8 -*-
-"""
-Copyright (c) 2019 - present AppSeed.us
-"""
 
 from django.test import TestCase
+from django.contrib.auth import authenticate, login,logout,password_validation
+from .auth_contract import *
 
-# Create your tests here.
+class AuthenticationTestCase(TestCase):
+    user =authenticate(username="dila", password="ddddd")
+    execTxn("loginUser",address,"username", "password")

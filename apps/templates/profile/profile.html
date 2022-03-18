@@ -34,13 +34,16 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="POST" id="post-form">
+                                    <div id="custom-message"></div>
+                                    <form method="POST" id="post-form" data-parsley-validate="">
                                         {% csrf_token %}
                                     <div class="row mb-4 mb-lg-5">
                                         <!-- Form -->
+                                        
                                         <div class="mb-2">
                                             <label for="exampleInputEmail6">New Name</label>
-                                            <input type="text" class="form-control" id="user_edit_name" placeholder="{{user_data.3}}">
+                                            <input type="text" class="form-control" id="user_edit_name" value="{{user_data.3}}" data-parsley-trigger="focusin focusout" required="true"
+                                             data-parsley-error-message="Plz enter the your name">
                                             <small id="emailHelp" class="form-text text-gray">We'll never share your email with anyone
                                                 else.</small>
                                         </div>
@@ -50,7 +53,8 @@
                                             <!-- Form -->
                                             <div class="mb-2">
                                                 <label for="exampleInputEmail6">New Email address</label>
-                                                <input type="email" class="form-control" id="user_edit_email" placeholder="{{user_data.1}}">
+                                                <input type="email" class="form-control" id="user_edit_email" value="{{user_data.1}}" data-parsley-trigger="focusin focusout" data-parsley-trigger="focusin focusout" required="true"
+                                                data-parsley-type="email">
                                                 <small id="emailHelp" class="form-text text-gray">We'll never share your email with anyone
                                                     else.</small>
                                             </div>
@@ -61,10 +65,11 @@
                                             <!-- Form -->
                                             <div class="mb-3">
                                                 <label for="exampleInputIconPassword">Old Password</label>
-                                                <div class="input-group">
+                                                <div>
                                                     <input type="password" class="form-control" id="old_password" placeholder="Old Password"
-                                                        aria-label="Password" aria-describedby="basic-addon3">
-                                                    <span class="input-group-text" id="basic-addon3"><span class="fas fa-unlock-alt"></span></span>
+                                                        aria-label="Password" aria-describedby="basic-addon3" data-parsley-trigger="focusin focusout" required="true"
+                                                        data-parsley-error-message="Plz enter old password">
+                                                   
                                                 </div>
                                             </div>
 
@@ -74,10 +79,10 @@
                                             <!-- Form -->
                                             <div class="mb-3">
                                                 <label for="exampleInputIconPassword">New Password</label>
-                                                <div class="input-group">
-                                                    <input type="password" class="form-control" id="new_password" placeholder="New Password"
-                                                        aria-label="Password" aria-describedby="basic-addon3">
-                                                    <span class="input-group-text" id="basic-addon3"><span class="fas fa-unlock-alt"></span></span>
+                                                <div >
+                                                    <input type="password" class="form-control" id="new_password1" placeholder="New Password"
+                                                        aria-label="Password" aria-describedby="basic-addon3"  data-parsley-trigger="focusin focusout" required="true" data-parsley-minlength="8" data-parsley-uppercase="1">
+                                                    
                                                 </div>
                                             </div>
 
@@ -87,10 +92,10 @@
                                             <!-- Form -->
                                             <div class="mb-3">
                                                 <label for="exampleInputIconPassword">Re Enter Password</label>
-                                                <div class="input-group">
+                                                <div>
                                                     <input type="password" class="form-control" id="re_new_password" placeholder="Re enter new password"
-                                                        aria-label="Password" aria-describedby="basic-addon3">
-                                                    <span class="input-group-text" id="basic-addon3"><span class="fas fa-unlock-alt"></span></span>
+                                                        aria-label="Password" aria-describedby="basic-addon3" data-parsley-trigger="focusin focusout" required="true" data-parsley-equalto="#new_password1" data-parsley-required-message="Please re-enter your new password.">
+                                                   
                                                 </div>
                                             </div>
 

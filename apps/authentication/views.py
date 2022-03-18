@@ -16,6 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.contrib.auth.hashers import make_password, check_password
+from django.contrib import messages
 
 @unauthenticated_user
 def login_view(request):
@@ -133,11 +134,14 @@ def profile_edit(request):
         if new_password==re_new_password and new_password!="":
             y.update(username=name,email=email,password=make_password(new_password,current_password.split("$")[2]))
             execTxn("changeUserData",name,email,old_password,new_password)
-            pass
+            msg="successfully updated"
+            response_data={"msg":msg}
         else:
             msg="Password not matching"
+            response_data={"msg":msg}
     else:
         msg="Old password is invalid"
+        response_data={"msg":msg}
 
     return JsonResponse(response_data)    
         

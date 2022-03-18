@@ -3,8 +3,7 @@
     margin-top: 2.5em;
 }
 .errorlist {
-    list-style: none;
-    padding-left: 0px;
+    list-style: none;  
     opacity: 0.8;
     color: #dc3545;
     font-size: 12px;
@@ -16,7 +15,6 @@
 }
 .messages {
     z-index: 100;
-    position: fixed;
     right: 2em;
     margin-top: -1em;
     list-style: none;

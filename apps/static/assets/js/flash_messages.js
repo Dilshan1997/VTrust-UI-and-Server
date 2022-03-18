@@ -8,7 +8,7 @@ function logFormData(data) {
 
 // fade out message alerts
 function fade_alerts() {
-    alerts = document.getElementsByClassName("alert msg");
+    alerts = document.getElementsByClassName("alert_msg_js");
         var i = alerts.length;
         for (let elem of alerts) {
             i--;

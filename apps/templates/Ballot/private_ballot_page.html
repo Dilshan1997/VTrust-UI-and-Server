@@ -7,11 +7,25 @@
 <script src="/static/assets/css/invitation_ui.css"></script>
 {% block content %}
     <main>
+   
         <div id="private_ballot_count" class=" visually-hidden">{{n}}</div>
         {% include 'includes/preloader.html' %}
+  
         <div class=" container-fluid row">
+            <div class=" mt-3">
+                {% if messages %}
+                {{messages}}
+                <ul class="messages list-style-none text-center">
+                {% for message in messages %}
+                <li {% if message.tags %} class=" alert-{{message.tags }} alert-dismissible msg fade show " role="alert"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+                {% else %}
+                <div class=" alert-{{message.tags }} msg fade show " role="alert">{{ message }}</div>
+                {% endif %}
+            </div>
             {% for value in ballot_data.values %}
-            <div class="col-6">
+            <div class="col-md-6">
             {% include 'includes/private_ballot_card.html' %}
             </div>
             {% endfor %}

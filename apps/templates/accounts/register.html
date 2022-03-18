@@ -30,7 +30,7 @@
                                     {% endif %}                                  
                                 </span>
                             </div>
-                            <form method="post" action="" action="#">
+                            <form method="post" action="" action="#" id="register_form">
 
                                 {% csrf_token %}
                                 <div class="form-group mb-4">
@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" name="register" class="btn btn-primary ">Sign UP</button>
+                                    <button type="submit" name="register" class="btn btn-primary " id="sign_up">Sign UP</button>
                                 </div>
                         
                                    
@@ -122,4 +122,6 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script src="/static/assets/js/VT_token.js"></script>
+{% endblock javascripts %}

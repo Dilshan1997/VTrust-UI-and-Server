@@ -31,14 +31,14 @@ def index(request):
     n=ballot_contract_controller.execTxn("getBallotId")
     today=datetime.datetime.now().strftime('%Y-%m-%d')
     user_address=auth_contract.auth_contract.functions.getUserData().call()[2]
-    print(user_address)
-    print(today)
+    # print(user_address)
+    # print(today)
     td=int(int(time.time()))
-    print(td,)
+    # print(td,)
     for i in range(n):
         inside_data=list()
         x=list(ballot_contract_controller.execTxn("getBallotDetails",i))
-        print("$$$$$",x)
+        # print("$$$$$",x)
         if(x[8]=="private"):
             continue
         start_date=datetime.datetime.fromtimestamp(x[6])
@@ -82,7 +82,7 @@ def index(request):
         labels = []
         data = []
 
-        print(ballot_data)
+        # print(ballot_data)
     context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_count,'addr':user_address,'login_val':True}
 
     html_template = loader.get_template('home/index.html')
@@ -131,7 +131,7 @@ def proposalChart(request,b_id):
     x=list(ballot_contract_controller.execTxn("getBallotDetails",int(b_id)))
     for j in range(x[9]):
             y=ballot_contract_controller.execTxn("getProposalDetails",f'{b_id}-{str(j)}')
-            print(y)
+            # print(y)
             labels.append(y[1])
             data.append(y[3])
     return JsonResponse(data={
@@ -143,7 +143,7 @@ def proposalChart(request,b_id):
 def following_ballot_tab(request):
     user_address=auth_contract.execTxn("getUserData")[2]
     following_ballots= ballot_contract_controller.execTxn("getFollowingBallots",user_address)
-    print(following_ballots)
+    # print(following_ballots)
     ballot_data=dict()
     proposal_data=dict()
     today=datetime.datetime.now().strftime('%Y-%m-%d')
@@ -153,7 +153,7 @@ def following_ballot_tab(request):
         for i in following_ballots:
             inside_data=list()
             x=list(ballot_contract_controller.execTxn("getBallotDetails",i))
-            print("$$$$$",x)
+            # print("$$$$$",x)
             if(x[8]=="private"):
                 continue
             start_date=datetime.datetime.fromtimestamp(x[6])
@@ -191,7 +191,7 @@ def following_ballot_tab(request):
             labels = []
             data = []
 
-    print(ballot_data)   
+    # print(ballot_data)   
     
     return render(request,'home/following_ballots.html',{'ballot_data': ballot_data,'proposal_data':proposal_data,'login_val':True})
     
