@@ -224,7 +224,7 @@
                                     {% for value in ballot_data.values %}
                                    
                                         <div class="col-3  mb-2">
-                                          <a class=" btn btn-dark mb-sm-3 mb-md-0" data-toggle="collapse" data-target="tab-{{value.0}}" class="accordion-toggle"  id="tabs-text-{{value.0}}-tab" href="#tabs-text-{{value.0}}-tab" role="button" aria-controls="tabs-text-{{value.0}}" aria-expanded="false" onclick="changeColour('#tabs-text-{{value.0}}-tab')">{{value.2}}
+                                          <a class=" btn btn-dark mb-sm-3 mb-md-0"  id="tabs-text-{{value.0}}-btn" href="#tabs-text-{{value.0}}-tab"  onclick="changeColour('.tabs-text-{{value.0}}-tab')">{{value.2}}
                                             </a>
                                       </div>
                                  
@@ -242,22 +242,25 @@
                                     <!-- <th>Winning proposal</th> -->
                                   </tr>
                                 </thead>
-                              
-                     
                               {% for key,value in proposal_data.items %}
-
-                                      <div class="collapse"  id="tabs-text-{{value.0}}-tab" data="tab-{{value.0}}">
-                                          
+                              <div id="tabs-text-{{key}}-tab">
                                               {% for p_value in value %}
-                                                <tr >
+                                              
+                                                <tr class="tabs-text-{{key}}-tab">
+                                                 
                                                   <td class="p-2">{{p_value.1}}</td>
                                                   <td class="p-2">{{p_value.3}}</td>
                                                   <td class="p-2">{{p_value.4}}%</td>
                                                   <!-- <td class="p-2"></td>    -->
+                                             
                                                 </tr>
+                                          
+                                                {% endfor %}
+                                              </div>
+                                              
                                               <!-- <h5> {{p_value.0}}</h5> -->
-                                              {% endfor %}  
-                                      </div>
+                                                
+                                   
                                   
         
                               {% endfor %}

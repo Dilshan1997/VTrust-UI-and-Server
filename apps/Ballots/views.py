@@ -14,6 +14,8 @@ import datetime
 from django.core.mail import send_mail
 from django.contrib import messages
 import re
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import loader
 
 @login_required(login_url="login/")
 def indexBallot(request):
@@ -199,7 +201,9 @@ def privateBallot(request):
 
         # print(ballot_data)
     context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_ids,'addr':admin_address,'login_val':True}
-    return render(request,"Ballot/private_ballot_page.html",context)
+    html_template = loader.get_template('Ballot/private_ballot_page.html')
+    return HttpResponse(html_template.render(context, request))
+    # return render(request,"Ballot/private_ballot_page.html",context)
 
 @login_required(login_url="login/")
 def gotoPrivateBallotView(request,b_id):
@@ -213,7 +217,7 @@ def gotoPrivateBallotView(request,b_id):
     # print("address",addr)
     # print(ballot_d)
     # print(proposals_d)
-    
+
     return render(request,"Ballot/private_ballot_details.html",{'data':ballot_d,'p_data':proposals_d,'address':addr,'login_val':True})
 
 
