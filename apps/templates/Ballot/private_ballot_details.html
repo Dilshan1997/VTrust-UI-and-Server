@@ -1,5 +1,5 @@
 {%extends 'layouts/base.html'%}
-{% block title %}Private Ballot Details{% endblock %} 
+{% block title %} Ballot Details {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -12,29 +12,41 @@
         <div class="section section-sm pb-0 mb-n4">
             <div class="container">
                 
-                <div class="row justify-content-center">
-                    <div class="col-12 mt-5">
-                        <div class="card shadow mb-6">
-                            <div class="card-body px-5 py-5 text-center text-md-left">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6">
-                                        <h2 class="mb-3">{{data.2}}</h2>
-                                        <p class="mb-0">
-                                            {{data.3}}
-                                        </p>
-                                        <p class="mb-0">
-                                            Type:{{data.8}}
-                                        </p>
-                                        <p class="mb-0">
-                                            Creator:{{data.4}}
-                                        </p>
-                                        <p class="mb-0">
-                                            Proposals:{{data.9}}
-                                        </p>
-                                        <p class="mb-0">
-                                            Full vote count:{{data.10}}
-                                        </p>
-                                      
+                <div class="row justify-content-center ">
+                    <div class="col-12 mt-5 ">
+                        <div class="card shadow mb-6 ">
+                            <div class="col-md-12 ">
+                                <h2 class="card-title mt-3  text-center text-uppercase text-google">{{data.2}}</h2>
+                                <div>
+                            <div class="card-body text-center">
+                                <div class="list-group-item list-group-item-primary ">
+                                    <h3 class=" h3 ">Details</h3>
+                                    <h5 class=" text-dark">
+                                        {{data.3}}
+                                    </h5>
+                            </div>
+                      
+                            <div class="list-group-item list-group-item-primary"> 
+                                <h3 class=" h3 ">Type  </h3>
+                                   <h5 class="h5 text-dark">{{data.8}} </h5>
+                            </div>
+                      
+                            <div class="list-group-item list-group-item-primary"> 
+                                <h3 class=" h3 ">Creator</h3>
+                                   <h5 class="h5 text-dark">{{data.4}}</h5>
+                              
+                            </div>
+                            
+                            <div class="list-group-item list-group-item-primary">
+                                <h3 class=" h3 ">Proposals</h3>
+                                   <h5 class="h5 text-dark">{{data.9}}</h5>
+                              
+                            </div>
+                            <div class="list-group-item list-group-item-primary">
+                            <h3 class=" h3 "> Full vote count</h3>
+                            <h5 class="h5 text-dark">{{data.10}}</h5>
+                            </div>
+                            
                                     </div>
                                     
                                 </div>
@@ -42,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-left">
+                <div class="row d-flex justify-content-between">
               {% for p_data in p_data%}
                     {% include 'includes/proposal.html'%}
               {%endfor%}

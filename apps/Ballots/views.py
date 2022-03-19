@@ -203,7 +203,7 @@ def privateBallot(request):
     context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_ids,'addr':admin_address,'login_val':True}
     html_template = loader.get_template('Ballot/private_ballot_page.html')
     return HttpResponse(html_template.render(context, request))
-    # return render(request,"Ballot/private_ballot_page.html",context)
+  
 
 @login_required(login_url="login/")
 def gotoPrivateBallotView(request,b_id):
