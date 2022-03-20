@@ -1,4 +1,4 @@
-
+{% load social_share %}
 <div class="row justify-content-left mb-7 mt-6">
     
     <div class="col-6 col-md-6 col-lg-4 mb-5 mb-lg-0 ">
@@ -16,8 +16,12 @@
                                     <h5 class="modal-title" id="myModelLabel">Share Link</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Share this link via</p>
-                                    <div class="d-flex align-items-center icons"> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-facebook-f"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-twitter"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-instagram"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-whatsapp"></span> </a> <a href="#" class="fs-5 d-flex align-items-center justify-content-center"> <span class="fab fa-telegram-plane"></span> </a> </div>
+                                    <div class="d-flex align-items-center icons"> 
+                                        <div  class="fs-5 d-flex align-items-center justify-content-center"> {% post_to_facebook 'http://127.0.0.1:8000/VTrust/ballot/{{value.0}}' '<span class="fab fa-facebook"></span>' %} </div> 
+                                        <div  class="fs-5 d-flex align-items-center justify-content-center"> {% post_to_twitter 'http://127.0.0.1:8000/VTrust/ballot/{{value.0}}' '<span class="fab fa-twitter">Twitter</span>' %}</div> 
+                                        <div  class="fs-5 d-flex align-items-center justify-content-center"> {% post_to_whatsapp 'http://127.0.0.1:8000/VTrust/ballot/{{value.0}}' '<span class="fab fa-whatsapp"></span>' %}</div>
+                                        <div  class="fs-5 d-flex align-items-center justify-content-center"> {% post_to_telegram 'http://127.0.0.1:8000/VTrust/ballot/{{value.0}}' '<span class="fab fa-telegram-plane>Telegram</span>' %}</div>
+                                    </div>
                                     <p>Or copy link</p>
                                     <div class="field d-flex align-items-center justify-content-between"> <span class="fas fa-link text-center"></span> <input id="share_link" type="text"> <button>Copy</button> </div>
                                 </div>
