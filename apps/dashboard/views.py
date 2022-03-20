@@ -26,10 +26,12 @@ def dashboard_index(request):
     full_vote_count=0
     ballot_vote_count=0
     followers_count=0
-    
+    private_ballot_count=len(ballot_contract_controller.execTxn("getPrivateBallotIds",user_address))
+    public_ballot_count=len(owner_belongs_ballot_ids)-private_ballot_count
     if len(owner_belongs_ballot_ids)!=0:
         most_famous_ballot_id=owner_belongs_ballot_ids[0]
     td=int(int(time.time()))
+   
     for i in owner_belongs_ballot_ids:
         inside_data=list()
         x=list(ballot_contract_controller.execTxn("getBallotDetails",i))
@@ -72,4 +74,4 @@ def dashboard_index(request):
         most_voting_count_from=ballot_data[most_famous_ballot_id][2]
     context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'login_val':True}
     json_data=json.dumps(context)
-    return render(request,'Dashboard/main.html',{"data":json_data,'ballot_data': ballot_data,'proposal_data':proposal_data,'login_val':True,'n':ballot_count,'addr':user_address,'full_vote_count':full_vote_count,'most_voting_count_from':most_voting_count_from,'followers_count':followers_count})
+    return render(request,'Dashboard/main.html',{"data":json_data,'ballot_data': ballot_data,'proposal_data':proposal_data,'login_val':True,'n':ballot_count,'addr':user_address,'full_vote_count':full_vote_count,'most_voting_count_from':most_voting_count_from,'followers_count':followers_count,'private_ballot_count':private_ballot_count,'public_ballot_count':public_ballot_count})
