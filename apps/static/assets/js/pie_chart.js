@@ -9,7 +9,6 @@ $(function () {
         // console.log(data)
         // console.log(proposalChart)
         var ctx = proposalChart[0].getContext("2d");
-
         new Chart(ctx, {
           type: 'horizontalBar', //'doughnut'
           data: {
