@@ -137,19 +137,12 @@ def gotoBallotView(request, b_id):
 def voting(request,b_id,p_id,address):
     print("ffffffff",b_id,p_id,address)
     vote=execTxn('voting',int(b_id),p_id,address)
-
-    print("*********",type(vote))
-    
+    print(vote)
     if vote==[]:
         msg="successfully voted"
         messages.add_message(request, messages.SUCCESS, msg)
     else:
-        msg=vote
-
-    print(vote)
-    if vote==None:
-        msg="You can't vote twice"
-
+        msg=str(vote).split(":")[2]
         messages.add_message(request, messages.ERROR, msg)
     
     return redirect('home')
@@ -231,7 +224,7 @@ def privateBalloVoting(request,b_id,p_id,address):
     # print(error)
     
     if vote!="":
-        msg=vote
+        msg=str(vote).split(":")[2]
         messages.add_message(request, messages.ERROR, msg)
     else:
         msg="Successfully Voted"
@@ -283,7 +276,7 @@ def privateBallotInvitationSend(request,b_id,wallet_address):
     
     user_data=auth_contract.execTxn("getUserData",wallet_address)
     get_private_ballot_voters_list=execTxn("getPrivateVotersData",int(b_id))
-    # print("##########",get_private_ballot_voters_list)
+    print("##########",get_private_ballot_voters_list)
     # print("######", user_email)
     ballot_data=execTxn("getBallotDetails",int(b_id))
     print("++++++++++++++++++++++++++",ballot_data)

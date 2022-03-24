@@ -13,8 +13,18 @@
         {% include 'includes/preloader.html' %}
 
     <div class="container d-flex justify-content-center align-items-center">
-        
+    
 <div class=" mt-7 container">
+        {% if messages %}
+        {{messages}}
+        <ul class="messages list-style-none text-center">
+        {% for message in messages %}
+        <li {% if message.tags %} class=" alert-{{message.tags }} alert-dismissible msg fade show alert_msg_js" role="alert"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <div class=" alert-{{message.tags }} msg fade show " role="alert">{{ message }}</div>
+        {% endif %}
   <div class="steps-form">
         <div class="steps-row setup-panel">
           <div class="steps-step">
