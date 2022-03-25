@@ -1,3 +1,4 @@
+from ftplib import error_temp
 from os import system
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
@@ -223,7 +224,7 @@ def privateBalloVoting(request,b_id,p_id,address):
     # error=re.findall(r"'reason':(.*)\},|$" ,str(vote)) 
     # print(error)
     
-    if vote==[]:
+    if vote==True:
         msg="Successfully Voted"
         messages.add_message(request, messages.SUCCESS, msg)
         
@@ -267,11 +268,7 @@ def privateBallotDetailsAnalysisChart(b_id):
 
 @login_required(login_url="login/")    
 def privateBallotInvitationSend(request,b_id,wallet_address):
-    save_voter=execTxn("savePrivateVotersData",int(b_id),wallet_address)
-    if save_voter:
-        status="success"
-    else:
-        status="Fail"
+
     get_voters_data=execTxn("getPrivateVotersData",int(b_id))
     # print(get_voters_data)
     # print(b_id,wallet_address)
@@ -293,10 +290,18 @@ def privateBallotInvitationSend(request,b_id,wallet_address):
         [user_data[1]],
         fail_silently=False
             )
+        save_voter=execTxn("savePrivateVotersData",int(b_id),wallet_address)
+        if save_voter:
+            status="success"
+        else:
+            status="Fail"
+        success_msg='Invitation send successfully'
+        error_msg=''
     except BadHeaderError:
-        print("Error")
+        error_msg='email server error plz check your internet connection and email login'
+        success_msg=''
     
     if request.is_ajax and request.method == "GET":
-            return JsonResponse({"valid":True,"state":200,"method":method,'status':status})
+            return JsonResponse({"valid":True,"state":200,"method":method,'status':status,'error_msg':error_msg,'success_msg':success_msg})
 
         
