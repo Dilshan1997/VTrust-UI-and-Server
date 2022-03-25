@@ -223,12 +223,14 @@ def privateBalloVoting(request,b_id,p_id,address):
     # error=re.findall(r"'reason':(.*)\},|$" ,str(vote)) 
     # print(error)
     
-    if vote!="":
-        msg=str(vote).split(":")[2]
-        messages.add_message(request, messages.ERROR, msg)
-    else:
+    if vote==[]:
         msg="Successfully Voted"
         messages.add_message(request, messages.SUCCESS, msg)
+        
+    else:
+        msg=str(vote).split(":")[2]
+        messages.add_message(request, messages.ERROR, msg)
+
     return redirect('private_ballot')
 
 @login_required(login_url="login/")

@@ -33,8 +33,9 @@
                                     <button type="button" class="btn-close bg-gray-500" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
+                                <div id="custom-message"></div>
                                 <div class="modal-body">
-                                    <div id="custom-message"></div>
+                                   
                                     <form method="POST" id="post-form" data-parsley-validate="">
                                         {% csrf_token %}
                                     <div class="row mb-4 mb-lg-5">
@@ -80,8 +81,8 @@
                                             <div class="mb-3">
                                                 <label for="exampleInputIconPassword">New Password</label>
                                                 <div >
-                                                    <input type="password" class="form-control" id="new_password1" placeholder="New Password"
-                                                        aria-label="Password" aria-describedby="basic-addon3"  data-parsley-trigger="focusin focusout" required="true" data-parsley-minlength="8" data-parsley-uppercase="1">
+                                                    <input type="password" class="form-control" id="new_password" placeholder="New Password"
+                                                        aria-label="Password" aria-describedby="basic-addon3"  data-parsley-trigger="focusin focusout" required="true" data-parsley-minlength="8">
                                                     
                                                 </div>
                                             </div>
@@ -94,7 +95,7 @@
                                                 <label for="exampleInputIconPassword">Re Enter Password</label>
                                                 <div>
                                                     <input type="password" class="form-control" id="re_new_password" placeholder="Re enter new password"
-                                                        aria-label="Password" aria-describedby="basic-addon3" data-parsley-trigger="focusin focusout" required="true" data-parsley-equalto="#new_password1" data-parsley-required-message="Please re-enter your new password.">
+                                                        aria-label="Password" aria-describedby="basic-addon3" data-parsley-trigger="focusin focusout" required="true" data-parsley-equalto="#new_password" data-parsley-required-message="Please re-enter your new password.">
                                                    
                                                 </div>
                                             </div>
