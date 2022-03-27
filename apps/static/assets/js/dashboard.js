@@ -187,7 +187,24 @@ $( document ).ready(()=>{
     
 
 })
+ar_class=[]
+function changeColour(id) { 
+  console.log(id) 
+  var i
+  if(!ar_class.includes(id)){
+    ar_class.push(id)
+    $(ar_class.slice(-1)[0]).addClass('bg-warning');
+    x=ar_class.slice(0,ar_class.length-1)
+  }
+  else{
+    $(id).addClass('bg-warning');
+    ar_class.splice(ar_class.indexOf(id),1)
+    x=ar_class
+ 
+  }
+  console.log(ar_class)
+  $.each(x,function(index,x){
+    $(x).removeClass('bg-warning')
+  })
 
-function changeColour(id) {  
-  // $(id).css('background-color','yellow')
 }

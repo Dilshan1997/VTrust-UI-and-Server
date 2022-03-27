@@ -1,3 +1,4 @@
+from ftplib import error_temp
 from os import system
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
@@ -14,6 +15,8 @@ import datetime
 from django.core.mail import send_mail
 from django.contrib import messages
 import re
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import loader
 
 @login_required(login_url="login/")
 def indexBallot(request):
@@ -135,19 +138,12 @@ def gotoBallotView(request, b_id):
 def voting(request,b_id,p_id,address):
     print("ffffffff",b_id,p_id,address)
     vote=execTxn('voting',int(b_id),p_id,address)
-
-    print("*********",type(vote))
-    
+    print(vote)
     if vote==[]:
         msg="successfully voted"
         messages.add_message(request, messages.SUCCESS, msg)
     else:
-        msg=vote
-
-    print(vote)
-    if vote==None:
-        msg="You can't vote twice"
-
+        msg=str(vote).split(":")[2]
         messages.add_message(request, messages.ERROR, msg)
     
     return redirect('home')
@@ -199,7 +195,9 @@ def privateBallot(request):
 
         # print(ballot_data)
     context = {'ballot_data': ballot_data,'proposal_data':proposal_data,'n':ballot_ids,'addr':admin_address,'login_val':True}
-    return render(request,"Ballot/private_ballot_page.html",context)
+    html_template = loader.get_template('Ballot/private_ballot_page.html')
+    return HttpResponse(html_template.render(context, request))
+  
 
 @login_required(login_url="login/")
 def gotoPrivateBallotView(request,b_id):
@@ -213,7 +211,7 @@ def gotoPrivateBallotView(request,b_id):
     # print("address",addr)
     # print(ballot_d)
     # print(proposals_d)
-    
+
     return render(request,"Ballot/private_ballot_details.html",{'data':ballot_d,'p_data':proposals_d,'address':addr,'login_val':True})
 
 
@@ -226,12 +224,14 @@ def privateBalloVoting(request,b_id,p_id,address):
     # error=re.findall(r"'reason':(.*)\},|$" ,str(vote)) 
     # print(error)
     
-    if vote!="":
-        msg=vote
-        messages.add_message(request, messages.ERROR, msg)
-    else:
+    if vote==True:
         msg="Successfully Voted"
         messages.add_message(request, messages.SUCCESS, msg)
+        
+    else:
+        msg=str(vote).split(":")[2]
+        messages.add_message(request, messages.ERROR, msg)
+
     return redirect('private_ballot')
 
 @login_required(login_url="login/")
@@ -268,18 +268,14 @@ def privateBallotDetailsAnalysisChart(b_id):
 
 @login_required(login_url="login/")    
 def privateBallotInvitationSend(request,b_id,wallet_address):
-    save_voter=execTxn("savePrivateVotersData",int(b_id),wallet_address)
-    if save_voter:
-        status="success"
-    else:
-        status="Fail"
+
     get_voters_data=execTxn("getPrivateVotersData",int(b_id))
     # print(get_voters_data)
     # print(b_id,wallet_address)
     
     user_data=auth_contract.execTxn("getUserData",wallet_address)
     get_private_ballot_voters_list=execTxn("getPrivateVotersData",int(b_id))
-    # print("##########",get_private_ballot_voters_list)
+    print("##########",get_private_ballot_voters_list)
     # print("######", user_email)
     ballot_data=execTxn("getBallotDetails",int(b_id))
     print("++++++++++++++++++++++++++",ballot_data)
@@ -294,10 +290,18 @@ def privateBallotInvitationSend(request,b_id,wallet_address):
         [user_data[1]],
         fail_silently=False
             )
+        save_voter=execTxn("savePrivateVotersData",int(b_id),wallet_address)
+        if save_voter:
+            status="success"
+        else:
+            status="Fail"
+        success_msg='Invitation send successfully'
+        error_msg=''
     except BadHeaderError:
-        print("Error")
+        error_msg='email server error plz check your internet connection and email login'
+        success_msg=''
     
     if request.is_ajax and request.method == "GET":
-            return JsonResponse({"valid":True,"state":200,"method":method,'status':status})
+            return JsonResponse({"valid":True,"state":200,"method":method,'status':status,'error_msg':error_msg,'success_msg':success_msg})
 
         

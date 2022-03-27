@@ -34,8 +34,8 @@ class BallotDetails(forms.Form):
             'rows':4,
             'data-parsley-trigger':"focusin focusout",
             'required':"true",
-            'data-parsley-length':"[10, 50]",
-            'data-parsley-length-message':"You should use 10-50 words"
+            'data-parsley-length':"[100, 1000]",
+            'data-parsley-length-message':"You should use 100-1000 charactors"
         }
         ))
     

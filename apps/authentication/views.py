@@ -108,8 +108,6 @@ def profile_edit(request):
     user_details=execTxn("getUserData")
     print(user_details)
     user=User.objects.all()
-    print(user[48: ])
-    print()
     
     response_data = {}
     print(request)
@@ -119,7 +117,7 @@ def profile_edit(request):
         old_password=request.POST.get('old_password')
         new_password=request.POST.get('new_password')
         re_new_password=request.POST.get('re_new_password')
-        print(name,email,old_password)
+        print(name,email,old_password,new_password,re_new_password)
     y=user.filter(username=user_details[3])
     
     print(y.values_list())
@@ -134,14 +132,15 @@ def profile_edit(request):
         if new_password==re_new_password and new_password!="":
             y.update(username=name,email=email,password=make_password(new_password,current_password.split("$")[2]))
             execTxn("changeUserData",name,email,old_password,new_password)
-            msg="successfully updated"
-            response_data={"msg":msg}
+            msg="profile successfully updated"
+            messages.add_message(request, messages.SUCCESS, msg)
+            response_data={"success_msg":msg}
         else:
             msg="Password not matching"
-            response_data={"msg":msg}
+            response_data={"error_msg":msg}
     else:
         msg="Old password is invalid"
-        response_data={"msg":msg}
+        response_data={"error_msg":msg}
 
     return JsonResponse(response_data)    
         

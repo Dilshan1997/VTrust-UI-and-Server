@@ -13,6 +13,16 @@ $("#edit_profile").click(()=>{
         },
         success: function (response) {
             console.log(response)
+            if("error_msg" in response){
+                $("#custom-message").html(response['error_msg'])
+            }
+            else{
+                window.location.replace("http://127.0.0.1:8000/VTrust/home");
+            }
+            
+            
+            // modal.hide()
+            
         },
         error: function (response) {
             console.log(response)

@@ -8,12 +8,19 @@ function privateInvitation(b_id){
         
         success: function (response) {
             console.log(response)
-            $('#modal_'+b_id).modal('toggle');
+            if(response["success_msg"]!=''){
+                $("#send_or_not").text(response["success_msg"])
+                // $("#send_or_not").addClass('new-class',"fa-solid fa-envelope fa-bounce" );
+            }
+            if(response["error_msg"]!=''){
+                $("#send_or_not").text(response["error_msg"])
+            }
+            // $('#modal_'+b_id).modal('toggle');
             $("#send_or_not").addClass('new-class',"fa-solid fa-envelope fa-bounce" );
         },
         error: function (response) {
             console.log(response)
-            $("#send_or_not").text('Error');
+            $("#send_or_not").text('Email server error');
         }
     })
   }
