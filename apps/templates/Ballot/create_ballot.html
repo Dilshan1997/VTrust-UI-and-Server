@@ -1,0 +1,291 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Ballot create {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<!-- <link rel="stylesheet" href="/static/assets/css/mdb.css"> -->
+<link rel="stylesheet" href="/static/assets/css/stage_nav.css">
+{% endblock stylesheets %}
+
+{% block content %}
+    <main> 
+        {% include 'includes/preloader.html' %}
+
+    <div class="container d-flex justify-content-center align-items-center">
+    
+<div class=" mt-7 container">
+        {% if messages %}
+        {{messages}}
+        <ul class="messages list-style-none text-center">
+        {% for message in messages %}
+        <li {% if message.tags %} class=" alert-{{message.tags }} alert-dismissible msg fade show alert_msg_js" role="alert"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <div class=" alert-{{message.tags }} msg fade show " role="alert">{{ message }}</div>
+        {% endif %}
+  <div class="steps-form">
+        <div class="steps-row setup-panel">
+          <div class="steps-step">
+            <a href="#step-9" type="button" class="btn btn-indigo btn-circle">1</a>
+            <p>Basic Details</p>
+          </div>
+          <div class="steps-step">
+            <a href="#step-10" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+            <p>Proposal Details</p>
+          </div>
+          <div class="steps-step">
+            <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+            <p>Submit</p>
+          </div>
+        </div>
+      </div>
+  
+    
+        <div class="section section-md pb-0">
+     
+            <div class="container">
+                <!-- Title -->
+                <div class="row">
+                    <div class="col">
+                        <h2 class="h2">Ballot Form</h2>
+                    </div>
+                </div>
+                <!-- End of Title -->
+            </div>
+        </div>
+        <!-- Form -->
+        <form method="POST" action="{%url 'create_ballot'%}" class="mt-4" name="ballot_form" id="ballot_form" data-parsley-validate="">
+            {% csrf_token %} 
+        <!-- First Step -->
+        <div class="row setup-content" id="step-9">
+          <div class="col-md-12">
+                   <!-- Section -->
+        <div class="section section-md pt-4">
+            <div class="container">          
+                            <div class="row mb-4 mb-lg-5">
+                            <div class="col-lg-4 col-sm-6">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail6">Email address</label>
+                         
+                            {{ form.email }}
+                            <span class="text-error">{{ form.email.errors }}</span>
+                  
+                            <small id="emailHelp" class="form-text text-gray">We'll never share your email with anyone
+                                else.</small>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <!-- Form -->
+                        <div class="mb-3">
+                            <label for="TextInput">Ballot Name</label>
+                            {{form.ballot_name}}
+                            <span class="text-error">{{ form.ballot_name.errors }}</span>
+                        </div>
+                   
+                        <!-- End of Form -->
+                        <!-- Form -->
+             
+                    </div>
+                        <!-- End of Form -->
+                        <!-- Form -->
+                        <div class="col-lg-4 col-sm-6">
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1">Details</label>
+                          {{form.ballot_details}}
+                          <span class="text-error">{{ form.ballot_details.errors }}</span>
+                        </div>
+                        </div>
+                        <!-- End of Form -->
+                        <div class="row mb-4 mb-lg-5">
+                            <!-- <div class="col-lg-4 col-sm-6">
+                        <div class="mb-1">
+                            <label class="my-1 me-2" for="inlineFormCustomSelectPref">Ballot type</label>
+                            {{form.ballot_type}}
+                        </div>
+                            </div> -->
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="mb-3">
+                                    <label class="my-1 me-2" for="inlineFormCustomSelectPref">Number of Proposals</label>
+                      {{form.proposal_count}}
+                      <span class="text-error">{{ form.proposal_count.errors }}</span>
+                                </div>
+                                    </div>
+                        </div>
+                        
+                <div class="row mb-5 mb-lg-5">
+                
+                    <legend class="h5">public or private</legend>
+                    <fieldset>
+                        <legend>{{ from.publish_method.label }}</legend>
+                        {% for radio in form.published_method %}
+                        <div class="myradio">
+                        {{ radio }}
+                        </div>
+                        {% endfor %}
+                   
+                    </fieldset>
+                    <span class="text-error">{{ form.publish_method.errors }}</span>
+                </div>
+                            <!-- End of Radio -->
+                        
+                  
+
+                <div class="row mb-4 mb-lg-5">
+                    <legend class="h5">Set ballot active period</legend>
+                    <div class="col-12 col-md-8">
+                        <!-- Form -->
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <label class="h6" for="exampleInputDate2">From</label>
+                                <div class="form-group">
+                                    <div class="input-group input-group-border">
+                                        <span class="input-group-text" id="basic-addonDate2"><span
+                                                class="fas far fa-calendar-alt"></span></span>
+                                   {{form.start_date}}
+                                   
+                                   <span class="text-error">{{ form.start_date.errors }}</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="h6" for="exampleInputDate3">To</label>
+                                    <div class="input-group input-group-border">
+                                        <span class="input-group-text" id="basic-addonDate3"><span
+                                                class="fas far fa-calendar-alt"></span></span>
+                                       {{form.end_date}}
+                                       <span class="text-error">{{ form.end_date.errors }}</span>
+                                       
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Form -->
+                  
+
+                    <div class="col mt-5">
+                        <div class=" fas far fa-arrow-right" ></div>
+                        <button type="button" value="Next" id="fn_btn"  class="btn btn-indigo btn-rounded nextBtn float-right ">NEXT</button>
+                    </div>
+                    </div>
+                </div>
+
+            
+            
+            </div>
+        </div>
+        </div>
+        
+          </div>
+   
+        </div>
+  
+        <!-- Second Step -->
+        <div class="row setup-content" id="step-10">
+            <div class="col-md-12">
+                <!-- Section -->
+     <div class="section section-md pt-4">
+         <div class="container" id="cont">
+             <div class="row mb-4 mb-lg-5">
+                 <div class="col-lg-4 col-sm-6">
+                     
+                     <!-- Form -->
+                     <div class="mb-4">
+                         <label for="exampleInputEmail6">Proposal Name</label>
+               
+                     </div>
+                    </div>
+                     <div class="col-lg-4 col-sm-6">
+                        <!-- Form -->
+                        <div class="mb-4">
+                            <label for="exampleInputEmail6">Proposal Details</label>
+                           
+                       
+                        </div>
+                 </div>
+            
+            </div>
+      
+     
+        </div>
+        <div class="col">
+            <button class="btn btn-indigo btn-rounded prevBtn float-left" type="button">Previous</button>
+            <button class="btn btn-indigo btn-rounded nextBtn float-right"  type="button">Next</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+        <!-- Third Step -->
+        <div class="row setup-content" id="step-11">
+          <div class="col-md-12">
+            <h3 class="font-weight-bold pl-0 my-4"><strong>Plz, submit first read all given conditions carefully and decide agree or not</strong></h3>
+            <div class="col-12 d-flex justify-content-center">
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal"
+                    data-bs-target="#modal-default">Read the agreement</button>
+            </div>
+            <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="h6 modal-title">Terms of Service</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>With less than a month to go before the European Union enacts new consumer privacy
+                            laws for its citizens, companies around the world are updating their terms of
+                            service agreements to comply.</p>
+                        <p>The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect
+                            on May 25 and is meant to ensure a common set of data rights in the European Union.
+                            It requires organizations to notify users as
+                            soon as possible of high-risk data breaches that could personally affect them.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="creationAgreement('True')">I accept</button>
+                        <button type="button" class="btn btn-link ms-auto"
+                            data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- <div class="col-lg-6 col-sm-6">
+                <div class="mb-3 form-control list-style-none">
+                   
+                    {{form.agrements}}
+      <span class="text-error">{{ form.agrements.errors }}</span>
+                </div>
+                    </div> -->
+           <div class=" d-flex justify-content-center">
+            <button class="btn btn-indigo btn-rounded prevBtn" type="button">Previous</button>
+            <button class="btn btn-default btn-rounded ms-3 disabled"  type="submit" id="sn_btn">Submit</button>
+        </div>
+          </div>
+        </div>
+   
+
+
+    </form>
+  </div>
+  <!-- Ste-->
+        
+
+ 
+        <!-- End of Section -->
+
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script src="/static/assets/js/progress_stage.js"></script>
+<script src="/static/assets/js/create_ballot.js"></script>
+{% endblock javascripts %}

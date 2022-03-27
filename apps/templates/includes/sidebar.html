@@ -1,1 +1,92 @@
-<!-- NOT_IMPLEMENTED -->
+<nav id="sidebar">
+        <div class="sidebar-header  position-fixed " >
+            <h3>
+            <a class="navbar-brand me-lg-5" href="{%url 'landing_page' %}">
+           
+                <img class="navbar-brand-light" src="/static/assets/img/brand/dark.svg" alt="Logo dark">
+                
+                <span class=" display-4 mx-3 mt-1">VTrust</span>
+            </a>
+        </h3>
+            <strong>VT</strong>
+        </div>
+        <div class="mt-7 ">
+        <ul class="list-unstyled  position-fixed">
+            <!-- <li class="active">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#">Home 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 3</a>
+                    </li>
+                </ul>
+            </li> -->
+            <!-- <li>
+                <a href="#">
+                    <i class="fas fa-briefcase"></i>
+                    
+                </a>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-copy"></i>
+                    Pages
+                </a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="#">Page 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 3</a>
+                    </li>
+                </ul>
+            </li> -->
+            <li class="active">
+                <a href="{%url 'home'%}">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="{%url 'dashboard-view'%}">
+                    <i class="fas fa-database"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="{%url 'index_ballot'%}">
+                    <i class="fas fa-vote-yea"></i>
+                    Create
+                </a>
+            </li>
+            <li>
+                <a href="{%url 'private_ballot'%}">
+                    <i class="fas fa-person-booth"></i>
+                    Private
+                </a>
+            </li>
+            <li>
+                <a href="{%url 'follower_tab'%}">
+                    <i class="fas fa-paper-plane"></i>
+                    Following
+                </a>
+            </li>
+            <li>
+                <a href="{%url 'profile'%}">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+            </li>
+        </ul>
+        </div>
+    </nav>
+    

@@ -62,16 +62,25 @@
 <!-- Pixel CSS -->
 <link type="text/css" href="/static/assets/css/pixel.css" rel="stylesheet">
 
+<!--side bar css-->
+<link rel="stylesheet" href="/static/assets/css/side_bar.css">
+
+<link rel="stylesheet" href="/static/assets/css/flash_messages.css">
+
 <!-- Specific Page JS goes HERE  -->    
 {% block stylesheets %}{% endblock stylesheets %}
 
 </head>
 <body>
 
-    {% include 'includes/navigation.html' %}
-
-    {% block content %}{% endblock content %}
-
+   
+<div class="wrapper">
+    {%include 'includes/sidebar.html'%}
+    <div id="content">
+        {% include 'includes/navigation_main.html' %}
+        {% block content %}{% endblock content %}
+    </div>
+</div>
     {% include 'includes/scripts.html' %}
 
     <!-- Specific Page JS goes HERE  -->

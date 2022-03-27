@@ -1,0 +1,65 @@
+{%extends 'layouts/base.html'%}
+{% block title %} Following {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/share_links_modal.css">
+{% endblock stylesheets %}
+
+{% block content %}
+    <main>
+
+        {% include 'includes/preloader.html' %}
+
+        <div class="section section-sm pb-0 mb-n4">
+            <div id="ballot_count" class=" visually-hidden">{{n}}</div>
+            <div class="container-fluid row">
+                {% for value in ballot_data.values %}
+                <div class=" col-md-6">
+                {% include 'includes/following_ballot_card.html' %}
+            </div>
+                {% endfor %}
+                    <div class="row justify-content-center">
+                    <div class="col-12 mt-5">
+                        <div class="card shadow mb-6">
+                            <div class="card-body px-5 py-5 text-center text-md-left">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <h2 class="mb-3">Get in touch</h2>
+                                        <p class="mb-0">
+                                            If you need any help with our products or services, choose one of the following ways
+                                            to contact us.
+                                        </p>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-4 mt-md-0 text-md-right">
+                                        <a href="#" class="btn btn-primary">
+                                            <span class="me-1">
+                                                <span class="fas fa-headphones"></span>
+                                            </span>
+                                            Contact Us
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+
+        {% include 'includes/footer.html' %}
+    </main>
+    
+
+
+{%endblock content%}
+    {% include 'includes/scripts.html' %}
+    {% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="/static/assets/js/pie_chart.js"></script>
+    <script src="/static/assets/js/public_ballot.js"></script>
+    <script src="/static/assets/js/share_link_modal.js"></script>
+    {%endblock javascripts%}
+</body>
+</html>

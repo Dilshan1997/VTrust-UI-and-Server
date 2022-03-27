@@ -1,0 +1,44 @@
+{%extends 'layouts/base.html'%}
+{% block title %} Private Ballots {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+{% endblock stylesheets %}
+<script src="/static/assets/css/invitation_ui.css"></script>
+{% block content %}
+    <main>
+   
+        <div id="private_ballot_count" class=" visually-hidden">{{n}}</div>
+        {% include 'includes/preloader.html' %}
+        <div class=" mt-5 container">
+            {% if messages %}
+            {{messages}}
+            <ul class="messages list-style-none text-center">
+            {% for message in messages %}
+            <li {% if message.tags %} class=" alert-{{message.tags }} alert-dismissible msg fade show alert_msg_js" role="alert"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+            {% else %}
+            <div class=" alert-{{message.tags }} msg fade show " role="alert">{{ message }}</div>
+            {% endif %}
+        </div>
+        <div class=" container-fluid row">
+       
+            {% for value in ballot_data.values %}
+            <div class="col-md-6">
+            {% include 'includes/private_ballot_card.html' %}
+            </div>
+            {% endfor %}
+        </div>
+        {% include 'includes/footer.html' %}
+    </main>
+    
+
+
+{%endblock content%}
+    {% include 'includes/scripts.html' %}
+    
+ {% block javascripts %}
+<script src="/static/assets/js/private_ballot.js"></script>
+{% endblock javascripts %}
+</html>

@@ -1,29 +1,230 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/base-fullscreen.html" %}
 
-{% block title %} Blank Page {% endblock %} 
+{% block title %}{% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+{%include 'includes/navigation.html'%}
 
-
-    <main>
-
-        <!-- Hero -->
-        <section class="section-header">
+  
+         <!-- Hero -->
+         <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-8 text-center">
-                        <h1 class="display-2 mb-3">Blank starter page</h1>
-                        <p>Hello world!</p>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="bootstrap-big-icon d-none d-lg-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="700" height="622" class="d-block my-1"
+                                viewBox="0 0 118 94" role="img">
+                                <title>VTrust</title>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <h1 class="fw-bolder display-2">
+                           VTrust
+                        </h1>
+                        <h2 class="lead fw-normal text-muted mb-4 px-lg-10">
+                            Blockchain empowered Ballot echo System
+                        </h2>
+                        <!-- Button Modal -->
+                        <!-- <div class="d-flex justify-content-center align-items-center mb-5">
+                            <a href="#components" class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2"><span
+                                    class="fas fa-th-large me-2"></span> <span class="d-none d-md-inline">Explore
+                                    components</span> <span class="d-md-none">Components</span></a>
+                        </div> -->
+                        <div class="d-flex justify-content-center flex-column mb-6 mb-lg-5">
+                            <a href="#" class="d-block text-center mx-auto" target="_blank">
+                                <img src="/static/assets/img/themesberg.svg" class="d-block mx-auto mb-3" height="25"
+                                    width="25" alt="Themesberg Logo">
+                                <span class="text-muted font-small">
+                                    &copy; VTrust and Appseeds.
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2"><svg class="fill-white"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                    <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+                </svg></figure>
         </section>
 
-    </main>
+        <div class="section py-0">
+            <div class="container mt-n10 mt-lg-n12 z-2">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10"><img src="/static/assets/img/presentation-mockup.png"
+                            alt="Pixel Free Mockup"></div>
+                </div>
+            </div>
+        </div>
 
+
+        <!-- PROTECTED ACTION BALLOTS
+Fast and effective workforce voting for the determination of protected action ballots. Fast turn around and fully compliant with Fair Work Australia’s Fair Work Act 2009.
+
+INDEPENDENT VOTING SOLUTION
+Our company has no affiliation with any union or employer. This ensures all voting is impartial, secure and confidential.
+
+VOTE EASILY
+It allows dispersed workforces an easy way to vote, working different shifts on different rotations often means that traditional voting systems are not only slow, cumbersome and expensive but are simply not practical.
+
+MULTI-CHANNEL VOTING
+Customise the voting process to suit every individual voting environment. A combination of online, telephone or SMS voting can be utilised. Any mobile platform can be used to vote, simplifying Enterprise Agreement (EA) voting.
+
+MAXIMIZE VOTER PARTICIPATION
+And also minimize staff disruption. We can provide staff education posters, voter education seminars, assistance with the creation of an accurate and up to date employee database (quoted upon request).
+
+INFORMATION PORTAL
+We can create an information portal for pending agreements to ensure staff are fully informed of the agreement and the agreement making process.
+
+PREVENTS MULTIPLE VOTING
+When an individual has used their allocated PIN they are unable to vote again, regardless of the voting platform they have utilized.
+
+REAL-TIME RESULTS
+Our platform provides a real-time voter and anonymous voter dashboard that informs ballot participation at any time. -->
+
+        <div class="row justify-content-between align-items-center mb-3 mb-lg-7 mx-4">
+            <div class="col-12 col-lg-5 mb-5 mb-lg-0 order-lg-2">
+                <h2 class="h1">Protected Action Ballots</h2>
+                <p class="mb-4 lead fw-bold">Etherium Blockchain empowered product</p>
+                <p class="mb-4">Fast and effective workforce voting for the determination of protected action ballots. 
+                    Two smart contracts manage whole process of the system and also auth data store in the server also the blockchain but all the ballot data store only blockchain.
+                </p>
+                <!-- <a href="https://docs.appseed.us/products/django-apps/pixel-lite" target="_blank"
+                    class="btn btn-outline-primary"><span class="fas fa-book me-2"></span> Product Docs</a> -->
+            </div>
+            <div class="col-12 col-lg-6 order-lg-1">
+                <img src="/static/assets/img/illustrations/bs5-illustrations.svg" alt="Front pages overview">
+            </div>
+        </div>
+        <div class="row justify-content-between align-items-center mb-5 mb-lg-7 mx-4">
+            <div class="col-lg-5 mb-5 mb-lg-0">
+                <h2 class="h1 d-flex align-items-center">Voting Power Never Expired 
+                    <!-- <span class="badge-md ms-3 mb-0 fs-6 badge rounded-pill text-white bg-tertiary">Pro</span> -->
+                </h2>
+                <p class="mb-4 lead fw-bold">Anyone can freely vote in here.</p>
+                <p class="mb-4">Mainly this echo system have two ballot types. According public ballot anyone can vote in here but people who invite by the ballot owner can vote in private ballot section.</p>
+                <!-- <a href="https://appseed.us/django/django-pixel-uikit-pro"
+                    target="_blank" class="btn btn-primary mt-2 animate-up-2">
+                    <span class="fas fa-th-large me-2"></span>
+                    See Premium Version
+                </a> -->
+            </div>
+           
+            <div class="col-lg-6">
+                <img src="/static/assets/img/sections-mockup.jpg" alt="MapBox Leaflet.js Custom Integration Mockup">
+            </div>
+        </div>
+
+        <section class="section section-lg">
+            <div class="container">
+                <div class="row justify-content-center ">
+                    <div class="row justify-content-center mb-4">
+                        <h3 class="text-center">Other Main Benefits</h3>
+                    </div>
+                    <div class="col-6 col-md-3 text-center mb-2">
+                        <div class="icon icon-shape icon-lg bg-white shadow-lg border-light rounded-circle mb-4">
+                            <span class="fas fa-adjust text-tertiary"></span>
+                        </div>
+                        <h3 class="fw-bolder">Vote Easily</h3>
+                        <p class="text-gray"></p>
+                    </div>
+                    <div class="col-6 col-md-3 text-center mb-2">
+                        <div class="icon icon-shape icon-lg bg-white shadow-lg border-light rounded-circle mb-4">
+                            <span class="fas fa-magic text-tertiary"></span>
+                        </div>
+                        <h3 class="fw-bolder">Maximize Voting Participants</h3>
+                        <p class="text-gray"></p>
+                    </div>
+                    <div class="col-6 col-md-3 text-center">
+                        <div class="icon icon-shape icon-lg bg-white shadow-lg border-light rounded-circle mb-4">
+                            <span class="fas fa-stop text-tertiary"></span>
+                        </div>
+                        <h3 class="fw-bolder">Prevent Multiple Voting</h3>
+                        <p class="text-gray"></p>
+                    </div>
+                    <div class="col-6 col-md-3 text-center">
+                        <div class="icon icon-shape icon-lg bg-white shadow-lg border-light rounded-circle mb-4">
+                            <span class="fas fa-search text-tertiary"></span>
+                        </div>
+                        <h3 class="fw-bolder">Dashboard and Analysis</h3>
+                        <p class="text-gray"></p>
+                    </div>
+                </div>
+               
+        </section>
+   
+    <div class="section section-sm pb-0 mb-n4" id="components">
+        <div class="container">
+            <div class="row justify-content-center">
+                <h3 class="text-center">FAQ</h3>
+            </div>
+        </div>
+    </div>
+
+    <!--End of Title section-->
+    <div class="section section-md">
+        <div class="container">
+            <div class="row justify-content-center mt-4">
+                <div class="col-12 col-lg-8">
+                    <!--Accordion-->
+                    <div class="accordion" id="accordionExample1">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    What is the purpose of a VTrust
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample1">
+                                <div class="accordion-body">
+                                    <strong>VTrust </strong> is the future ballot echo system. It empowered with
+                                    <strong>Blockchain </strong>, So trust is 100%.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    How we can work with VTrust?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#accordionExample1">
+                                <div class="accordion-body">
+                                    It is superior easier because this system has general ui like social media. So you can
+                                    can access website in that way. If have any doubts plz contact us.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    How much we want to pay in here?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                data-bs-parent="#accordionExample1">
+                                <div class="accordion-body">
+                                  Any one can create account in freely here and you can also vote freely public or private ballots.
+                                  If you want to create ballot you should pay particular ether price according to creation.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End of Accordion-->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
     {% include 'includes/footer.html' %}
 
 {% endblock content %}
