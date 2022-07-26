@@ -1,4 +1,3 @@
-
 $( document ).ready(()=>{
     function loadJson(selector) {
         return JSON.parse(document.querySelector(selector).getAttribute('data-json'));
@@ -7,7 +6,6 @@ $( document ).ready(()=>{
 
     var ballot_names=[]
     var ballot_chart_data=[]
-    console.log(jsonData.ballot_data)
     $.each(jsonData.ballot_data, function(k, v) {
         //display the key and value pair
         console.log(k + ' is ' + v);

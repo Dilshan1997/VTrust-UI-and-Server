@@ -1,47 +1,27 @@
 # [Django Boilerplate](https://appseed.us/boilerplate-code/django-boilerplate)
 
-> Template [boilerplate code](https://appseed.us/boilerplate-code) used by [AppSeed](https://appseed.us) to generate simple admin dashboards coded in [Django](https://www.djangoproject.com/) - Features:
 
 <br />
 
 - Up-to-date [dependencies](./requirements.txt): **Django 3.2.6 LTS**
 - [SCSS compilation](#recompile-css) via **Gulp**
 - UI Kit: **Pixel UI Kit** (Free Version) by **Themesberg**
-- SQLite Database, Django Native ORM
+- SQL Database, Django Native ORM
+- web3
 - Modular design, clean codebase
 - Session-Based Authentication, Forms validation
 - Deployment scripts: Docker, Gunicorn / Nginx
-- Support via **Github** (issues tracker) and [Discord](https://discord.gg/fZC6hup).
 
 <br />
 
 > Links
 
-- [Boierplate Code Django](https://appseed.us/django/django-pixel-bootstrap-uikit) - Product page
-- [Boierplate Code Django](https://docs.appseed.us/boilerplate-code/django/) - Documentation
+<br />
+
 
 <br />
 
-## Quick Start in [Docker](https://www.docker.com/)
-
-> Get the code
-
-```bash
-$ git clone https://github.com/app-generator/boilerplate-code-django.git
-$ cd boilerplate-code-django
-```
-
-> Start the app in Docker
-
-```bash
-$ docker-compose up --build 
-```
-
-Visit `http://localhost:85` in your browser. The app should be up & running.
-
-<br />
-
-![Boierplate Code Django - Template project provided by AppSeed.](https://user-images.githubusercontent.com/51070104/132866430-46a91bcd-98dd-44ba-9e9c-acbd5e8f1156.png)
+![VTrust](https://user-images.githubusercontent.com/51070104/132866430-46a91bcd-98dd-44ba-9e9c-acbd5e8f1156.png)
 
 <br />
 
@@ -101,8 +81,28 @@ The project is coded using a simple and intuitive structure presented bellow:
    |    |-- authentication/                # Handles auth routes (login and register)
    |    |    |-- urls.py                   # Define authentication routes  
    |    |    |-- views.py                  # Handles login and registration  
-   |    |    |-- forms.py                  # Define auth forms (login and register) 
-   |    |
+   |    |    |-- forms.py                  # Define auth forms (login and register)
+   |    |    |-- auth_connection.py      # Define auth forms (login and register)
+   |    |    |-- auth_controller.py      # Define auth forms (login and register)
+   |    |     
+   |    |-- Ballots/                # Handles auth routes (login and register)
+   |    |    |-- urls.py                   # Define authentication routes  
+   |    |    |-- views.py                  # Handles login and registration  
+   |    |    |-- forms.py                  # Define auth forms (login and register)
+   |    |    |-- ballot_contract_connection.py      # Define auth forms (login and register)
+   |    |    |-- ballot_contract_controller.py      # Define auth forms (login and register)
+   |    |    |-- config.py                  # Define auth forms (login and register)
+   |    |    |-- test.py                  # Define auth forms (login and register)
+   |    |    |-- models.py                  # Define auth forms (login and register)
+   |    |    
+   |    |-- dashboard/                # Handles auth routes (login and register)
+   |    |    |-- urls.py                   # Define authentication routes  
+   |    |    |-- views.py                  # Handles login and registration  
+   |    |    |-- forms.py                  # Define auth forms (login and register)
+   |    |    |-- config.py                  # Define auth forms (login and register)
+   |    |    |-- test.py                  # Define auth forms (login and register)
+   |    |    |-- models.py                  # Define auth forms (login and register)
+   
    |    |-- static/
    |    |    |-- <css, JS, images>         # CSS files, Javascripts files
    |    |
@@ -120,6 +120,15 @@ The project is coded using a simple and intuitive structure presented bellow:
    |         |-- accounts/                  # Authentication pages
    |         |    |-- login.html            # Login page
    |         |    |-- register.html         # Register page
+   |         |
+   |         |-- Ballot/                  # Authentication pages
+   |         |    |-- ballot_details.html            # Login page
+   |         |    |-- create_ballot.html         # Register page
+   |         |    |-- private_ballot_details.html            # Login page
+   |         |    |-- private_ballot_page.html         # Register page
+   |         |    
+   |         |-- Dashboard/                  # Authentication pages
+   |         |    |-- main.html            # Login page
    |         |
    |         |-- home/                      # UI Kit Pages
    |              |-- index.html            # Index page

@@ -16,7 +16,7 @@ function privateInvitation(b_id){
                 $("#send_or_not").text(response["error_msg"])
             }
             // $('#modal_'+b_id).modal('toggle');
-            $("#send_or_not").addClass('new-class',"fa-solid fa-envelope fa-bounce" );
+            // $("#send_or_not").addClass('new-class',"fa-solid fa-envelope fa-bounce" );
         },
         error: function (response) {
             console.log(response)

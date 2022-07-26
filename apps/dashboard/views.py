@@ -68,7 +68,7 @@ def dashboard_index(request):
         proposal_data[i]=inside_data
         labels = []
         data = []
-        print(ballot_data)
+        print("bbbbbb",ballot_data)
     print(proposal_data)
     if len(owner_belongs_ballot_ids)!=0:
         most_voting_count_from=ballot_data[most_famous_ballot_id][2]
