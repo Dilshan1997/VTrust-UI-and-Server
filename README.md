@@ -21,7 +21,7 @@ The platform utilizes a hybrid execution architecture:
   - Cached data
 
 ## 🛠️ System Architecture
-![Use Case Diagram](assets/docs/use_case_diagram.png)
+![Abstract System Architecture](https://github.com/Dilshan1997/MIni-project-VTrust/blob/main/Documents/Abstract%20architecture.PNG))
 
 
 ## 🔬 Feature Implementation
@@ -76,10 +76,10 @@ The platform utilizes a hybrid execution architecture:
 ## 🖼️ UI & System Diagrams
 
 ### Use Case Diagram
-![Use Case Diagram](assets/docs/use_case_diagram.png)
+![Use Case Diagram](https://github.com/Dilshan1997/MIni-project-VTrust/blob/main/Documents/Use%20case%20digram.png)
 
 ### Activity Diagram
-![Activity Diagram](assets/docs/activity_diagram.png)
+![Activity Diagram](https://github.com/Dilshan1997/MIni-project-VTrust/blob/main/Documents/Activity%20diagram.png)
 
 ## 🎛️ Technology Stack
 
