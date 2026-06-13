@@ -1,250 +1,188 @@
-# [Django Boilerplate](https://appseed.us/boilerplate-code/django-boilerplate)
+# 🗳️ VTrust: A Decentralized Blockchain-Empowered Voting Ecosystem
 
-> Template [boilerplate code](https://appseed.us/boilerplate-code) used by [AppSeed](https://appseed.us) to generate simple admin dashboards coded in [Django](https://www.djangoproject.com/) - Features:
+VTrust is a secure, decentralized, and mobile-responsive web-based voting ecosystem engineered to mitigate the systemic vulnerabilities of trust, architectural centralization, and administrative manipulation inherent in traditional voting systems.
 
-<br />
+By implementing Web 3.0 technologies, VTrust eliminates single points of failure, ensuring that all cast ballots are cryptographically immutable, auditable, and completely free from third-party intervention.
 
-- Up-to-date [dependencies](./requirements.txt): **Django 3.2.6 LTS**
-- [SCSS compilation](#recompile-css) via **Gulp**
-- UI Kit: **Pixel UI Kit** (Free Version) by **Themesberg**
-- SQLite Database, Django Native ORM
-- Modular design, clean codebase
-- Session-Based Authentication, Forms validation
-- Deployment scripts: Docker, Gunicorn / Nginx
-- Support via **Github** (issues tracker) and [Discord](https://discord.gg/fZC6hup).
+## ✨ Platform Overview
 
-<br />
+The platform utilizes a hybrid execution architecture:
 
-> Links
+- **On-chain (Ethereum + Solidity):**
+  - Ballot execution
+  - Credential validation
+  - Immutable storage
 
-- [Boierplate Code Django](https://appseed.us/django/django-pixel-bootstrap-uikit) - Product page
-- [Boierplate Code Django](https://docs.appseed.us/boilerplate-code/django/) - Documentation
+- **Off-chain (Django + MySQL):**
+  - Session management
+  - Telemetry
+  - Cached data
 
-<br />
+## 🛠️ System Architecture
 
-## Quick Start in [Docker](https://www.docker.com/)
 
-> Get the code
 
-```bash
-$ git clone https://github.com/app-generator/boilerplate-code-django.git
-$ cd boilerplate-code-django
-```
+## 🔬 Feature Implementation
 
-> Start the app in Docker
+### 🔐 1. Hybrid Parallel 2FA Authentication
 
-```bash
-$ docker-compose up --build 
-```
+- Combines:
+  - Local database verification
+  - Blockchain smart contract validation
+- Uses MetaMask wallet identity
+- Dual hashing:
+  - Django hashing
+  - Solidity `keccak256`
 
-Visit `http://localhost:85` in your browser. The app should be up & running.
+### 📊 2. Dynamic Ballot Engine
 
-<br />
+- Dynamic UI generation without page reload
+- Converts timestamps to Unix Epoch
+- Deterministic ID structure:
 
-![Boierplate Code Django - Template project provided by AppSeed.](https://user-images.githubusercontent.com/51070104/132866430-46a91bcd-98dd-44ba-9e9c-acbd5e8f1156.png)
+### 🌐 3. Trustless Public Polling
 
-<br />
+- One vote per wallet (anti-Sybil protection)
+- Real-time analytics using AJAX + Chart.js
+- Auto result finalization after deadline
 
-## How to use it
+### 🔒 4. Private Ballot System
 
-```bash
-$ # Get the code
-$ git clone https://github.com/app-generator/boilerplate-code-django.git
-$ cd boilerplate-code-django
-$
-$ # Virtualenv modules installation (Unix based systems)
-$ virtualenv env
-$ source env/bin/activate
-$
-$ # Virtualenv modules installation (Windows based systems)
-$ # virtualenv env
-$ # .\env\Scripts\activate
-$
-$ # Install modules - SQLite Storage
-$ pip3 install -r requirements.txt
-$
-$ # Create tables
-$ python manage.py makemigrations
-$ python manage.py migrate
-$
-$ # Start the application (development mode)
-$ python manage.py runserver # default port 8000
-$
-$ # Start the app - custom port
-$ # python manage.py runserver 0.0.0.0:<your_port>
-$
-$ # Access the web app in browser: http://127.0.0.1:8000/
-```
+- Wallet whitelist stored on-chain
+- Email-based access control
+- Smart contract validation via `msg.sender`
 
-> Note: To use the app, please access the registration page and create a new user. After authentication, the app will unlock the private pages.
+### 🪙 5. VT Token (ERC-20)
 
-<br />
+- Built on ERC-20 standard
+- Used for:
+- Ballot creation fees
+- Monetization model
+- Automatic token distribution during registration
 
-## Code-base structure
+## 📈 Feature Validation Matrix
 
-The project is coded using a simple and intuitive structure presented bellow:
+| Feature | Status |
+|--------|--------|
+| Web3 Authentication | ✅ Validated |
+| Dynamic Ballots | ✅ Validated |
+| Public Polling | ✅ Validated |
+| Private Voting | ✅ Validated |
+| Analytics Dashboard | ✅ Validated |
+| ERC-20 Token | 💎 Core Stable |
 
-```bash
-< PROJECT ROOT >
-   |
-   |-- core/                               # Implements app configuration
-   |    |-- settings.py                    # Defines Global Settings
-   |    |-- wsgi.py                        # Start the app in production
-   |    |-- urls.py                        # Define URLs served by all apps/nodes
-   |
-   |-- apps/
-   |    |
-   |    |-- home/                          # A simple app that serve HTML files
-   |    |    |-- views.py                  # Serve HTML pages for authenticated users
-   |    |    |-- urls.py                   # Define some super simple routes  
-   |    |
-   |    |-- authentication/                # Handles auth routes (login and register)
-   |    |    |-- urls.py                   # Define authentication routes  
-   |    |    |-- views.py                  # Handles login and registration  
-   |    |    |-- forms.py                  # Define auth forms (login and register) 
-   |    |
-   |    |-- static/
-   |    |    |-- <css, JS, images>         # CSS files, Javascripts files
-   |    |
-   |    |-- templates/                     # Templates used to render pages
-   |         |-- includes/                 # HTML chunks and components
-   |         |    |-- navigation.html      # Top menu component
-   |         |    |-- sidebar.html         # Sidebar component
-   |         |    |-- footer.html          # App Footer
-   |         |    |-- scripts.html         # Scripts common to all pages
-   |         |
-   |         |-- layouts/                   # Master pages
-   |         |    |-- base-fullscreen.html  # Used by Authentication pages
-   |         |    |-- base.html             # Used by common pages
-   |         |
-   |         |-- accounts/                  # Authentication pages
-   |         |    |-- login.html            # Login page
-   |         |    |-- register.html         # Register page
-   |         |
-   |         |-- home/                      # UI Kit Pages
-   |              |-- index.html            # Index page
-   |              |-- 404-page.html         # 404 page
-   |              |-- *.html                # All other pages
-   |
-   |-- requirements.txt                     # Development modules - SQLite storage
-   |
-   |-- .env                                 # Inject Configuration via Environment
-   |-- manage.py                            # Start the app - Django default start script
-   |
-   |-- ************************************************************************
-```
+## 🖼️ UI & System Diagrams
 
-<br />
+### Use Case Diagram
+![Use Case Diagram](assets/docs/use_case_diagram.png)
 
-> The bootstrap flow
+### Activity Diagram
+![Activity Diagram](assets/docs/activity_diagram.png)
 
-- Django bootstrapper `manage.py` uses `core/settings.py` as the main configuration file
-- `core/settings.py` loads the app magic from `.env` file
-- Redirect the guest users to Login page
-- Unlock the pages served by *app* node for authenticated users
+### Dashboard UI
+![Dashboard UI](assets/screenshots/dashboard.png)
 
-<br />
+### Ballot Wizard UI
+![Ballot Wizard](assets/screenshots/ballot_wizard.png)
 
-## Recompile CSS
+## 🎛️ Technology Stack
 
-To recompile SCSS files, follow this setup:
+### ⛓️ Blockchain
+- Solidity (v0.8.x)
+- OpenZeppelin Contracts
+- Ganache
+- Remix IDE
 
-<br />
+### ⚙️ Backend
+- Python 3.8+
+- Django Framework
+- MySQL Server
+- MailHog
 
-**Step #1** - Install tools
+### 🎨 Frontend
+- Bootstrap 4/5
+- JavaScript (ES6)
+- jQuery
+- Parsley.js
+- Chart.js
 
-- [NodeJS](https://nodejs.org/en/) 12.x or higher
-- [Gulp](https://gulpjs.com/) - globally 
-    - `npm install -g gulp-cli`
-- [Yarn](https://yarnpkg.com/) (optional) 
+## 🚀 Installation Guide
 
-<br />
+### ✅ Prerequisites
 
-**Step #2** - Change the working directory to `assets` folder
+- Python 3.8+
+- Node.js (LTS)
+- MySQL Server
+- MetaMask Extension
+
+### 🔹 Phase 1: Blockchain Setup
+
+1. Start Ganache
+2. Connect MetaMask to Ganache
+3. Import accounts
+4. Compile contracts in Remix
+5. Deploy contracts
+6. Save:
+ - Contract addresses
+ - ABI files
+
+### 🔹 Phase 2: Backend Setup
 
 ```bash
-$ cd apps/static/assets
+git clone https://github.com/placeholder-username/vtrust-voting-system.git
+cd vtrust-voting-system
+
+python -m venv venv
+source venv/bin/activate
+
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+## 🔹 Environment Configuration (.env)
+
+Create a `.env` file in your project root:
+
+```env
+DEBUG=True
+SECRET_KEY=your_secret_key_here
+
+DB_NAME=vtrust_db
+DB_USER=root
+DB_PASSWORD=your_mysql_password
+DB_HOST=127.0.0.1
+DB_PORT=3306
+
+BLOCKCHAIN_NODE_URL=http://127.0.0.1:7545
+
+AUTH_CONTRACT_ADDRESS=0xYourAuthContractAddress
+BALLOT_CONTRACT_ADDRESS=0xYourBallotContractAddress
 ```
 
-<br />
-
-**Step #3** - Install modules (this will create a classic `node_modules` directory)
+## 🔹 Backend Setup Commands
 
 ```bash
-$ npm install
-// OR
-$ yarn
+git clone https://github.com/placeholder-username/vtrust-voting-system.git
+cd vtrust-voting-system
+
+python -m venv venv
+source venv/bin/activate   # Windows: .\venv\Scripts\activate
+
+pip install --upgrade pip
+pip install -r requirements.txt
 ```
 
-<br />
-
-**Step #4** - Edit & Recompile SCSS files 
+## 🔹 Database & Server Commands
 
 ```bash
-$ gulp scss
+python manage.py makemigrations
+python manage.py migrate
+
+# Start MailHog (depends on installation)
+mailhog
+
+# Run Django server
+python manage.py runserver
 ```
 
-The generated file is saved in `static/assets/css` directory.
-
-<br /> 
-
-## Deployment
-
-The app is provided with a basic configuration to be executed in [Docker](https://www.docker.com/), [Gunicorn](https://gunicorn.org/), and [Waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/).
-
-### [Docker](https://www.docker.com/) execution
----
-
-### [Gunicorn](https://gunicorn.org/)
----
-
-Gunicorn 'Green Unicorn' is a Python WSGI HTTP Server for UNIX.
-
-> Install using pip
-
-```bash
-$ pip install gunicorn
-```
-> Start the app using gunicorn binary
-
-```bash
-$ gunicorn --bind=0.0.0.0:8001 core.wsgi:application
-Serving on http://localhost:8001
-```
-
-Visit `http://localhost:8001` in your browser. The app should be up & running.
-
-
-<br />
-
-### [Waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/)
----
-
-Waitress (Gunicorn equivalent for Windows) is meant to be a production-quality pure-Python WSGI server with very acceptable performance. It has no dependencies except ones that live in the Python standard library.
-
-> Install using pip
-
-```bash
-$ pip install waitress
-```
-> Start the app using [waitress-serve](https://docs.pylonsproject.org/projects/waitress/en/stable/runner.html)
-
-```bash
-$ waitress-serve --port=8001 core.wsgi:application
-Serving on http://localhost:8001
-```
-
-Visit `http://localhost:8001` in your browser. The app should be up & running.
-
-<br />
-
-## Credits & Links
-
-- [Django](https://www.djangoproject.com/) - The official website
-- [Boilerplate Code](https://appseed.us/boilerplate-code) - Index provided by **AppSeed**
-- [Boilerplate Code](https://github.com/app-generator/boilerplate-code) - Index published on Github
-
-<br />
-
----
-[Django Boilerplate](https://appseed.us/boilerplate-code/django-boilerplate) - Provided by **AppSeed** [App Generator](https://appseed.us/app-generator).
+## 🔹 Access URL
+http://127.0.0.1:8000
