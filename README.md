@@ -4,6 +4,8 @@ VTrust is a secure, decentralized, and mobile-responsive web-based voting ecosys
 
 By implementing Web 3.0 technologies, VTrust eliminates single points of failure, ensuring that all cast ballots are cryptographically immutable, auditable, and completely free from third-party intervention.
 
+[![VTrust Demo](https://github.com/Dilshan1997/MIni-project-VTrust/blob/main/Documents/maxresdefault.jpg)](https://www.youtube.com/watch?v=yjIdQItkWJE)
+
 ## ✨ Platform Overview
 
 The platform utilizes a hybrid execution architecture:
@@ -19,7 +21,7 @@ The platform utilizes a hybrid execution architecture:
   - Cached data
 
 ## 🛠️ System Architecture
-
+![Use Case Diagram](assets/docs/use_case_diagram.png)
 
 
 ## 🔬 Feature Implementation
@@ -78,12 +80,6 @@ The platform utilizes a hybrid execution architecture:
 
 ### Activity Diagram
 ![Activity Diagram](assets/docs/activity_diagram.png)
-
-### Dashboard UI
-![Dashboard UI](assets/screenshots/dashboard.png)
-
-### Ballot Wizard UI
-![Ballot Wizard](assets/screenshots/ballot_wizard.png)
 
 ## 🎛️ Technology Stack
 
